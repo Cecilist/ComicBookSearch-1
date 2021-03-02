@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.5.0'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.6.1'
+
+}
+
+test {
+    useJUnitPlatform()
+}
