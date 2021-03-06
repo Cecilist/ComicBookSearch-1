@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class MarvelDataArray {
-    public JSONArray cacheDataStream (InputStream inputStream) throws IOException {
+    public JSONArray cacheDataStream(InputStream inputStream) throws IOException {
         return (JsonPath.read(inputStream, "*"));
     }
 }
