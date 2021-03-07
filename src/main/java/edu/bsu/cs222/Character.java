@@ -1,26 +1,18 @@
 package edu.bsu.cs222;
 
 import com.jayway.jsonpath.JsonPath;
+import javafx.scene.image.Image;
 import net.minidev.json.JSONArray;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.URL;
 
 public class Character {
     private String name;
     private String id;
     private String description;
-    private BufferedImage thumbnail;
+    private Image thumbnail;
 
     public Character() {
-    }
-
-    public Character createCharacter(String characterName) throws IOException {
-        MarvelCharacterDataStream dataStream = new MarvelCharacterDataStream();
-        JSONArray characterData = dataStream.MarvelCharacterConnector(characterName);
-        return new Character(characterData);
     }
 
     public Character(JSONArray characterData) throws IOException {
@@ -34,6 +26,12 @@ public class Character {
         thumbnail = setThumbnail(thumbnailData.get(0).toString());
     }
 
+    public Character createCharacter(String characterName) throws IOException {
+        MarvelCharacterDataStream dataStream = new MarvelCharacterDataStream();
+        JSONArray characterData = dataStream.MarvelCharacterConnector(characterName);
+        return new Character(characterData);
+    }
+
     public String getName() {
         return name;
     }
@@ -42,7 +40,7 @@ public class Character {
         return description;
     }
 
-    public BufferedImage getThumbnail() {
+    public Image getThumbnail() {
         return thumbnail;
     }
 
@@ -50,11 +48,11 @@ public class Character {
         return id;
     }
 
-    private BufferedImage setThumbnail(String thumbnailData) throws IOException {
-        String thumbnailURLEnd = "/portrait_xlarge.jpg";
+    private Image setThumbnail(String thumbnailData) throws IOException {
+        String thumbnailURLEnd = "/portrait_medium.jpg";
         String thumbnailURL = thumbnailData + thumbnailURLEnd;
-        URL url = new URL(thumbnailURL);
-        return (ImageIO.read(url));
+        //URL url = new URL(thumbnailURL);
+        return (new Image(thumbnailURL));
     }
 
 }

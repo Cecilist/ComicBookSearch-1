@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 group 'org.example'
@@ -15,9 +17,15 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.5.0'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.6.1'
-
 }
 
 test {
     useJUnitPlatform()
 }
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    version = "15.0.1"
+
+}
+mainClassName = 'edu.bsu.cs222.GraphicalUserInterface'

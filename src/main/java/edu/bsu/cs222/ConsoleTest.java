@@ -1,8 +1,6 @@
 package edu.bsu.cs222;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -12,16 +10,16 @@ public class ConsoleTest {
     public static void main(String[] args) throws IOException {
         Scanner userInput = new Scanner(System.in);
         System.out.print("Enter a Marvel superhero: ");
-        String marvelHeroName= URLEncoder.encode(userInput.nextLine(), StandardCharsets.UTF_8.toString());
+        String marvelHeroName = URLEncoder.encode(userInput.nextLine(), StandardCharsets.UTF_8.toString());
         Character newCharacter = new Character();
-        newCharacter=newCharacter.createCharacter(marvelHeroName);
+        newCharacter = newCharacter.createCharacter(marvelHeroName);
         ComicBook newComicBook = new ComicBook();
         List<ComicBook> comicBooks = newComicBook.createComicBooks(newCharacter.getId());
         System.out.println("Character Name: " + newCharacter.getName());
         System.out.println("Character Id: " + newCharacter.getId());
-        System.out.println("Character Description: "+newCharacter.getDescription());
-        System.out.println("Character Thumbnail: "+newCharacter.getThumbnail());
-        for(ComicBook comicbook: comicBooks){
+        System.out.println("Character Description: " + newCharacter.getDescription());
+        System.out.println("Character Thumbnail: " + newCharacter.getThumbnail());
+        for (ComicBook comicbook : comicBooks) {
             System.out.println("********************************");
             System.out.println("Comic Book Title: " + comicbook.getTitle());
             System.out.println("Comic Book Description: " + comicbook.getDescription());
@@ -31,9 +29,7 @@ public class ConsoleTest {
         }
 
 
-
     }
-
 
 
 }

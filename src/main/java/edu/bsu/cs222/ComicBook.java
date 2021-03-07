@@ -1,11 +1,9 @@
 package edu.bsu.cs222;
 
+import javafx.scene.image.Image;
 import net.minidev.json.JSONArray;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +12,7 @@ public class ComicBook {
     private String title;
     private String description;
     private String onsaleDate;
-    private BufferedImage thumbnail;
+    private Image thumbnail;
 
     public List<ComicBook> createComicBooks(String characterId) throws IOException {
         MarvelComicBookDataStream comicBookStream = new MarvelComicBookDataStream();
@@ -41,11 +39,11 @@ public class ComicBook {
         return comicBooks;
     }
 
-    private BufferedImage setThumbnail(JSONArray thumbnailData, int index) throws IOException {
-        String thumbnailURLEnd = "/portrait_xlarge.jpg";
+    private Image setThumbnail(JSONArray thumbnailData, int index) throws IOException {
+        String thumbnailURLEnd = "/portrait_medium.jpg";
         String thumbnailURL = thumbnailData.get(index).toString() + thumbnailURLEnd;
-        URL url = new URL(thumbnailURL);
-        return (ImageIO.read(url));
+        //URL url = new URL(thumbnailURL);
+        return (new Image(thumbnailURL));
     }
 
     public String getTitle() {
@@ -64,7 +62,7 @@ public class ComicBook {
         return creators;
     }
 
-    public BufferedImage getThumbnail() {
+    public Image getThumbnail() {
         return thumbnail;
     }
 }
