@@ -5,7 +5,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -30,7 +29,7 @@ public class GraphicalUserInterface extends Application {
         primaryStage.setHeight(250);
         VBox searchBox = getSearchBox();
         Label titleLabel = getTitleLabel();
-        TextField searchBar = getSearchBar(searchBox);
+        TextField searchBar = getSearchBar();
         Button searchButton = getSearchButton(searchBar);
 
         searchBox.getChildren().addAll(titleLabel, searchBar, searchButton);
@@ -55,7 +54,7 @@ public class GraphicalUserInterface extends Application {
         return titleLabel;
     }
 
-    private TextField getSearchBar(VBox searchBox) {
+    private TextField getSearchBar() {
         TextField searchBar = new TextField("Enter the name of a Marvel Superhero");
         searchBar.setMaxWidth(300);
         searchBar.setOnMouseClicked(event -> searchBar.clear());
@@ -112,9 +111,7 @@ public class GraphicalUserInterface extends Application {
                 ImageView comicThumbnail = new ImageView(comicCharacter.getThumbnail());
                 comicButton.setGraphic(comicThumbnail);
                 comicPane.add(comicButton, x, i);
-                comicButton.setOnMouseClicked(event -> {
-                    showComicDetail(comicCharacter);
-                });
+                comicButton.setOnMouseClicked(event -> showComicDetail(comicCharacter));
             }
         resultsBox.getChildren().addAll(characterBox, comicPane);
         Stage secondaryStage = new Stage();
@@ -126,12 +123,12 @@ public class GraphicalUserInterface extends Application {
     public void showComicDetail(ComicBook comicSelected){
         HBox comicDetailBox = new HBox();
         ImageView comicThumbnail= new ImageView(comicSelected.getThumbnail());
-        String creators="";
+        StringBuilder creators= new StringBuilder();
         for(int i=0; i<comicSelected.getCreators().size(); i++)
         {
-            creators+=comicSelected.getCreators().get(i).getCreators();
+            creators.append(comicSelected.getCreators().get(i).getCreators());
         }
-        TextArea comicDescription = new TextArea("Description: \n"+comicSelected.getDescription()+"\nCreators: \n"+creators);
+        TextArea comicDescription = new TextArea("Comic Book Title: \n"+comicSelected.getTitle()+"\n "+ "Description: \n"+comicSelected.getDescription()+"\nCreators: \n"+creators);
         comicDescription.setWrapText(true);
         comicDescription.setEditable(false);
         comicDetailBox.getChildren().addAll(comicThumbnail, comicDescription);
