@@ -16,4 +16,8 @@ public class Creator {
     public String getRole() {
         return role;
     }
+
+    public String getCreators(){
+        return getRole()+": "+getName()+"\n";
+    }
 }

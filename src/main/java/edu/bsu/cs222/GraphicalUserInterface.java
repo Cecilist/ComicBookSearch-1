@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -87,13 +88,15 @@ public class GraphicalUserInterface extends Application {
 
     private void showComics(Character superHero, List<ComicBook> comicBooks) {
         final int COMICBOOK_WIDTH = 5;
-        VBox resultsBox = new VBox();
 
+        VBox resultsBox = new VBox();
+        ScrollPane scrollPane =  new ScrollPane(resultsBox);
         HBox characterBox = new HBox();
         ImageView characterThumbnail = new ImageView(superHero.getThumbnail());
         VBox superHeroDetails = new VBox();
         Label superHeroName = new Label(superHero.getName());
         TextArea superHeroDescript = new TextArea(superHero.getDescription());
+        superHeroDescript.setWrapText(true);
         superHeroDescript.setEditable(false);
         superHeroDetails.getChildren().addAll(superHeroName, superHeroDescript);
         characterBox.getChildren().addAll(characterThumbnail, superHeroDetails);
@@ -101,21 +104,40 @@ public class GraphicalUserInterface extends Application {
         GridPane comicPane = new GridPane();
 
         int comicCount = comicBooks.size();
-        for(int i=0; i<comicCount; i++)
-            for(int x=0; x<COMICBOOK_WIDTH; x++)
-            {
+        for (int i = 0; i < comicCount; i++)
+            for (int x = 0; x < COMICBOOK_WIDTH; x++) {
                 comicCount--;
                 Button comicButton = new Button();
-                ImageView comicThumbnail = new ImageView(comicBooks.get(comicCount).getThumbnail());
+                ComicBook comicCharacter = comicBooks.get(comicCount);
+                ImageView comicThumbnail = new ImageView(comicCharacter.getThumbnail());
                 comicButton.setGraphic(comicThumbnail);
                 comicPane.add(comicButton, x, i);
+                comicButton.setOnMouseClicked(event -> {
+                    showComicDetail(comicCharacter);
+                });
             }
         resultsBox.getChildren().addAll(characterBox, comicPane);
         Stage secondaryStage = new Stage();
         secondaryStage.setHeight(600);
         secondaryStage.setWidth(600);
-        secondaryStage.setScene(new Scene(resultsBox));
+        secondaryStage.setScene(new Scene(scrollPane));
         secondaryStage.show();
+    }
+    public void showComicDetail(ComicBook comicSelected){
+        HBox comicDetailBox = new HBox();
+        ImageView comicThumbnail= new ImageView(comicSelected.getThumbnail());
+        String creators="";
+        for(int i=0; i<comicSelected.getCreators().size(); i++)
+        {
+            creators+=comicSelected.getCreators().get(i).getCreators();
+        }
+        TextArea comicDescription = new TextArea("Description: \n"+comicSelected.getDescription()+"\nCreators: \n"+creators);
+        comicDescription.setWrapText(true);
+        comicDescription.setEditable(false);
+        comicDetailBox.getChildren().addAll(comicThumbnail, comicDescription);
+        Stage comicDetailStage = new Stage();
+        comicDetailStage.setScene(new Scene(comicDetailBox));
+        comicDetailStage.show();
     }
 
 }
