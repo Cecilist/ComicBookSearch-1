@@ -32,6 +32,7 @@ public class GraphicalUserInterface extends Application {
         Label titleLabel = getTitleLabel();
         TextField searchBar = getSearchBar();
         Button searchButton = getSearchButton(searchBar);
+
         searchBox.getChildren().addAll(titleLabel, searchBar, searchButton);
         primaryStage.setScene(new Scene(searchBox));
         primaryStage.show();
@@ -65,9 +66,11 @@ public class GraphicalUserInterface extends Application {
         Button searchButton = new Button("Search");
         searchButton.setOnAction(event -> {
             try {
-                comicBooks(articleName.getText());
+                GraphicalUserInterface.this.comicBooks(articleName.getText());
             } catch (IOException e) {
-                e.printStackTrace();
+                Alert articleNameError = new Alert(Alert.AlertType.ERROR);
+                articleNameError.setTitle("SuperHero Name Error");
+                articleNameError.show();
             }
         });
         return searchButton;
@@ -106,7 +109,7 @@ public class GraphicalUserInterface extends Application {
                 comicCount--;
                 Button comicButton = new Button();
                 ComicBook comicCharacter = comicBooks.get(comicCount);
-                ImageView comicThumbnail = new ImageView(comicCharacter.getThumbnailURL());
+                ImageView comicThumbnail = new ImageView(new Image (comicCharacter.getThumbnailURL()));
                 comicButton.setGraphic(comicThumbnail);
                 comicPane.add(comicButton, x, i);
                 comicButton.setOnMouseClicked(event -> showComicDetail(comicCharacter));
@@ -120,13 +123,13 @@ public class GraphicalUserInterface extends Application {
     }
     public void showComicDetail(ComicBook comicSelected){
         HBox comicDetailBox = new HBox();
-        ImageView comicThumbnail= new ImageView(comicSelected.getThumbnailURL());
+        ImageView comicThumbnail= new ImageView(new Image (comicSelected.getThumbnailURL()));
         StringBuilder creators= new StringBuilder();
         for(int i=0; i<comicSelected.getCreators().size(); i++)
         {
             creators.append(comicSelected.getCreators().get(i).getCreators());
         }
-        TextArea comicDescription = new TextArea("Description: \n"+comicSelected.getDescription()+"\nCreators: \n"+creators);
+        TextArea comicDescription = new TextArea("Comic Book Title:\n"+comicSelected.getTitle()+"\n"+ "Description: \n"+comicSelected.getDescription()+"\nCreators: \n"+creators);
         comicDescription.setWrapText(true);
         comicDescription.setEditable(false);
         comicDetailBox.getChildren().addAll(comicThumbnail, comicDescription);
