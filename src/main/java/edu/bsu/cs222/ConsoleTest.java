@@ -14,17 +14,17 @@ public class ConsoleTest {
         Character newCharacter = new Character();
         newCharacter = newCharacter.createCharacter(marvelHeroName);
         ComicBook newComicBook = new ComicBook();
-        List<ComicBook> comicBooks = newComicBook.createComicBooks(newCharacter.getId());
+        List<ComicBook> comicBooks = newComicBook.getComicBookData(newCharacter.getId());
         System.out.println("Character Name: " + newCharacter.getName());
         System.out.println("Character Id: " + newCharacter.getId());
         System.out.println("Character Description: " + newCharacter.getDescription());
-        System.out.println("Character Thumbnail: " + newCharacter.getThumbnail());
+        System.out.println("Character Thumbnail: " + newCharacter.getThumbnailURL());
         for (ComicBook comicbook : comicBooks) {
             System.out.println("********************************");
             System.out.println("Comic Book Title: " + comicbook.getTitle());
             System.out.println("Comic Book Description: " + comicbook.getDescription());
             System.out.println("Comic Book On Sale Date: " + comicbook.getOnsaleDate());
-            System.out.println("Comic Book Thumbnail: " + comicbook.getThumbnail());
+            System.out.println("Comic Book Thumbnail: " + comicbook.getThumbnailURL());
             System.out.println("********************************");
         }
 
