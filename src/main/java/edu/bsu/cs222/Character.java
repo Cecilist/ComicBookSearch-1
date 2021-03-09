@@ -34,6 +34,7 @@ public class Character{
     public Character createCharacter(String characterName) throws IOException {
         MarvelCharacterDataStream dataStream = new MarvelCharacterDataStream();
         JSONArray characterData = dataStream.MarvelCharacterConnector(characterName);
+        String name;
         return new Character(characterData);
     }
 
