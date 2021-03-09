@@ -15,7 +15,7 @@ public class MarvelCharacterParser {
     public JSONArray getCharName(JSONArray characterData){
         return JsonPath.read(characterData, "$..results[0].name");
     }
-    public JSONArray getCharDescript (JSONArray characterData){
+    public JSONArray getCharDescription(JSONArray characterData){
         return JsonPath.read(characterData, "$..results[0].description");
     }
     public JSONArray getCharThumbnail (JSONArray characterData){

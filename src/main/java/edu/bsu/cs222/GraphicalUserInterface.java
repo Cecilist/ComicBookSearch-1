@@ -1,6 +1,7 @@
 package edu.bsu.cs222;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -31,7 +32,7 @@ public class GraphicalUserInterface extends Application {
         VBox searchBox = getSearchBox();
         Label titleLabel = getTitleLabel();
         TextField searchBar = getSearchBar();
-        Button searchButton = getSearchButton(searchBar);
+        Button searchButton = getSearchButton(searchBar,primaryStage);
 
         searchBox.getChildren().addAll(titleLabel, searchBar, searchButton);
         primaryStage.setScene(new Scene(searchBox));
@@ -62,11 +63,11 @@ public class GraphicalUserInterface extends Application {
         return searchBar;
     }
 
-    private Button getSearchButton(TextField articleName) {
+    private Button getSearchButton(TextField articleName,Stage primaryStage) {
         Button searchButton = new Button("Search");
         searchButton.setOnAction(event -> {
             try {
-                GraphicalUserInterface.this.comicBooks(articleName.getText());
+                GraphicalUserInterface.this.comicBooks(articleName.getText(),primaryStage);
             } catch (IOException e) {
                 Alert articleNameError = new Alert(Alert.AlertType.ERROR);
                 articleNameError.setTitle("SuperHero Name Error");
@@ -76,19 +77,18 @@ public class GraphicalUserInterface extends Application {
         return searchButton;
     }
 
-    private void comicBooks(String superheroName) throws IOException {
+    private void comicBooks(String superheroName, Stage primaryStage) throws IOException {
         String marvelHeroName = URLEncoder.encode(superheroName, StandardCharsets.UTF_8.toString());
         Character newCharacter = new Character();
         newCharacter = newCharacter.createCharacter(marvelHeroName);
         ComicBook newComicBook = new ComicBook();
         List<ComicBook> comicBooks = newComicBook.getComicBookData(newCharacter.getId());
-        showComics(newCharacter, comicBooks);
+        showComics(newCharacter, comicBooks, primaryStage);
 
     }
 
-    private void showComics(Character superHero, List<ComicBook> comicBooks) {
+    private void showComics(Character superHero, List<ComicBook> comicBooks,Stage primaryStage) {
         final int COMICBOOK_WIDTH = 5;
-
         VBox resultsBox = new VBox();
         ScrollPane scrollPane =  new ScrollPane(resultsBox);
         HBox characterBox = new HBox();
@@ -98,6 +98,7 @@ public class GraphicalUserInterface extends Application {
         TextArea superHeroDescript = new TextArea(superHero.getDescription());
         superHeroDescript.setWrapText(true);
         superHeroDescript.setEditable(false);
+        primaryStage.close();
         superHeroDetails.getChildren().addAll(superHeroName, superHeroDescript);
         characterBox.getChildren().addAll(characterThumbnail, superHeroDetails);
 
@@ -115,7 +116,12 @@ public class GraphicalUserInterface extends Application {
                 comicButton.setOnMouseClicked(event -> showComicDetail(comicCharacter));
             }
         resultsBox.getChildren().addAll(characterBox, comicPane);
+
+        secondaryStage(scrollPane);
+    }
+    public void secondaryStage(ScrollPane scrollPane){
         Stage secondaryStage = new Stage();
+        secondaryStage.close();
         secondaryStage.setHeight(600);
         secondaryStage.setWidth(600);
         secondaryStage.setScene(new Scene(scrollPane));

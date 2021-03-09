@@ -41,7 +41,7 @@ public class ComicBookTest {
 
     @Test
     public void getsaleDateTest(){
-        String saleDate = comicBooks.get(2).getOnsaleDate();
+        String saleDate = comicBooks.get(2).getOnSaleDate();
         Assertions.assertEquals("1963-03-01T00:00:00-0500", saleDate);
     }
 

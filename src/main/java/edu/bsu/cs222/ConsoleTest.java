@@ -23,7 +23,7 @@ public class ConsoleTest {
             System.out.println("********************************");
             System.out.println("Comic Book Title: " + comicbook.getTitle());
             System.out.println("Comic Book Description: " + comicbook.getDescription());
-            System.out.println("Comic Book On Sale Date: " + comicbook.getOnsaleDate());
+            System.out.println("Comic Book On Sale Date: " + comicbook.getOnSaleDate());
             System.out.println("Comic Book Thumbnail: " + comicbook.getThumbnailURL());
             System.out.println("********************************");
         }

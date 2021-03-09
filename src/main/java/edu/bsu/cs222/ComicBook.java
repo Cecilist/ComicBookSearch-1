@@ -9,7 +9,7 @@ public class ComicBook {
     private final ArrayList<Creator> creators = new ArrayList<>();
     private String title;
     private String description;
-    private String onsaleDate;
+    private String OnSaleDate;
     private String thumbnailURL;
 
     public ComicBook(){}
@@ -22,13 +22,13 @@ public class ComicBook {
         MarvelComicBookDataParser comicBookParser = new MarvelComicBookDataParser();
         List<ComicBook> comicBooks = new ArrayList<>();
         JSONArray comicTitles = comicBookParser.getComicTitles(comicBookData);
-        JSONArray comicDescriptions = comicBookParser.getComicDescript(comicBookData);
-        JSONArray comicOnsaleDates = comicBookParser.getComicDates(comicBookData);
+        JSONArray comicDescriptions = comicBookParser.getComicDescription(comicBookData);
+        JSONArray comicOnSaleDates = comicBookParser.getComicDates(comicBookData);
         for (int i = 0; i < comicTitles.size(); i++) {
             ComicBook newComic = new ComicBook();
             newComic.title = String.valueOf(comicTitles.get(i));
             newComic.description = String.valueOf(comicDescriptions.get(i));
-            newComic.onsaleDate = String.valueOf(comicOnsaleDates.get(i));
+            newComic.OnSaleDate = String.valueOf(comicOnSaleDates.get(i));
             newComic.thumbnailURL = comicBookParser.getThumbnail(comicBookData).get(i) + "/portrait_medium.jpg";
             JSONArray comicCreatorNames = comicBookParser.getComicCreatorName(comicBookData, i);
             JSONArray comicCreatorRoles = comicBookParser.getComicCreatorRole(comicBookData, i);
@@ -48,8 +48,8 @@ public class ComicBook {
         return description;
     }
 
-    public String getOnsaleDate() {
-        return onsaleDate;
+    public String getOnSaleDate() {
+        return OnSaleDate;
     }
 
     public ArrayList<Creator> getCreators() {

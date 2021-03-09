@@ -19,15 +19,15 @@ public class Character{
         if(characterParser.doesCharExist(characterData)) {
             id = String.valueOf(characterParser.getCharId(characterData).get(0));
             name = String.valueOf(characterParser.getCharName(characterData).get(0));
-            description = String.valueOf(characterParser.getCharDescript(characterData).get(0));
+            description = String.valueOf(characterParser.getCharDescription(characterData).get(0));
             thumbnailURL = characterParser.getCharThumbnail(characterData).get(0) + "/portrait_medium.jpg";
 
         }
         else{
-            Alert charDoesntExist = new Alert(Alert.AlertType.ERROR);
-            charDoesntExist.setTitle("Character Does Not Exist!");
-            charDoesntExist.setContentText("The Character does not exist, please try again!");
-            charDoesntExist.show();
+            Alert charDoesNotExist = new Alert(Alert.AlertType.ERROR);
+            charDoesNotExist.setTitle("Character Does Not Exist!");
+            charDoesNotExist.setContentText("The Character does not exist, please try again!");
+            charDoesNotExist.show();
         }
     }
 
