@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComicBook {
+public class ComicBook implements Comparable<ComicBook>  {
     private final ArrayList<Creator> creators = new ArrayList<>();
     private String title;
     private String description;
@@ -37,7 +37,10 @@ public class ComicBook {
                         new Creator(String.valueOf(comicCreatorNames.get(x)), String.valueOf(comicCreatorRoles.get(x))));
             }
             comicBooks.add(newComic);
+
         }
+        comicBooks.sort(ComicBook::compareTo);
+
         return comicBooks;
     }
     public String getTitle() {
@@ -58,5 +61,11 @@ public class ComicBook {
 
     public String getThumbnailURL() {
         return thumbnailURL;
+    }
+
+
+    @Override
+    public int compareTo(ComicBook comicBook){
+        return CharSequence.compare(onsaleDate, comicBook.onsaleDate);
     }
 }
