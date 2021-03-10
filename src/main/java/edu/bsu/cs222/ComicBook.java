@@ -1,8 +1,6 @@
 package edu.bsu.cs222;
 
-import javafx.scene.image.Image;
 import net.minidev.json.JSONArray;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +10,15 @@ public class ComicBook {
     private String title;
     private String description;
     private String onsaleDate;
-    private Image thumbnail;
+    private String thumbnailURL;
 
-    public List<ComicBook> createComicBooks(String characterId) throws IOException {
+    public ComicBook(){}
+
+    public List<ComicBook> getComicBookData(String characterId) throws IOException {
         MarvelComicBookDataStream comicBookStream = new MarvelComicBookDataStream();
-        JSONArray comicBookData = comicBookStream.MarvelComicBookConnector(characterId);
+        return createComicBooks(comicBookStream.MarvelComicBookConnector(characterId));
+    }
+    public List<ComicBook> createComicBooks(JSONArray comicBookData){
         MarvelComicBookDataParser comicBookParser = new MarvelComicBookDataParser();
         List<ComicBook> comicBooks = new ArrayList<>();
         JSONArray comicTitles = comicBookParser.getComicTitles(comicBookData);
@@ -27,7 +29,7 @@ public class ComicBook {
             newComic.title = String.valueOf(comicTitles.get(i));
             newComic.description = String.valueOf(comicDescriptions.get(i));
             newComic.onsaleDate = String.valueOf(comicOnsaleDates.get(i));
-            newComic.thumbnail = setThumbnail(comicBookParser.getThumbnail(comicBookData), i);
+            newComic.thumbnailURL = comicBookParser.getThumbnail(comicBookData).get(i) + "/portrait_medium.jpg";
             JSONArray comicCreatorNames = comicBookParser.getComicCreatorName(comicBookData, i);
             JSONArray comicCreatorRoles = comicBookParser.getComicCreatorRole(comicBookData, i);
             for (int x = 0; x < comicCreatorNames.size(); x++) {
@@ -38,14 +40,6 @@ public class ComicBook {
         }
         return comicBooks;
     }
-
-    private Image setThumbnail(JSONArray thumbnailData, int index) throws IOException {
-        String thumbnailURLEnd = "/portrait_medium.jpg";
-        String thumbnailURL = thumbnailData.get(index).toString() + thumbnailURLEnd;
-        //URL url = new URL(thumbnailURL);
-        return (new Image(thumbnailURL));
-    }
-
     public String getTitle() {
         return title;
     }
@@ -62,7 +56,7 @@ public class ComicBook {
         return creators;
     }
 
-    public Image getThumbnail() {
-        return thumbnail;
+    public String getThumbnailURL() {
+        return thumbnailURL;
     }
 }

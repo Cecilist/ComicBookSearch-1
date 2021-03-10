@@ -9,7 +9,7 @@ import java.net.URLConnection;
 
 public class MarvelCharacterDataStream {
     public JSONArray MarvelCharacterConnector(String characterName) throws IOException {
-        String urlString = "https://gateway.marvel.com/v1/public/characters?name=" + characterName +
+        String urlString = "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" + characterName +
                 "&ts=2&apikey=f68be3ef212bbce1cfefed726396718d&hash=997d5981dfde767fa0fca645e967d9ee";
         URL url =new URL(urlString);
         URLConnection connection = url.openConnection();
