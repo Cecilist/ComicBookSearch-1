@@ -20,6 +20,7 @@ public class ComicStage extends Stage {
         VBox resultsBox = new VBox();
         ScrollPane scrollPane = new ScrollPane(resultsBox);
         HBox characterBox = new HBox();
+        characterBox.setMaxHeight(30);
         ImageView characterThumbnail = new ImageView(new Image(superHero.getThumbnailURL()));
         VBox superHeroDetails = new VBox();
         Label superHeroName = new Label(superHero.getName());

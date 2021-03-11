@@ -14,11 +14,11 @@ edu/bsu/cs222/MarvelSuperheroParser.java
  edu.bsu.cs222.MarvelSuperheroParser
 edu/bsu/cs222/ComicDetailStage.java
  edu.bsu.cs222.ComicDetailStage
-edu/bsu/cs222/ComicStage.java
- edu.bsu.cs222.ComicStage
-edu/bsu/cs222/HeroStage.java
- edu.bsu.cs222.HeroStage
 edu/bsu/cs222/GraphicalUserInterface.java
  edu.bsu.cs222.GraphicalUserInterface
 edu/bsu/cs222/SearchStage.java
  edu.bsu.cs222.SearchStage
+edu/bsu/cs222/HeroStage.java
+ edu.bsu.cs222.HeroStage
+edu/bsu/cs222/ComicStage.java
+ edu.bsu.cs222.ComicStage
