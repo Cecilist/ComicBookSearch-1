@@ -60,6 +60,7 @@ public class ComicBook implements Comparable<ComicBook>  {
 
     public String getOnsaleDate() {
         return onsaleDate;
+
     }
 
     public ArrayList<Creator> getCreators() {
