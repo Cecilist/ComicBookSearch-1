@@ -61,21 +61,36 @@ public class GraphicalUserInterface extends Application {
 
     private Button getSearchButton(TextField articleName) {
         Button searchButton = new Button("Search");
-        searchButton.setOnAction(event -> comicBooks(articleName.getText()));
+        searchButton.setOnAction(event -> pickSuperhero(articleName.getText()));
         return searchButton;
     }
+    private void pickSuperhero(String superheroName){
+        Superhero newSuperhero = new Superhero();
+        List<Superhero> superheroList = newSuperhero.createSuperhero(superheroName);
+        Stage selectSuperheroStage = new Stage();
+        VBox superheroButtons = new VBox(new Label("Please select a Superhero: "));
+        ScrollPane buttonScroll = new ScrollPane(superheroButtons);
+        superheroButtons.setSpacing(5);
+        superheroButtons.setAlignment(Pos.CENTER);
+        for(int i=0; i<superheroList.size(); i++)
+        {
+         Button superHeroButton = new Button(superheroList.get(i).getName());
+            int finalI = i;
+            superHeroButton.setOnMouseClicked(event -> comicBooks(superheroList.get(finalI)));
+            superheroButtons.getChildren().add(superHeroButton);
+        }
 
-    private void comicBooks(String superheroName) {
-
-        Character newCharacter = new Character();
-        newCharacter = newCharacter.createCharacter(superheroName);
-        ComicBook newComicBook = new ComicBook();
-        List<ComicBook> comicBooks = newComicBook.getComicBookData(newCharacter.getId());
-        showComics(newCharacter, comicBooks);
-
+        selectSuperheroStage.setScene(new Scene(buttonScroll));
+        selectSuperheroStage.showAndWait();
     }
 
-    private void showComics(Character superHero, List<ComicBook> comicBooks) {
+    private void comicBooks(Superhero superhero) {
+        ComicBook newComicBook = new ComicBook();
+        List<ComicBook> comicBooks = newComicBook.getComicBookData(superhero.getId());
+        showComics(superhero, comicBooks);
+    }
+
+    private void showComics(Superhero superHero, List<ComicBook> comicBooks) {
         final int COMICBOOK_WIDTH = 5;
 
         VBox resultsBox = new VBox();

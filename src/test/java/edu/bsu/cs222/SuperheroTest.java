@@ -8,15 +8,15 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class CharacterTest {
+public class SuperheroTest {
     private InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("spiderCharacter.json");
     private JSONArray charData;
-    private Character spiderMan = new Character();
+    private Superhero spiderMan = new Superhero();
 
     {
         try {
             charData = JsonPath.read(inputStream, "*");
-            spiderMan = new Character(charData);
+            spiderMan = spiderMan.buildSuperheros(charData).get(0);
         } catch (IOException e) {
             e.printStackTrace();
         }

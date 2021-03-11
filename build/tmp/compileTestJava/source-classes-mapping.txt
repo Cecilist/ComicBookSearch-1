@@ -1,4 +1,4 @@
-edu/bsu/cs222/CharacterTest.java
- edu.bsu.cs222.CharacterTest
 edu/bsu/cs222/ComicBookTest.java
  edu.bsu.cs222.ComicBookTest
+edu/bsu/cs222/SuperheroTest.java
+ edu.bsu.cs222.SuperheroTest
