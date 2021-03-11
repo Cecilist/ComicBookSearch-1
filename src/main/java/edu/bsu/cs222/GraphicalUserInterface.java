@@ -107,12 +107,14 @@ public class GraphicalUserInterface extends Application {
         for (int i = 0; i < comicCount; i++)
             for (int x = 0; x < COMICBOOK_WIDTH; x++) {
                 comicCount--;
-                Button comicButton = new Button();
-                ComicBook comicCharacter = comicBooks.get(comicCount);
-                ImageView comicThumbnail = new ImageView(new Image (comicCharacter.getThumbnailURL()));
-                comicButton.setGraphic(comicThumbnail);
-                comicPane.add(comicButton, x, i);
-                comicButton.setOnMouseClicked(event -> showComicDetail(comicCharacter));
+                if(comicCount>0) {
+                    Button comicButton = new Button();
+                    ComicBook comicCharacter = comicBooks.get(comicCount);
+                    ImageView comicThumbnail = new ImageView(new Image(comicCharacter.getThumbnailURL()));
+                    comicButton.setGraphic(comicThumbnail);
+                    comicPane.add(comicButton, x, i);
+                    comicButton.setOnMouseClicked(event -> showComicDetail(comicCharacter));
+                }
             }
         resultsBox.getChildren().addAll(characterBox, comicPane);
         Stage secondaryStage = new Stage();
