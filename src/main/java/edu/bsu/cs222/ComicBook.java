@@ -14,9 +14,16 @@ public class ComicBook {
 
     public ComicBook(){}
 
-    public List<ComicBook> getComicBookData(String characterId) throws IOException {
+    public List<ComicBook> getComicBookData(String characterId) {
         MarvelComicBookDataStream comicBookStream = new MarvelComicBookDataStream();
-        return createComicBooks(comicBookStream.MarvelComicBookConnector(characterId));
+        List<ComicBook> comicBookList= null;
+
+        try {
+            comicBookList =  createComicBooks(comicBookStream.MarvelComicBookConnector(characterId));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return comicBookList;
     }
     public List<ComicBook> createComicBooks(JSONArray comicBookData){
         MarvelComicBookDataParser comicBookParser = new MarvelComicBookDataParser();
