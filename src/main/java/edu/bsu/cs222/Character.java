@@ -4,6 +4,9 @@ import javafx.scene.control.Alert;
 import net.minidev.json.JSONArray;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 public class Character{
     private String name;
@@ -24,17 +27,27 @@ public class Character{
 
         }
         else{
+           throw new IOException("Bad Superhero Name");
+        }
+    }
+
+    public Character createCharacter(String superheroName) {
+        Character newCharacter = new Character();
+        try {
+            String encodedSuperheroName = URLEncoder.encode(superheroName, StandardCharsets.UTF_8.toString());
+            MarvelCharacterDataStream dataStream = new MarvelCharacterDataStream();
+            newCharacter = new Character(dataStream.MarvelCharacterConnector(encodedSuperheroName));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             Alert charDoesntExist = new Alert(Alert.AlertType.ERROR);
             charDoesntExist.setTitle("Character Does Not Exist!");
             charDoesntExist.setContentText("The Character does not exist, please try again!");
             charDoesntExist.show();
+            System.exit(1);
         }
-    }
 
-    public Character createCharacter(String characterName) throws IOException {
-        MarvelCharacterDataStream dataStream = new MarvelCharacterDataStream();
-        JSONArray characterData = dataStream.MarvelCharacterConnector(characterName);
-        return new Character(characterData);
+        return newCharacter;
     }
 
     public String getName() {
