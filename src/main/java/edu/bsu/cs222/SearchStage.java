@@ -15,7 +15,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class SearchStage extends Stage {
-    public void createStage(){
+    public void createStage() {
         setTitle("Superhero Search");
         setWidth(400);
         setHeight(250);
@@ -23,6 +23,7 @@ public class SearchStage extends Stage {
         Label titleLabel = getTitleLabel();
         TextField searchBar = getSearchBar();
         Button searchButton = getSearchButton(searchBar);
+        searchButton.setDefaultButton(true);
         searchBox.getChildren().addAll(titleLabel, searchBar, searchButton);
         setScene(new Scene(searchBox));
     }

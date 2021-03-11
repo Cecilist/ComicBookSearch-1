@@ -1,10 +1,15 @@
 package edu.bsu.cs222;
 
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class ComicDetailStage extends Stage{
@@ -19,6 +24,8 @@ public class ComicDetailStage extends Stage{
         comicDescription.setWrapText(true);
         comicDescription.setEditable(false);
         comicDetailBox.getChildren().addAll(comicThumbnail, comicDescription);
+        comicDetailBox.setBackground(new Background(
+                new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
         Stage comicDetailStage = new Stage();
         comicDetailStage.setScene(new Scene(comicDetailBox));
         comicDetailStage.show();
