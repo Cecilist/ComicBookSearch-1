@@ -2,6 +2,7 @@ package edu.bsu.cs222;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import org.apache.log4j.BasicConfigurator;
 
 public class GraphicalUserInterface extends Application {
 
@@ -11,6 +12,7 @@ public class GraphicalUserInterface extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        BasicConfigurator.configure();
         SearchStage searchView= new SearchStage();
         searchView.createStage();
         primaryStage=searchView;

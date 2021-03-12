@@ -55,6 +55,7 @@ public class Superhero {
             charDoesntExist.setTitle("Character Does Not Exist!");
             charDoesntExist.setContentText("The Character does not exist, please try again!");
             charDoesntExist.showAndWait();
+            return null;
 
 
         }

@@ -18,35 +18,28 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class HeroStage extends Stage {
-    public void pickSuperhero(String superheroName){
+    public void pickSuperhero(String superheroName) {
         ComicStage comicStage = new ComicStage();
         Superhero newSuperhero = new Superhero();
         List<Superhero> superheroList = newSuperhero.createSuperhero(superheroName);
-        Label instruction = new Label("Please select a Superhero: ");
-        instruction.setTextFill(Color.web("#ffffffff"));
-        instruction.setFont(Font.font("Fantasy",FontWeight.BOLD, 15));
-        VBox superheroButtons = new VBox(instruction);
-        ScrollPane buttonScroll = new ScrollPane(superheroButtons);
-        superheroButtons.setSpacing(5);
-        superheroButtons.setAlignment(Pos.CENTER);
-        if(superheroList.size()==0)
-        {
-            Label errorLabel = new Label ("There was no superheros found");
-            Button closebt = new Button("Close");
-            closebt.setOnMouseClicked(e-> close() );
-            superheroButtons.getChildren().addAll(errorLabel, closebt);
-            setScene (new Scene(superheroButtons));
+        if (superheroList != null) {
+            Label instruction = new Label("Please select a Superhero: ");
+            instruction.setTextFill(Color.web("#ffffffff"));
+            instruction.setFont(Font.font("Fantasy", FontWeight.BOLD, 15));
+            VBox superheroButtons = new VBox(instruction);
+            ScrollPane buttonScroll = new ScrollPane(superheroButtons);
+            superheroButtons.setSpacing(5);
+            superheroButtons.setAlignment(Pos.CENTER);
+            for (int i = 0; i < superheroList.size(); i++) {
+                Button superHeroButton = new Button(superheroList.get(i).getName());
+                int finalI = i;
+                superHeroButton.setOnMouseClicked(event -> comicStage.comicBooks(superheroList.get(finalI)));
+                superheroButtons.getChildren().add(superHeroButton);
+            }
+            superheroButtons.setBackground(new Background(
+                    new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
+            setScene(new Scene(buttonScroll));
+            showAndWait();
         }
-        for(int i=0; i<superheroList.size(); i++)
-        {
-            Button superHeroButton = new Button(superheroList.get(i).getName());
-            int finalI = i;
-            superHeroButton.setOnMouseClicked(event -> comicStage.comicBooks(superheroList.get(finalI)));
-            superheroButtons.getChildren().add(superHeroButton);
-        }
-        superheroButtons.setBackground(new Background(
-                new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
-        setScene(new Scene(buttonScroll));
-        showAndWait();
     }
 }
