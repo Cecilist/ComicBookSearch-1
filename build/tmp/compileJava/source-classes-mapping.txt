@@ -1,24 +1,24 @@
 edu/bsu/cs222/MarvelSuperheroDataStream.java
  edu.bsu.cs222.MarvelSuperheroDataStream
-edu/bsu/cs222/Superhero.java
- edu.bsu.cs222.Superhero
-edu/bsu/cs222/HeroStage.java
- edu.bsu.cs222.HeroStage
+edu/bsu/cs222/ComicBook.java
+ edu.bsu.cs222.ComicBook
+edu/bsu/cs222/MarvelComicBookDataStream.java
+ edu.bsu.cs222.MarvelComicBookDataStream
 edu/bsu/cs222/Creator.java
  edu.bsu.cs222.Creator
 edu/bsu/cs222/ComicDetailStage.java
  edu.bsu.cs222.ComicDetailStage
-edu/bsu/cs222/ComicStage.java
- edu.bsu.cs222.ComicStage
-edu/bsu/cs222/MarvelComicBookDataStream.java
- edu.bsu.cs222.MarvelComicBookDataStream
 edu/bsu/cs222/MarvelComicBookDataParser.java
  edu.bsu.cs222.MarvelComicBookDataParser
-edu/bsu/cs222/MarvelSuperheroParser.java
- edu.bsu.cs222.MarvelSuperheroParser
-edu/bsu/cs222/ComicBook.java
- edu.bsu.cs222.ComicBook
-edu/bsu/cs222/SearchStage.java
- edu.bsu.cs222.SearchStage
 edu/bsu/cs222/GraphicalUserInterface.java
  edu.bsu.cs222.GraphicalUserInterface
+edu/bsu/cs222/SearchStage.java
+ edu.bsu.cs222.SearchStage
+edu/bsu/cs222/MarvelSuperheroParser.java
+ edu.bsu.cs222.MarvelSuperheroParser
+edu/bsu/cs222/Superhero.java
+ edu.bsu.cs222.Superhero
+edu/bsu/cs222/HeroStage.java
+ edu.bsu.cs222.HeroStage
+edu/bsu/cs222/ComicStage.java
+ edu.bsu.cs222.ComicStage

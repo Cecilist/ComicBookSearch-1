@@ -31,10 +31,12 @@ public class HeroStage extends Stage {
             superheroButtons.setSpacing(5);
             superheroButtons.setAlignment(Pos.CENTER);
             for (int i = 0; i < superheroList.size(); i++) {
-                Button superHeroButton = new Button(superheroList.get(i).getName());
-                int finalI = i;
-                superHeroButton.setOnMouseClicked(event -> comicStage.comicBooks(superheroList.get(finalI)));
-                superheroButtons.getChildren().add(superHeroButton);
+                if(superheroList.get(i).hasComics()) {
+                    Button superHeroButton = new Button(superheroList.get(i).getName());
+                    int finalI = i;
+                    superHeroButton.setOnMouseClicked(event -> comicStage.comicBooks(superheroList.get(finalI)));
+                    superheroButtons.getChildren().add(superHeroButton);
+                }
             }
             superheroButtons.setBackground(new Background(
                     new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));

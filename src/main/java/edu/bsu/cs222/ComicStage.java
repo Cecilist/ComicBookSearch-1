@@ -24,7 +24,8 @@ public class ComicStage extends Stage {
         ImageView characterThumbnail = new ImageView(new Image(superHero.getThumbnailURL()));
         VBox superHeroDetails = new VBox();
         Label superHeroName = new Label(superHero.getName());
-        TextArea superHeroDescript = new TextArea(superHero.getDescription());
+        TextArea superHeroDescript = new TextArea(superHero.getDescription()+
+                "\nAppears in "+superHero.getComicsTotal()+" Marvel comics");
         superHeroDescript.setWrapText(true);
         superHeroDescript.setEditable(false);
         superHeroDetails.getChildren().addAll(superHeroName, superHeroDescript);

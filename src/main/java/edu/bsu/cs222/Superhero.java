@@ -15,6 +15,7 @@ public class Superhero {
     private String id;
     private String description;
     private String thumbnailURL;
+    private int comicsTotal;
 
     public Superhero() {
     }
@@ -27,12 +28,14 @@ public class Superhero {
             JSONArray names = superheroParser.getSuperName(characterData);
             JSONArray descriptions= superheroParser.getSuperDescript(characterData);
             JSONArray thumbnailURLs = superheroParser.getSuperThumbnail(characterData);
+            JSONArray comicTotals = superheroParser.getComicsTotal(characterData);
             for(int i=0; i<ids.size(); i++) {
                 Superhero newSuperhero = new Superhero();
                 newSuperhero.id = String.valueOf(ids.get(i));
                 newSuperhero.name = String.valueOf(names.get(i));
                 newSuperhero.description = String.valueOf(descriptions.get(i));
                 newSuperhero.thumbnailURL = thumbnailURLs.get(i) + "/portrait_medium.jpg";
+                newSuperhero.comicsTotal = (int)comicTotals.get(i);
                 superheros.add(newSuperhero);
             }
             return superheros;
@@ -77,6 +80,12 @@ public class Superhero {
 
     public String getId() {
         return id;
+    }
+
+    public int getComicsTotal(){return comicsTotal;}
+
+    public boolean hasComics(){
+        return comicsTotal>0;
     }
 
 }
