@@ -29,6 +29,14 @@ public class HeroStage extends Stage {
         ScrollPane buttonScroll = new ScrollPane(superheroButtons);
         superheroButtons.setSpacing(5);
         superheroButtons.setAlignment(Pos.CENTER);
+        if(superheroList.size()==0)
+        {
+            Label errorLabel = new Label ("There was no superheros found");
+            Button closebt = new Button("Close");
+            closebt.setOnMouseClicked(e-> close() );
+            superheroButtons.getChildren().addAll(errorLabel, closebt);
+            setScene (new Scene(superheroButtons));
+        }
         for(int i=0; i<superheroList.size(); i++)
         {
             Button superHeroButton = new Button(superheroList.get(i).getName());

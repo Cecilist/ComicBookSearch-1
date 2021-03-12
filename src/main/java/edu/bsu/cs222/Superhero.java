@@ -54,8 +54,9 @@ public class Superhero {
             Alert charDoesntExist = new Alert(Alert.AlertType.ERROR);
             charDoesntExist.setTitle("Character Does Not Exist!");
             charDoesntExist.setContentText("The Character does not exist, please try again!");
-            charDoesntExist.show();
-            System.exit(1);
+            charDoesntExist.showAndWait();
+
+
         }
 
         return superheros;
