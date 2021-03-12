@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+
 import java.util.List;
 
 public class Superhero {
@@ -55,7 +56,7 @@ public class Superhero {
             charDoesntExist.setTitle("Character Does Not Exist!");
             charDoesntExist.setContentText("The Character does not exist, please try again!");
             charDoesntExist.show();
-            System.exit(1);
+            return null;
         }
 
         return superheros;
