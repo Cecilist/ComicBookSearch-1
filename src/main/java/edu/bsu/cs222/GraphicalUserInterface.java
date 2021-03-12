@@ -64,7 +64,7 @@ public class GraphicalUserInterface extends Application {
         searchButton.setOnAction(event -> pickSuperhero(articleName.getText()));
         return searchButton;
     }
-    private void pickSuperhero(String superheroName){
+    private void pickSuperhero(String superheroName) {
         Superhero newSuperhero = new Superhero();
         List<Superhero> superheroList = newSuperhero.createSuperhero(superheroName);
         Stage selectSuperheroStage = new Stage();
@@ -72,16 +72,19 @@ public class GraphicalUserInterface extends Application {
         ScrollPane buttonScroll = new ScrollPane(superheroButtons);
         superheroButtons.setSpacing(5);
         superheroButtons.setAlignment(Pos.CENTER);
-        for(int i=0; i<superheroList.size(); i++)
-        {
-         Button superHeroButton = new Button(superheroList.get(i).getName());
-            int finalI = i;
-            superHeroButton.setOnMouseClicked(event -> comicBooks(superheroList.get(finalI)));
-            superheroButtons.getChildren().add(superHeroButton);
-        }
 
-        selectSuperheroStage.setScene(new Scene(buttonScroll));
-        selectSuperheroStage.showAndWait();
+        if (superheroList != null) {
+
+            for (int i = 0; i < superheroList.size(); i++) {
+                Button superHeroButton = new Button(superheroList.get(i).getName());
+                int finalI = i;
+                superHeroButton.setOnMouseClicked(event -> comicBooks(superheroList.get(finalI)));
+                superheroButtons.getChildren().add(superHeroButton);
+            }
+
+            selectSuperheroStage.setScene(new Scene(buttonScroll));
+            selectSuperheroStage.showAndWait();
+        }
     }
 
     private void comicBooks(Superhero superhero) {
