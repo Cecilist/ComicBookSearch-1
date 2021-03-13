@@ -20,4 +20,7 @@ public class MarvelSuperheroParser {
     public JSONArray getSuperThumbnail(JSONArray characterData){
         return JsonPath.read(characterData, "$..results[*].thumbnail.path");
     }
+    public JSONArray getComicsTotal(JSONArray characterData){
+        return JsonPath.read(characterData, "$..results[*].comics.available");
+    }
 }
