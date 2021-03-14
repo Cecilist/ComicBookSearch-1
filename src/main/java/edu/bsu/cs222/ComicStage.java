@@ -1,10 +1,7 @@
 package edu.bsu.cs222;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -14,7 +11,9 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
+
 public class ComicStage extends Stage {
+
     public void showComics(Superhero superHero, List<ComicBook> comicBooks) {
         final int COMICBOOK_WIDTH = 5;
         VBox resultsBox = new VBox();
@@ -32,6 +31,7 @@ public class ComicStage extends Stage {
         characterBox.getChildren().addAll(characterThumbnail, superHeroDetails);
 
         GridPane comicPane = new GridPane();
+
 
         int comicCount = comicBooks.size();
         int comicNumber=0;
@@ -56,11 +56,16 @@ public class ComicStage extends Stage {
         setScene(new Scene(scrollPane));
         showAndWait();
     }
+
+
     public void comicBooks(Superhero superhero) {
         ComicBook newComicBook = new ComicBook();
         List<ComicBook> comicBooks = newComicBook.getComicBookData(superhero.getId());
         ComicStage comicView = new ComicStage();
         comicView.showComics(superhero, comicBooks);
+
+        }
+
+
     }
 
-}
