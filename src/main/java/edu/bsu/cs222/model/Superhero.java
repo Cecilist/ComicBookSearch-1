@@ -5,6 +5,7 @@ import net.minidev.json.JSONArray;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class Superhero {
     private String name;
     private String id;
     private String description;
-    private String thumbnailURL;
+    private URL thumbnailURL;
     private int comicsTotal;
 
     public Superhero() {
@@ -34,7 +35,7 @@ public class Superhero {
                 newSuperhero.id = String.valueOf(ids.get(i));
                 newSuperhero.name = String.valueOf(names.get(i));
                 newSuperhero.description = String.valueOf(descriptions.get(i));
-                newSuperhero.thumbnailURL = thumbnailURLs.get(i) + "/portrait_medium.jpg";
+                newSuperhero.thumbnailURL = new URL (thumbnailURLs.get(i) + "/portrait_medium.jpg");
                 newSuperhero.comicsTotal = (int)comicTotals.get(i);
                 superheros.add(newSuperhero);
             }
@@ -74,7 +75,7 @@ public class Superhero {
         return description;
     }
 
-    public String getThumbnailURL() {
+    public URL getThumbnailURL() {
         return thumbnailURL;
     }
 
