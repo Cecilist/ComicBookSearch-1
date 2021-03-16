@@ -75,8 +75,6 @@ public class ComicBook implements Comparable<ComicBook> {
     public String getThumbnailURL() {
         return thumbnailURL;
     }
-
-
     @Override
     public int compareTo(ComicBook comicBook) {
         return CharSequence.compare(onsaleDate, comicBook.onsaleDate);
