@@ -1,5 +1,7 @@
-package edu.bsu.cs222;
+package edu.bsu.cs222.view;
 
+import edu.bsu.cs222.model.ComicBook;
+import edu.bsu.cs222.model.Superhero;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

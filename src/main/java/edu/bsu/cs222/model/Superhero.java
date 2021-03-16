@@ -1,4 +1,4 @@
-package edu.bsu.cs222;
+package edu.bsu.cs222.model;
 
 import javafx.scene.control.Alert;
 import net.minidev.json.JSONArray;
@@ -41,7 +41,7 @@ public class Superhero {
             return superheros;
         }
         else{
-           throw new IOException("Bad Superhero Name");
+            throw new IOException("Bad Superhero Name");
         }
     }
 

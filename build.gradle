@@ -29,4 +29,4 @@ javafx {
     version = "15.0.1"
 
 }
-mainClassName = 'edu.bsu.cs222.GraphicalUserInterface'
+mainClassName = 'edu.bsu.cs222.view.GraphicalUserInterface'

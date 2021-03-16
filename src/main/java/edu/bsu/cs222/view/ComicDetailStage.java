@@ -1,5 +1,6 @@
-package edu.bsu.cs222;
+package edu.bsu.cs222.view;
 
+import edu.bsu.cs222.model.ComicBook;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;

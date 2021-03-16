@@ -1,5 +1,6 @@
-package edu.bsu.cs222;
+package edu.bsu.cs222.view;
 
+import edu.bsu.cs222.model.Superhero;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
