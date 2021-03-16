@@ -23,7 +23,7 @@ public class ComicStage extends Stage {
         ScrollPane scrollPane = new ScrollPane(resultsBox);
         HBox characterBox = new HBox();
         characterBox.setMaxHeight(30);
-        ImageView characterThumbnail = new ImageView(new Image(superHero.getThumbnailURL()));
+        ImageView characterThumbnail = new ImageView(new Image(superHero.getThumbnailURL().toString()));
         VBox superHeroDetails = new VBox();
         Label superHeroName = new Label(superHero.getName());
         TextArea superHeroDescript = new TextArea(superHero.getDescription()+
@@ -42,7 +42,7 @@ public class ComicStage extends Stage {
                 if (comicNumber<comicCount) {
                     Button comicButton = new Button();
                     ComicBook comicCharacter = comicBooks.get(comicNumber);
-                    ImageView comicThumbnail = new ImageView(new Image(comicCharacter.getThumbnailURL()));
+                    ImageView comicThumbnail = new ImageView(new Image(comicCharacter.getThumbnailURL().toString()));
                     comicButton.setGraphic(comicThumbnail);
                     comicPane.add(comicButton, x, i);
                     comicButton.setOnMouseClicked(event -> {

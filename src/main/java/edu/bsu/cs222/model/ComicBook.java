@@ -3,6 +3,8 @@ package edu.bsu.cs222.model;
 import net.minidev.json.JSONArray;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class ComicBook implements Comparable<ComicBook> {
     private String title;
     private String description;
     private String onsaleDate;
-    private String thumbnailURL;
+    private URL thumbnailURL;
 
     public ComicBook() {
     }
@@ -39,7 +41,11 @@ public class ComicBook implements Comparable<ComicBook> {
             newComic.title = String.valueOf(comicTitles.get(i));
             newComic.description = String.valueOf(comicDescriptions.get(i));
             newComic.onsaleDate = String.valueOf(comicOnsaleDates.get(i));
-            newComic.thumbnailURL = comicBookParser.getThumbnail(comicBookData).get(i) + ("/portrait_medium.jpg");
+            try {
+                newComic.thumbnailURL = new URL(comicBookParser.getThumbnail(comicBookData).get(i) + ("/portrait_medium.jpg"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
 
             JSONArray comicCreatorNames = comicBookParser.getComicCreatorName(comicBookData, i);
             JSONArray comicCreatorRoles = comicBookParser.getComicCreatorRole(comicBookData, i);
@@ -72,7 +78,7 @@ public class ComicBook implements Comparable<ComicBook> {
         return creators;
     }
 
-    public String getThumbnailURL() {
+    public URL getThumbnailURL() {
         return thumbnailURL;
     }
     @Override
