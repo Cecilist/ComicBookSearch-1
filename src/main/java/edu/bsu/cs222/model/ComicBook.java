@@ -33,7 +33,7 @@ public class ComicBook implements Comparable<ComicBook> {
         MarvelComicBookDataParser comicBookParser = new MarvelComicBookDataParser();
         List<ComicBook> comicBooks = new ArrayList<>();
         JSONArray comicTitles = comicBookParser.getComicTitles(comicBookData);
-        JSONArray comicDescriptions = comicBookParser.getComicDescript(comicBookData);
+        JSONArray comicDescriptions = comicBookParser.getComicDescription(comicBookData);
         JSONArray comicOnsaleDates = comicBookParser.getComicDates(comicBookData);
         for (int i = 0; i < comicTitles.size(); i++) {
             ComicBook newComic = new ComicBook();
