@@ -8,7 +8,7 @@ public class MarvelComicBookDataParser {
         return JsonPath.read(marvelData, "$..['results'][*]['title']");
     }
 
-    public JSONArray getComicDescript(JSONArray marvelData) {
+    public JSONArray getComicDescription(JSONArray marvelData) {
         return JsonPath.read(marvelData, "$..['results'][*]['description']");
     }
 
