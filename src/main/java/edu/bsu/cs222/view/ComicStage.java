@@ -3,10 +3,7 @@ package edu.bsu.cs222.view;
 import edu.bsu.cs222.model.ComicBook;
 import edu.bsu.cs222.model.Superhero;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -17,6 +14,7 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class ComicStage extends Stage {
+    public int comicPage;
     public void showComics(Superhero superHero, List<ComicBook> comicBooks) {
         final int COMICBOOK_WIDTH = 5;
         VBox resultsBox = new VBox();
@@ -53,16 +51,35 @@ public class ComicStage extends Stage {
                 }
             }
         resultsBox.getChildren().addAll(characterBox, comicPane);
+        if (superHero.getComicsTotal()> getComicPage() * 100) {
+            Button moreButton = moreResults(superHero);
+            resultsBox.getChildren().add(moreButton);
+        }
         setHeight(600);
         setWidth(600);
         setScene(new Scene(scrollPane));
         showAndWait();
     }
+
+    private Button moreResults(Superhero superhero) {
+        Button moreButton = new Button("More comics");
+        moreButton.setOnAction(event -> {
+            setComicPage(5);
+            comicBooks(superhero);
+        });
+        return moreButton;
+    }
+
     public void comicBooks(Superhero superhero) {
         ComicBook newComicBook = new ComicBook();
         List<ComicBook> comicBooks = newComicBook.getComicBookData(superhero.getId());
         ComicStage comicView = new ComicStage();
         comicView.showComics(superhero, comicBooks);
     }
-
+    public int getComicPage() {
+        return comicPage;
+    }
+    public  void setComicPage(int comicPage) {
+        this.comicPage = comicPage;
+    }
 }

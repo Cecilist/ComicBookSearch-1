@@ -1,5 +1,6 @@
 package edu.bsu.cs222.model;
 
+import edu.bsu.cs222.view.ComicStage;
 import net.minidev.json.JSONArray;
 
 import java.io.IOException;
@@ -19,9 +20,9 @@ public class ComicBook implements Comparable<ComicBook> {
     public List<ComicBook> getComicBookData(String characterId) {
         MarvelComicBookDataStream comicBookStream = new MarvelComicBookDataStream();
         List<ComicBook> comicBookList = null;
-
+        ComicStage currentPage = new ComicStage();
         try {
-            comicBookList = createComicBooks(comicBookStream.MarvelComicBookConnector(characterId));
+            comicBookList = createComicBooks(comicBookStream.MarvelComicBookConnector(characterId,currentPage.getComicPage()));
         } catch (IOException e) {
             e.printStackTrace();
         }
