@@ -10,13 +10,14 @@ import java.util.Scanner;
 public class APIKey {
     private String publicKey;
     private String hashKey;
-    public APIKey(){
+
+    public APIKey() {
         File apiFile = new File
                 (Objects.requireNonNull(getClass().getClassLoader().getResource("apiInformation.txt")).getFile());
         Alert badApi = new Alert(Alert.AlertType.ERROR);
         badApi.setContentText("Bad API file");
-        if(apiFile.exists()){
-            try{
+        if (apiFile.exists()) {
+            try {
                 Scanner fileReader = new Scanner(apiFile);
                 publicKey = fileReader.nextLine();
                 hashKey = fileReader.nextLine();
@@ -24,8 +25,7 @@ public class APIKey {
                 badApi.showAndWait();
                 e.printStackTrace();
             }
-        }
-        else{
+        } else {
             badApi.showAndWait();
         }
     }

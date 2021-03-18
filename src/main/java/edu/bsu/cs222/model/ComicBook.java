@@ -24,7 +24,7 @@ public class ComicBook implements Comparable<ComicBook> {
         List<ComicBook> comicBookList = null;
         ComicStage currentPage = new ComicStage();
         try {
-            comicBookList = createComicBooks(comicBookStream.MarvelComicBookConnector(characterId,comicResultPage));
+            comicBookList = createComicBooks(comicBookStream.MarvelComicBookConnector(characterId, comicResultPage));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -82,6 +82,11 @@ public class ComicBook implements Comparable<ComicBook> {
     public URL getThumbnailURL() {
         return thumbnailURL;
     }
+
+    public String getOnSaleDate() {
+        return onsaleDate;
+    }
+
     @Override
     public int compareTo(ComicBook comicBook) {
         return CharSequence.compare(onsaleDate, comicBook.onsaleDate);
