@@ -51,7 +51,7 @@ public class ComicStage extends VBox {
         HBox pageChooser = new HBox();
         pageChooser.setAlignment(Pos.CENTER);
         pageChooser.setSpacing(20);
-        if (superHero.getComicsTotal() > comicPage * 100) {
+        if (superHero.getComicsTotal() > (comicPage+1) * 100) {
             Label pageNumber = new Label("Page: " + (comicPage + 1));
             Button moreButton = nextResults(superHero, primaryStage);
             if (comicPage != 0) {
