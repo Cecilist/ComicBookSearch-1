@@ -14,11 +14,11 @@ public class CharacterDetailBox extends HBox {
         setMaxHeight(30);
         ImageView characterThumbnail = new ImageView(new Image(superHero.getThumbnailURL().toString()));
         Label superHeroName = new Label(superHero.getName());
-        TextArea superHeroDescript = new TextArea(superHero.getDescription() +
+        TextArea superHeroDescription = new TextArea(superHero.getDescription() +
                 "\nAppears in " + superHero.getComicsTotal() + " Marvel comics");
-        superHeroDescript.setWrapText(true);
-        superHeroDescript.setEditable(false);
-        superDetails.getChildren().addAll(superHeroName, superHeroDescript);
+        superHeroDescription.setWrapText(true);
+        superHeroDescription.setEditable(false);
+        superDetails.getChildren().addAll(superHeroName, superHeroDescription);
         getChildren().addAll(characterThumbnail, superDetails);
     }
 }

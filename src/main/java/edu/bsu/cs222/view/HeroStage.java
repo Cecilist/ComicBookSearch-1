@@ -31,7 +31,11 @@ public class HeroStage extends VBox {
             ScrollPane buttonScroll = new ScrollPane(superheroButtons);
             superheroButtons.setSpacing(5);
             superheroButtons.setAlignment(Pos.CENTER);
+            primaryStage.setWidth(205);
+            primaryStage.setHeight(50);
+            primaryStage.centerOnScreen();
             for (int i = 0; i < superheroList.size(); i++) {
+                primaryStage.setHeight(primaryStage.getHeight()+ 16.5);
                 if (superheroList.get(i).hasComics()) {
                     Button superHeroButton = new Button(superheroList.get(i).getName());
                     int finalI = i;

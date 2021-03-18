@@ -48,28 +48,11 @@ public class ComicStage extends VBox {
                 }
 
         });
-        HBox pageChooser = new HBox();
-        pageChooser.setAlignment(Pos.CENTER);
-        pageChooser.setSpacing(20);
-        if (superHero.getComicsTotal() > (comicPage+1) * 100) {
-            Label pageNumber = new Label("Page: " + (comicPage + 1));
-            Button moreButton = nextResults(superHero, primaryStage);
-            if (comicPage != 0) {
-                Button lessButton = previousResults(superHero, primaryStage);
-                pageChooser.getChildren().addAll(lessButton, pageNumber, moreButton);
-            } else {
-                pageChooser.getChildren().addAll(pageNumber, moreButton);
-            }
-        }
+        HBox pageChooser = HBoxPageChooser(superHero, primaryStage);
         Label loadingLabel = new Label("Loading comics, Please wait!");
         comicPane.add(loadingLabel, 0, 0, 5, 1);
         resultsBox.getChildren().addAll(characterBox, pageChooser, comicPane);
-        ScrollPane scrollPane = new ScrollPane(resultsBox);
-        primaryStage.setHeight(600);
-        primaryStage.setWidth(600);
-        primaryStage.setScene(new Scene(scrollPane));
-        primaryStage.show();
-        primaryStage.centerOnScreen();
+        primaryStageEdit(primaryStage,resultsBox);
     }
 
     private Button nextResults(Superhero superhero, Stage primaryStage) {
@@ -95,5 +78,40 @@ public class ComicStage extends VBox {
         ComicBook newComicBook = new ComicBook();
         List<ComicBook> comicBooks = newComicBook.getComicBookData(superhero.getId(), comicPage);
         showComics(superhero, comicBooks, primaryStage);
+    }
+    public void primaryStageEdit(Stage primaryStage , VBox resultsBox) {
+        ScrollPane scrollPane = new ScrollPane(resultsBox);
+        primaryStage.setHeight(600);
+        primaryStage.setWidth(600);
+        primaryStage.setScene(new Scene(scrollPane));
+        primaryStage.show();
+        primaryStage.centerOnScreen();
+    }
+    public HBox HBoxPageChooser(Superhero superHero, Stage primaryStage) {
+        HBox pageChooser = new HBox();
+        pageChooser.setAlignment(Pos.CENTER);
+        pageChooser.setSpacing(20);
+        Button backButton = backResults(superHero, primaryStage);
+        pageChooser.getChildren().add(backButton);
+        if (superHero.getComicsTotal() > (comicPage+1) * 100) {
+            Label pageNumber = new Label("Page: " + (comicPage + 1));
+            Button nextButton = nextResults(superHero, primaryStage);
+            if (comicPage != 0) {
+                Button previousButton = previousResults(superHero, primaryStage);
+                pageChooser.getChildren().addAll(previousButton, pageNumber, nextButton);
+            } else {
+                pageChooser.getChildren().addAll(pageNumber, nextButton);
+            }
+        }
+        return pageChooser;
+    }
+
+    private Button backResults(Superhero superHero, Stage primaryStage) {
+        Button backButton = new Button("Back to Search");
+        backButton.setOnAction(event -> {
+            SearchStage createStage = new SearchStage();
+            createStage.createStage( primaryStage);
+        });
+        return backButton;
     }
 }

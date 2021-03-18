@@ -17,7 +17,7 @@ public class MarvelSuperheroParser {
         return JsonPath.read(characterData, "$..results[*].name");
     }
 
-    public JSONArray getSuperDescript(JSONArray characterData) {
+    public JSONArray getSuperDescription(JSONArray characterData) {
         return JsonPath.read(characterData, "$..results[*].description");
     }
 
