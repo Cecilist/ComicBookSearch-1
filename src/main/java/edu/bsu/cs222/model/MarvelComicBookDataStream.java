@@ -9,10 +9,9 @@ import java.net.URLConnection;
 
 public class MarvelComicBookDataStream {
     public JSONArray MarvelComicBookConnector(String characterId, int comicPage) throws IOException {
-        APIKey key = new APIKey();
         String urlString = "https://gateway.marvel.com/v1/public/characters/" + characterId +
                 "/comics?format=comic&formatType=comic&orderBy=onsaleDate&noVariants=true&limit=100&offset=" + comicPage * 100 +
-                "&ts=2&apikey=" + key.getPublicKey() + "&hash=" + key.getHashKey();
+                "&ts=2&apikey=f68be3ef212bbce1cfefed726396718d&hash=997d5981dfde767fa0fca645e967d9ee";
         URL url = new URL(urlString);
         URLConnection connection = url.openConnection();
         connection.setRequestProperty("User-Agent",

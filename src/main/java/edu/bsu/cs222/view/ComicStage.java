@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class ComicStage extends VBox {
-    private int comicPage = 1;
+    private int comicPage = 0;
 
     public void showComics(Superhero superHero, List<ComicBook> comicBooks, Stage primaryStage) {
         final int COMICBOOK_WIDTH = 5;
@@ -52,9 +52,9 @@ public class ComicStage extends VBox {
         pageChooser.setAlignment(Pos.CENTER);
         pageChooser.setSpacing(20);
         if (superHero.getComicsTotal() > comicPage * 100) {
-            Label pageNumber = new Label("Page: " + comicPage);
+            Label pageNumber = new Label("Page: " + comicPage+ 1);
             Button moreButton = moreResults(superHero, primaryStage);
-            if (comicPage != 1) {
+            if (comicPage != 0) {
                 Button lessButton = lessResults(superHero, primaryStage);
                 pageChooser.getChildren().addAll(lessButton, pageNumber, moreButton);
             } else {
