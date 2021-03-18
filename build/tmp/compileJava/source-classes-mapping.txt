@@ -1,13 +1,9 @@
 edu/bsu/cs222/view/SearchStage.java
  edu.bsu.cs222.view.SearchStage
-edu/bsu/cs222/model/MarvelSuperheroDataStream.java
- edu.bsu.cs222.model.MarvelSuperheroDataStream
+edu/bsu/cs222/model/APIKey.java
+ edu.bsu.cs222.model.APIKey
 edu/bsu/cs222/model/MarvelComicBookDataParser.java
  edu.bsu.cs222.model.MarvelComicBookDataParser
-edu/bsu/cs222/model/MarvelComicBookDataStream.java
- edu.bsu.cs222.model.MarvelComicBookDataStream
-edu/bsu/cs222/view/GraphicalUserInterface.java
- edu.bsu.cs222.view.GraphicalUserInterface
 edu/bsu/cs222/model/Creator.java
  edu.bsu.cs222.model.Creator
 edu/bsu/cs222/model/MarvelSuperheroParser.java
@@ -18,6 +14,12 @@ edu/bsu/cs222/view/HeroStage.java
  edu.bsu.cs222.view.HeroStage
 edu/bsu/cs222/model/ComicBook.java
  edu.bsu.cs222.model.ComicBook
+edu/bsu/cs222/model/MarvelSuperheroDataStream.java
+ edu.bsu.cs222.model.MarvelSuperheroDataStream
+edu/bsu/cs222/model/MarvelComicBookDataStream.java
+ edu.bsu.cs222.model.MarvelComicBookDataStream
+edu/bsu/cs222/view/GraphicalUserInterface.java
+ edu.bsu.cs222.view.GraphicalUserInterface
 edu/bsu/cs222/model/Superhero.java
  edu.bsu.cs222.model.Superhero
 edu/bsu/cs222/view/ComicDetailStage.java
