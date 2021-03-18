@@ -52,10 +52,10 @@ public class ComicStage extends VBox {
         pageChooser.setAlignment(Pos.CENTER);
         pageChooser.setSpacing(20);
         if (superHero.getComicsTotal() > comicPage * 100) {
-            Label pageNumber = new Label("Page: " + comicPage+ 1);
-            Button moreButton = moreResults(superHero, primaryStage);
+            Label pageNumber = new Label("Page: " + (comicPage + 1));
+            Button moreButton = nextResults(superHero, primaryStage);
             if (comicPage != 0) {
-                Button lessButton = lessResults(superHero, primaryStage);
+                Button lessButton = previousResults(superHero, primaryStage);
                 pageChooser.getChildren().addAll(lessButton, pageNumber, moreButton);
             } else {
                 pageChooser.getChildren().addAll(pageNumber, moreButton);
@@ -71,23 +71,23 @@ public class ComicStage extends VBox {
         primaryStage.show();
     }
 
-    private Button moreResults(Superhero superhero, Stage primaryStage) {
-        Button moreButton = new Button("More comics");
-        moreButton.setOnAction(event -> {
+    private Button nextResults(Superhero superhero, Stage primaryStage) {
+        Button nextButton = new Button("Next comics Page");
+        nextButton.setOnAction(event -> {
             comicPage += 1;
             comicBooks(superhero, primaryStage);
         });
-        return moreButton;
+        return nextButton;
     }
 
-    private Button lessResults(Superhero superhero, Stage primaryStage) {
-        Button lessButton = new Button("Less comics");
-        lessButton.setOnAction(event -> {
+    private Button previousResults(Superhero superhero, Stage primaryStage) {
+        Button previousButton = new Button("Previous comics Page");
+        previousButton.setOnAction(event -> {
             comicPage -= 1;
-            if (comicPage < 1) comicPage = 1;
+            if (comicPage < 0) comicPage = 0;
             comicBooks(superhero, primaryStage);
         });
-        return lessButton;
+        return previousButton;
     }
 
     public void comicBooks(Superhero superhero, Stage primaryStage) {

@@ -10,8 +10,9 @@ import java.net.URLConnection;
 public class MarvelSuperheroDataStream {
 
     public JSONArray MarvelCharacterConnector(String characterName) throws IOException {
+        APIKey key = new APIKey();
         String urlString = "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" + characterName +
-                "&ts=2&apikey=f68be3ef212bbce1cfefed726396718d&hash=997d5981dfde767fa0fca645e967d9ee";
+                "&ts=2&apikey=" + key.getPublicKey() + "&hash=" + key.getHashKey();
         URL url = new URL(urlString);
         URLConnection connection = url.openConnection();
         connection.setRequestProperty("User-Agent",
