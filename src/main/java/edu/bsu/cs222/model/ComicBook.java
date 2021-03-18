@@ -19,12 +19,12 @@ public class ComicBook implements Comparable<ComicBook> {
     public ComicBook() {
     }
 
-    public List<ComicBook> getComicBookData(String characterId) {
+    public List<ComicBook> getComicBookData(String characterId, int comicResultPage) {
         MarvelComicBookDataStream comicBookStream = new MarvelComicBookDataStream();
         List<ComicBook> comicBookList = null;
         ComicStage currentPage = new ComicStage();
         try {
-            comicBookList = createComicBooks(comicBookStream.MarvelComicBookConnector(characterId,currentPage.getComicPage()));
+            comicBookList = createComicBooks(comicBookStream.MarvelComicBookConnector(characterId,comicResultPage));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -10,11 +10,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.util.List;
 
 public class ComicStage extends Stage {
-    public int comicPage;
+    private int comicPage=1;
     public void showComics(Superhero superHero, List<ComicBook> comicBooks) {
         final int COMICBOOK_WIDTH = 5;
         VBox resultsBox = new VBox();
@@ -51,7 +50,7 @@ public class ComicStage extends Stage {
                 }
             }
         resultsBox.getChildren().addAll(characterBox, comicPane);
-        if (superHero.getComicsTotal()> getComicPage() * 100) {
+        if (superHero.getComicsTotal()> comicPage * 100) {
             Button moreButton = moreResults(superHero);
             resultsBox.getChildren().add(moreButton);
         }
@@ -64,7 +63,7 @@ public class ComicStage extends Stage {
     private Button moreResults(Superhero superhero) {
         Button moreButton = new Button("More comics");
         moreButton.setOnAction(event -> {
-            setComicPage(5);
+            comicPage++;
             comicBooks(superhero);
         });
         return moreButton;
@@ -72,14 +71,8 @@ public class ComicStage extends Stage {
 
     public void comicBooks(Superhero superhero) {
         ComicBook newComicBook = new ComicBook();
-        List<ComicBook> comicBooks = newComicBook.getComicBookData(superhero.getId());
+        List<ComicBook> comicBooks = newComicBook.getComicBookData(superhero.getId(), comicPage);
         ComicStage comicView = new ComicStage();
         comicView.showComics(superhero, comicBooks);
-    }
-    public int getComicPage() {
-        return comicPage;
-    }
-    public  void setComicPage(int comicPage) {
-        this.comicPage = comicPage;
     }
 }

@@ -8,8 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class MarvelComicBookDataStream {
-    private int comicPage=0;
-    public JSONArray MarvelComicBookConnector(String characterId) throws IOException {
+    public JSONArray MarvelComicBookConnector(String characterId, int comicPage) throws IOException {
         APIKey key = new APIKey();
         String urlString = "https://gateway.marvel.com/v1/public/characters/" + characterId +
                 "/comics?format=comic&formatType=comic&orderBy=onsaleDate&noVariants=true&limit=100&offset=" + comicPage *100 +
