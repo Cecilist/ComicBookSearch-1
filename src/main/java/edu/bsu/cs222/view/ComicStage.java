@@ -69,6 +69,7 @@ public class ComicStage extends VBox {
         primaryStage.setWidth(600);
         primaryStage.setScene(new Scene(scrollPane));
         primaryStage.show();
+        primaryStage.centerOnScreen();
     }
 
     private Button nextResults(Superhero superhero, Stage primaryStage) {
