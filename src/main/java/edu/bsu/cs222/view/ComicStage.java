@@ -52,7 +52,10 @@ public class ComicStage extends VBox {
         Label loadingLabel = new Label("Loading comics, Please wait!");
         comicPane.add(loadingLabel, 0, 0, 5, 1);
         resultsBox.getChildren().addAll(characterBox, pageChooser, comicPane);
-        primaryStageEdit(primaryStage,resultsBox);
+        primarystage primarystage = new primarystage();
+        ScrollPane scrollPane = new ScrollPane(resultsBox);
+        primaryStage.setScene(new Scene(scrollPane));
+        primarystage.primaryStageEdit(primaryStage,600,600,superHero.getName()+" comics");
     }
 
     private Button nextResults(Superhero superhero, Stage primaryStage) {
@@ -78,14 +81,6 @@ public class ComicStage extends VBox {
         ComicBook newComicBook = new ComicBook();
         List<ComicBook> comicBooks = newComicBook.getComicBookData(superhero.getId(), comicPage);
         showComics(superhero, comicBooks, primaryStage);
-    }
-    public void primaryStageEdit(Stage primaryStage , VBox resultsBox) {
-        ScrollPane scrollPane = new ScrollPane(resultsBox);
-        primaryStage.setHeight(600);
-        primaryStage.setWidth(600);
-        primaryStage.setScene(new Scene(scrollPane));
-        primaryStage.show();
-        primaryStage.centerOnScreen();
     }
     public HBox HBoxPageChooser(Superhero superHero, Stage primaryStage) {
         HBox pageChooser = new HBox();

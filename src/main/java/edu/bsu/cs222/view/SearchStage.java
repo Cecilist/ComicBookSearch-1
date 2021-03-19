@@ -16,9 +16,8 @@ import javafx.stage.Stage;
 
 public class SearchStage extends VBox {
     public void createStage(Stage primaryStage) {
-        primaryStage.setTitle("Superhero Search");
-        primaryStage.setWidth(400);
-        primaryStage.setHeight(250);
+        primarystage primarystage = new primarystage();
+        primarystage.primaryStageEdit(primaryStage,250,400,"Superhero Search");
         VBox searchBox = getSearchBox();
         Label titleLabel = getTitleLabel();
         TextField searchBar = getSearchBar();
@@ -27,7 +26,6 @@ public class SearchStage extends VBox {
         searchBox.getChildren().addAll(titleLabel, searchBar, searchButton);
         primaryStage.setScene(new Scene(searchBox));
         primaryStage.show();
-        primaryStage.centerOnScreen();
     }
 
     private VBox getSearchBox() {
