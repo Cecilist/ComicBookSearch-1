@@ -91,7 +91,7 @@ public class ComicStage extends VBox {
         HBox pageChooser = new HBox();
         pageChooser.setAlignment(Pos.CENTER);
         pageChooser.setSpacing(20);
-        Button backButton = backResults(superHero, primaryStage);
+        Button backButton = backResults(primaryStage);
         pageChooser.getChildren().add(backButton);
         if (superHero.getComicsTotal() > (comicPage+1) * 100) {
             Label pageNumber = new Label("Page: " + (comicPage + 1));
@@ -106,7 +106,7 @@ public class ComicStage extends VBox {
         return pageChooser;
     }
 
-    private Button backResults(Superhero superHero, Stage primaryStage) {
+    private Button backResults(Stage primaryStage) {
         Button backButton = new Button("Back to Search");
         backButton.setOnAction(event -> {
             SearchStage createStage = new SearchStage();

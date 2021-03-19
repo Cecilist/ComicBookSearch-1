@@ -1,6 +1,8 @@
 package edu.bsu.cs222.view;
 
 import edu.bsu.cs222.model.Superhero;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -22,6 +24,7 @@ public class HeroStage extends VBox {
     public void pickSuperhero(String superheroName, Stage primaryStage) {
         ComicStage comicStage = new ComicStage();
         Superhero newSuperhero = new Superhero();
+        int noComicsFlag = 0;
         List<Superhero> superheroList = newSuperhero.createSuperhero(superheroName);
         if (superheroList != null) {
             Label instruction = new Label("Please select a Superhero: ");
@@ -42,11 +45,28 @@ public class HeroStage extends VBox {
                     superHeroButton.setOnMouseClicked(event -> comicStage.comicBooks(superheroList.get(finalI), primaryStage));
                     superheroButtons.getChildren().add(superHeroButton);
                 }
+                else noComicsFlag++;
+
+            }
+            if (noComicsFlag != superheroList.size()) {
+                superheroButtons.setBackground(new Background(
+                        new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
+                primaryStage.setScene(new Scene(buttonScroll));
+                primaryStage.showAndWait();
+            }
+            else {
+                Alert charHasNoComics = new Alert(Alert.AlertType.ERROR);
+                charHasNoComics.setTitle("Character has no comics!");
+                charHasNoComics.setContentText("The Marvel Character, "+ superheroList.get(0).getName()+
+                        ", exists but is not featured in any comics, please try again!");
+                charHasNoComics.showAndWait();
             }
             superheroButtons.setBackground(new Background(
                     new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
             primaryStage.setScene(new Scene(buttonScroll));
             primaryStage.show();
+            SearchStage createStage = new SearchStage();
+            createStage.createStage( primaryStage);
         }
     }
 }
