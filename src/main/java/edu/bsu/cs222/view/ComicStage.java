@@ -52,7 +52,7 @@ public class ComicStage extends VBox {
         Label loadingLabel = new Label("Loading comics, Please wait!");
         comicPane.add(loadingLabel, 0, 0, 5, 1);
         resultsBox.getChildren().addAll(characterBox, pageChooser, comicPane);
-        primarystage primarystage = new primarystage();
+        edu.bsu.cs222.view.primaryStage primarystage = new primaryStage();
         ScrollPane scrollPane = new ScrollPane(resultsBox);
         primaryStage.setScene(new Scene(scrollPane));
         primarystage.primaryStageEdit(primaryStage,600,600,superHero.getName()+" comics");

@@ -1,7 +1,6 @@
 package edu.bsu.cs222.view;
 
 import edu.bsu.cs222.model.Superhero;
-import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -34,7 +33,7 @@ public class HeroStage extends VBox {
             ScrollPane buttonScroll = new ScrollPane(superheroButtons);
             superheroButtons.setSpacing(5);
             superheroButtons.setAlignment(Pos.CENTER);
-            primarystage primarystage = new primarystage();
+            edu.bsu.cs222.view.primaryStage primarystage = new primaryStage();
             primarystage.primaryStageEdit(primaryStage,50,205,"Superhero picker");
             for (int i = 0; i < superheroList.size(); i++) {
                 primaryStage.setHeight(primaryStage.getHeight()+ 16.5);
