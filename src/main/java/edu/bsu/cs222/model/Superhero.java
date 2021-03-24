@@ -5,6 +5,7 @@ import net.minidev.json.JSONArray;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -14,33 +15,32 @@ public class Superhero {
     private String name;
     private String id;
     private String description;
-    private String thumbnailURL;
+    private URL thumbnailURL;
     private int comicsTotal;
 
     public Superhero() {
     }
 
-    public List<Superhero> buildSuperheros (JSONArray characterData) throws IOException {
+    public List<Superhero> buildSuperheros(JSONArray characterData) throws IOException {
         MarvelSuperheroParser superheroParser = new MarvelSuperheroParser();
-        if(superheroParser.doesCharExist(characterData)) {
+        if (superheroParser.doesCharExist(characterData)) {
             List<Superhero> superheros = new ArrayList<>();
             JSONArray ids = superheroParser.getSuperId(characterData);
             JSONArray names = superheroParser.getSuperName(characterData);
-            JSONArray descriptions= superheroParser.getSuperDescript(characterData);
+            JSONArray descriptions = superheroParser.getSuperDescript(characterData);
             JSONArray thumbnailURLs = superheroParser.getSuperThumbnail(characterData);
             JSONArray comicTotals = superheroParser.getComicsTotal(characterData);
-            for(int i=0; i<ids.size(); i++) {
+            for (int i = 0; i < ids.size(); i++) {
                 Superhero newSuperhero = new Superhero();
                 newSuperhero.id = String.valueOf(ids.get(i));
                 newSuperhero.name = String.valueOf(names.get(i));
                 newSuperhero.description = String.valueOf(descriptions.get(i));
-                newSuperhero.thumbnailURL = thumbnailURLs.get(i) + "/portrait_medium.jpg";
-                newSuperhero.comicsTotal = (int)comicTotals.get(i);
+                newSuperhero.thumbnailURL = new URL(thumbnailURLs.get(i) + "/portrait_medium.jpg");
+                newSuperhero.comicsTotal = (int) comicTotals.get(i);
                 superheros.add(newSuperhero);
             }
             return superheros;
-        }
-        else{
+        } else {
             throw new IOException("Bad Superhero Name");
         }
     }
@@ -74,7 +74,7 @@ public class Superhero {
         return description;
     }
 
-    public String getThumbnailURL() {
+    public URL getThumbnailURL() {
         return thumbnailURL;
     }
 
@@ -82,10 +82,12 @@ public class Superhero {
         return id;
     }
 
-    public int getComicsTotal(){return comicsTotal;}
+    public int getComicsTotal() {
+        return comicsTotal;
+    }
 
-    public boolean hasComics(){
-        return comicsTotal>0;
+    public boolean hasComics() {
+        return comicsTotal > 0;
     }
 
 }

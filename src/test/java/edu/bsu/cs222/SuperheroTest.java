@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class SuperheroTest {
-    private InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("spiderCharacter.json");
+    private final InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("spiderCharacter.json");
     private JSONArray charData;
     private Superhero spiderMan = new Superhero();
 

@@ -13,17 +13,18 @@ import java.util.List;
 
 public class ComicBookTest {
     public static List<ComicBook> comicBooks;
+
     @BeforeAll
-    public static void testSetup(){
+    public static void testSetup() {
         InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("spider.json");
         JSONArray comicData = null;
-            try {
-                comicData = JsonPath.read(inputStream, "*");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            comicData = JsonPath.read(inputStream, "*");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         ComicBook comic = new ComicBook();
-        comicBooks= comic.createComicBooks(comicData);
+        comicBooks = comic.createComicBooks(comicData);
     }
 
     @Test
@@ -34,20 +35,20 @@ public class ComicBookTest {
     }
 
     @Test
-    public void getDescriptTest(){
+    public void getDescriptTest() {
         String descript = comicBooks.get(2).getDescription();
         Assertions.assertEquals("Spider-Man, in one of his earliest adventures " +
                 "following Uncle Ben's death, must save a crew of astronauts aboard a malfunctioning space ship!", descript);
     }
 
     @Test
-    public void getsaleDateTest(){
-        String saleDate = comicBooks.get(2).getOnsaleDate();
+    public void getsaleDateTest() {
+        String saleDate = comicBooks.get(2).getOnSaleDate();
         Assertions.assertEquals("1963-03-01T00:00:00-0500", saleDate);
     }
 
     @Test
-    public void getCreatorNameTest(){
+    public void getCreatorNameTest() {
         String name = comicBooks.get(2).getCreators().get(0).getName();
         Assertions.assertEquals("Sol Brodsky", name);
     }

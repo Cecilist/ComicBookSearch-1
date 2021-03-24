@@ -13,10 +13,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class ComicDetailStage extends Stage{
+public class ComicDetailStage extends Stage {
     public void showComicDetail(ComicBook comicSelected) {
         HBox comicDetailBox = new HBox();
-        ImageView comicThumbnail = new ImageView(new Image(comicSelected.getThumbnailURL()));
+        ImageView comicThumbnail = new ImageView(new Image(comicSelected.getThumbnailURL().toString()));
         StringBuilder creators = new StringBuilder();
         for (int i = 0; i < comicSelected.getCreators().size(); i++) {
             creators.append(comicSelected.getCreators().get(i).getCreators());
