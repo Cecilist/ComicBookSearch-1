@@ -43,19 +43,19 @@ public class HeroStage extends VBox {
                 }
                 else
                 {
-                    superheroNoComic.add(superheroList.get(i))
+                    superheroNoComics.add(superheroList.get(i));
                 }
             }
-            if(superheroNoComics.size()!=0){
-                Alert charHasNoComics = new Alert(Alert.AlertType.ERROR);
-                charHasNoComics.setTitle("Some Characters have no comcis");
-                StringBuilder noComicsAlertText;
+            if(superheroNoComics.size()!=0) {
+                Alert charHasNoComics = new Alert(Alert.AlertType.INFORMATION);
+                charHasNoComics.setTitle("Some Characters have no comics");
+                StringBuilder noComicsAlertText = new StringBuilder();
                 noComicsAlertText.append("The Marvel Characters: ");
-                for(int i=0; i<superheroNoComics.size(); i++)
-                {
-                    noComicsAlertText.append("\n"+superheroNoComics.get(i).getName());
+                for (Superhero superheroNoComic : superheroNoComics) {
+                    noComicsAlertText.append("\n");
+                    noComicsAlertText.append(superheroNoComic.getName());
                 }
-                charHasNoComics.setContentText(noComicsAlertText);
+                charHasNoComics.setContentText(noComicsAlertText.toString());
                 charHasNoComics.showAndWait();
             }
 

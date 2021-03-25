@@ -1,4 +1,4 @@
-package edu.bsu.cs222;
+package edu.bsu.cs222.model;
 
 import com.jayway.jsonpath.JsonPath;
 import net.minidev.json.JSONArray;
@@ -11,7 +11,7 @@ public class MarvelComicBookDataStream {
     public JSONArray MarvelComicBookConnector(String characterId, int comicPage) throws IOException {
         APIKey key = new APIKey();
         String urlString = "https://gateway.marvel.com/v1/public/characters/" + characterId +
-                "/comics?format=comic&formatType=comic&orderBy=onsaleDate&noVariants=true&limit=100&offset=" + comicPage * 100 +
+                "/comics?format=comic&formatType=comic&noVariants=true&orderBy=onsaleDate&limit=100&offset=" + (comicPage - 1) * 100 +
                 "&ts=2&apikey=" + key.getPublicKey() + "&hash=" + key.getHashKey();
         URL url = new URL(urlString);
         URLConnection connection = url.openConnection();
