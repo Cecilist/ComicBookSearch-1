@@ -29,24 +29,21 @@ public class HeroBox extends VBox {
             Label instruction = new Label("Please select a Superhero: ");
             instruction.setTextFill(Color.web("#ffffffff"));
             instruction.setFont(Font.font("Fantasy", FontWeight.BOLD, 15));
-            VBox superheroButtons = new VBox(instruction);
-            ScrollPane buttonScroll = new ScrollPane(superheroButtons);
-            superheroButtons.setSpacing(5);
-            superheroButtons.setAlignment(Pos.CENTER);
-            List<Superhero> superheroNoComics= new ArrayList<>();
+            getChildren().add(instruction);
+            setSpacing(5);
+            setAlignment(Pos.CENTER);
+            List<Superhero> superheroNoComics = new ArrayList<>();
             for (int i = 0; i < superheroList.size(); i++) {
                 if (superheroList.get(i).hasComics()) {
                     Button superHeroButton = new Button(superheroList.get(i).getName());
                     int finalI = i;
                     superHeroButton.setOnMouseClicked(event -> comicBox.comicBooks(superheroList.get(finalI), primaryStage));
-                    superheroButtons.getChildren().add(superHeroButton);
-                }
-                else
-                {
+                    getChildren().add(superHeroButton);
+                } else {
                     superheroNoComics.add(superheroList.get(i));
                 }
             }
-            if(superheroNoComics.size()!=0) {
+            if (superheroNoComics.size() != 0) {
                 Alert charHasNoComics = new Alert(Alert.AlertType.INFORMATION);
                 charHasNoComics.setTitle("Some Characters have no comics");
                 StringBuilder noComicsAlertText = new StringBuilder();
@@ -59,8 +56,10 @@ public class HeroBox extends VBox {
                 charHasNoComics.showAndWait();
             }
 
-            superheroButtons.setBackground(new Background(
+            setBackground(new Background(
                     new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
+            ScrollPane buttonScroll = new ScrollPane(HeroBox.this);
+            buttonScroll.setFitToWidth(true);
             primaryStage.setScene(new Scene(buttonScroll));
             primaryStage.show();
         }

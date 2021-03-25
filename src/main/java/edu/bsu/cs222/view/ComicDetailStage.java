@@ -22,7 +22,7 @@ public class ComicDetailStage extends Stage {
             creators.append(comicSelected.getCreators().get(i).getCreators());
         }
         TextArea comicDescription = new TextArea("Comic Book Title:\n" + comicSelected.getTitle() + "\n" +
-                "On Sale Date: " + comicSelected.getOnSaleDate().substring(0, 10) + "\nDescription: \n" + comicSelected.getDescription() + "\nCreators: \n" + creators);
+                "On Sale Date: " + comicSelected.getFormattedSaleDate() + "\nDescription: \n" + comicSelected.getDescription() + "\nCreators: \n" + creators);
         comicDescription.setWrapText(true);
         comicDescription.setEditable(false);
         comicDetailBox.getChildren().addAll(comicThumbnail, comicDescription);
