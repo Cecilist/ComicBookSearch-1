@@ -4,6 +4,7 @@ import edu.bsu.cs222.model.Superhero;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -16,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HeroStage extends VBox {
@@ -31,6 +33,7 @@ public class HeroStage extends VBox {
             ScrollPane buttonScroll = new ScrollPane(superheroButtons);
             superheroButtons.setSpacing(5);
             superheroButtons.setAlignment(Pos.CENTER);
+            List<Superhero> superheroNoComics= new ArrayList<>();
             for (int i = 0; i < superheroList.size(); i++) {
                 if (superheroList.get(i).hasComics()) {
                     Button superHeroButton = new Button(superheroList.get(i).getName());
@@ -38,7 +41,24 @@ public class HeroStage extends VBox {
                     superHeroButton.setOnMouseClicked(event -> comicStage.comicBooks(superheroList.get(finalI), primaryStage));
                     superheroButtons.getChildren().add(superHeroButton);
                 }
+                else
+                {
+                    superheroNoComic.add(superheroList.get(i))
+                }
             }
+            if(superheroNoComics.size()!=0){
+                Alert charHasNoComics = new Alert(Alert.AlertType.ERROR);
+                charHasNoComics.setTitle("Some Characters have no comcis");
+                StringBuilder noComicsAlertText;
+                noComicsAlertText.append("The Marvel Characters: ");
+                for(int i=0; i<superheroNoComics.size(); i++)
+                {
+                    noComicsAlertText.append("\n"+superheroNoComics.get(i).getName());
+                }
+                charHasNoComics.setContentText(noComicsAlertText);
+                charHasNoComics.showAndWait();
+            }
+
             superheroButtons.setBackground(new Background(
                     new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
             primaryStage.setScene(new Scene(buttonScroll));

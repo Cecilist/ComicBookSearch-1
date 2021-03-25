@@ -21,7 +21,8 @@ public class ComicDetailStage extends Stage {
         for (int i = 0; i < comicSelected.getCreators().size(); i++) {
             creators.append(comicSelected.getCreators().get(i).getCreators());
         }
-        TextArea comicDescription = new TextArea("Comic Book Title:\n" + comicSelected.getTitle() + "\n" + "Description: \n" + comicSelected.getDescription() + "\nCreators: \n" + creators);
+        TextArea comicDescription = new TextArea("Comic Book Title:\n" + comicSelected.getTitle() + "\n" +
+                "On Sale Date: "+ comicSelected.getOnsaleDate().substring(0,10) + "\nDescription: \n" + comicSelected.getDescription() + "\nCreators: \n" + creators);
         comicDescription.setWrapText(true);
         comicDescription.setEditable(false);
         comicDetailBox.getChildren().addAll(comicThumbnail, comicDescription);
