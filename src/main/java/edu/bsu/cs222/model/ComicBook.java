@@ -12,7 +12,7 @@ public class ComicBook implements Comparable<ComicBook> {
     private final ArrayList<Creator> creators = new ArrayList<>();
     private String title;
     private String description;
-    private String onsaleDate;
+    private String onSaleDate;
     private URL thumbnailURL;
 
     public ComicBook() {
@@ -34,12 +34,12 @@ public class ComicBook implements Comparable<ComicBook> {
         List<ComicBook> comicBooks = new ArrayList<>();
         JSONArray comicTitles = comicBookParser.getComicTitles(comicBookData);
         JSONArray comicDescriptions = comicBookParser.getComicDescription(comicBookData);
-        JSONArray comicOnsaleDates = comicBookParser.getComicDates(comicBookData);
+        JSONArray comicOnSaleDates = comicBookParser.getComicDates(comicBookData);
         for (int i = 0; i < comicTitles.size(); i++) {
             ComicBook newComic = new ComicBook();
             newComic.title = String.valueOf(comicTitles.get(i));
             newComic.description = String.valueOf(comicDescriptions.get(i));
-            newComic.onsaleDate = String.valueOf(comicOnsaleDates.get(i));
+            newComic.onSaleDate = String.valueOf(comicOnSaleDates.get(i));
             try {
                 newComic.thumbnailURL = new URL(comicBookParser.getThumbnail(comicBookData).get(i) + ("/portrait_medium.jpg"));
             } catch (MalformedURLException e) {
@@ -68,10 +68,6 @@ public class ComicBook implements Comparable<ComicBook> {
         return description;
     }
 
-    public String getOnsaleDate() {
-        return onsaleDate;
-
-    }
 
     public ArrayList<Creator> getCreators() {
         return creators;
@@ -82,11 +78,11 @@ public class ComicBook implements Comparable<ComicBook> {
     }
 
     public String getOnSaleDate() {
-        return onsaleDate;
+        return onSaleDate;
     }
 
     @Override
     public int compareTo(ComicBook comicBook) {
-        return CharSequence.compare(onsaleDate, comicBook.onsaleDate);
+        return CharSequence.compare(onSaleDate, comicBook.onSaleDate);
     }
 }
