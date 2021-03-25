@@ -20,9 +20,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HeroStage extends VBox {
+public class HeroBox extends VBox {
     public void pickSuperhero(String superheroName, Stage primaryStage) {
-        ComicStage comicStage = new ComicStage();
+        ComicBox comicBox = new ComicBox();
         Superhero newSuperhero = new Superhero();
         List<Superhero> superheroList = newSuperhero.createSuperhero(superheroName);
         if (superheroList != null) {
@@ -38,7 +38,7 @@ public class HeroStage extends VBox {
                 if (superheroList.get(i).hasComics()) {
                     Button superHeroButton = new Button(superheroList.get(i).getName());
                     int finalI = i;
-                    superHeroButton.setOnMouseClicked(event -> comicStage.comicBooks(superheroList.get(finalI), primaryStage));
+                    superHeroButton.setOnMouseClicked(event -> comicBox.comicBooks(superheroList.get(finalI), primaryStage));
                     superheroButtons.getChildren().add(superHeroButton);
                 }
                 else

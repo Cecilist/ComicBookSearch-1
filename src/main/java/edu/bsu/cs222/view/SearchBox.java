@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class SearchStage extends VBox {
+public class SearchBox extends VBox {
     public void createStage(Stage primaryStage) {
         primaryStage.setTitle("Superhero Search");
         setWidth(400);
@@ -56,7 +56,7 @@ public class SearchStage extends VBox {
     private Button getSearchButton(TextField articleName, Stage primaryStage) {
         Button searchButton = new Button("Search");
         searchButton.setOnAction(event -> {
-            HeroStage heroView = new HeroStage();
+            HeroBox heroView = new HeroBox();
             heroView.pickSuperhero(articleName.getText(), primaryStage);
         });
         return searchButton;
