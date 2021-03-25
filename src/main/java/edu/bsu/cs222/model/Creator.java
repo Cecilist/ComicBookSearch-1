@@ -1,11 +1,14 @@
 package edu.bsu.cs222.model;
 
 public class Creator {
-    private final String name;
-    private final String role;
+    private String name;
+    private String role;
 
-    public Creator(String name, String role) {
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public void setRole(String role) {
         this.role = role;
     }
 

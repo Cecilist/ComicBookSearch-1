@@ -50,8 +50,10 @@ public class ComicBook {
             List<String> comicCreatorNames = comicBookParser.getComicCreatorName(comicBookData, i);
             List<String> comicCreatorRoles = comicBookParser.getComicCreatorRole(comicBookData, i);
             for (int x = 0; x < comicCreatorNames.size(); x++) {
-                newComic.creators.add(
-                        new Creator((comicCreatorNames.get(x)), (comicCreatorRoles.get(x))));
+                Creator newCreator = new Creator();
+                newCreator.setName(comicCreatorNames.get(x));
+                newCreator.setRole(comicCreatorRoles.get(x));
+                newComic.creators.add(newCreator);
             }
             comicBooks.add(newComic);
 
@@ -75,10 +77,6 @@ public class ComicBook {
 
     public URL getThumbnailURL() {
         return thumbnailURL;
-    }
-
-    public LocalDateTime getOnSaleDate() {
-        return onSaleDate;
     }
 
     public String getFormattedSaleDate() {
