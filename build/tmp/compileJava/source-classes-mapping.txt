@@ -1,32 +1,32 @@
-edu/bsu/cs222/view/HeroBox.java
- edu.bsu.cs222.view.HeroBox
+edu/bsu/cs222/model/MarvelSuperheroDataStream.java
+ edu.bsu.cs222.model.MarvelSuperheroDataStream
 edu/bsu/cs222/model/MarvelComicBookDataStream.java
  edu.bsu.cs222.model.MarvelComicBookDataStream
 edu/bsu/cs222/model/APIKey.java
  edu.bsu.cs222.model.APIKey
 edu/bsu/cs222/view/primaryStage.java
  edu.bsu.cs222.view.primaryStage
-edu/bsu/cs222/model/Creator.java
- edu.bsu.cs222.model.Creator
-edu/bsu/cs222/model/MarvelSuperheroDataStream.java
- edu.bsu.cs222.model.MarvelSuperheroDataStream
+edu/bsu/cs222/model/MarvelSuperheroParser.java
+ edu.bsu.cs222.model.MarvelSuperheroParser
 edu/bsu/cs222/view/ComicBox.java
  edu.bsu.cs222.view.ComicBox
 edu/bsu/cs222/view/CharacterDetailBox.java
  edu.bsu.cs222.view.CharacterDetailBox
-edu/bsu/cs222/view/ComicDetailStage.java
- edu.bsu.cs222.view.ComicDetailStage
+edu/bsu/cs222/model/Superhero.java
+ edu.bsu.cs222.model.Superhero
 edu/bsu/cs222/model/MarvelComicBookDataParser.java
  edu.bsu.cs222.model.MarvelComicBookDataParser
 edu/bsu/cs222/view/ComicGrid.java
  edu.bsu.cs222.view.ComicGrid
-edu/bsu/cs222/model/Superhero.java
- edu.bsu.cs222.model.Superhero
-edu/bsu/cs222/model/MarvelSuperheroParser.java
- edu.bsu.cs222.model.MarvelSuperheroParser
-edu/bsu/cs222/model/ComicBook.java
- edu.bsu.cs222.model.ComicBook
 edu/bsu/cs222/view/GraphicalUserInterface.java
  edu.bsu.cs222.view.GraphicalUserInterface
+edu/bsu/cs222/view/ComicDetailStage.java
+ edu.bsu.cs222.view.ComicDetailStage
+edu/bsu/cs222/model/Creator.java
+ edu.bsu.cs222.model.Creator
+edu/bsu/cs222/model/ComicBook.java
+ edu.bsu.cs222.model.ComicBook
+edu/bsu/cs222/view/HeroBox.java
+ edu.bsu.cs222.view.HeroBox
 edu/bsu/cs222/view/SearchBox.java
  edu.bsu.cs222.view.SearchBox

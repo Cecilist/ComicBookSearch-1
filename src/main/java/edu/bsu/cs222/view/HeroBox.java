@@ -21,47 +21,63 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HeroBox extends VBox {
+    private List<Superhero> superheroList;
+    private List<Superhero> superheroNoComics;
+    private Stage primaryStage;
+
     public void pickSuperhero(String superheroName, Stage primaryStage) {
-        ComicBox comicBox = new ComicBox();
+        this.primaryStage = primaryStage;
         Superhero newSuperhero = new Superhero();
-        List<Superhero> superheroList = newSuperhero.createSuperhero(superheroName);
+        superheroNoComics = new ArrayList<>();
+        superheroList = newSuperhero.createSuperhero(superheroName);
         if (superheroList != null) {
-            Label instruction = new Label("Please select a Superhero: ");
-            instruction.setTextFill(Color.web("#ffffffff"));
-            instruction.setFont(Font.font("Fantasy", FontWeight.BOLD, 15));
-            getChildren().add(instruction);
+            getChildren().add(createInstructionLabel());
             setSpacing(5);
             setAlignment(Pos.CENTER);
-            List<Superhero> superheroNoComics = new ArrayList<>();
-            for (int i = 0; i < superheroList.size(); i++) {
-                if (superheroList.get(i).hasComics()) {
-                    Button superHeroButton = new Button(superheroList.get(i).getName());
-                    int finalI = i;
-                    superHeroButton.setOnMouseClicked(event -> comicBox.comicBooks(superheroList.get(finalI), primaryStage));
-                    getChildren().add(superHeroButton);
-                } else {
-                    superheroNoComics.add(superheroList.get(i));
-                }
-            }
+            createButtons();
             if (superheroNoComics.size() != 0) {
-                Alert charHasNoComics = new Alert(Alert.AlertType.INFORMATION);
-                charHasNoComics.setTitle("Some Characters have no comics");
-                StringBuilder noComicsAlertText = new StringBuilder();
-                noComicsAlertText.append("The Marvel Characters: ");
-                for (Superhero superheroNoComic : superheroNoComics) {
-                    noComicsAlertText.append("\n");
-                    noComicsAlertText.append(superheroNoComic.getName());
-                }
-                charHasNoComics.setContentText(noComicsAlertText.toString());
-                charHasNoComics.showAndWait();
+                alertNoComic(superheroNoComics);
             }
-
             setBackground(new Background(
                     new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
             ScrollPane buttonScroll = new ScrollPane(HeroBox.this);
             buttonScroll.setFitToWidth(true);
             primaryStage.setScene(new Scene(buttonScroll));
             primaryStage.show();
+        }
+    }
+
+    private Label createInstructionLabel() {
+        Label instruction = new Label("Please select a Superhero: ");
+        instruction.setTextFill(Color.web("#ffffffff"));
+        instruction.setFont(Font.font("Fantasy", FontWeight.BOLD, 15));
+        return instruction;
+    }
+
+    private void alertNoComic(List<Superhero> superheroNoComics) {
+        Alert charHasNoComics = new Alert(Alert.AlertType.INFORMATION);
+        charHasNoComics.setTitle("Some Characters have no comics");
+        StringBuilder noComicsAlertText = new StringBuilder();
+        noComicsAlertText.append("The following Marvel characters exist but have no comics: ");
+        for (Superhero superheroNoComic : superheroNoComics) {
+            noComicsAlertText.append("\n");
+            noComicsAlertText.append(superheroNoComic.getName());
+        }
+        charHasNoComics.setContentText(noComicsAlertText.toString());
+        charHasNoComics.showAndWait();
+    }
+
+    private void createButtons() {
+        ComicBox comicBox = new ComicBox();
+        for (int i = 0; i < superheroList.size(); i++) {
+            if (superheroList.get(i).hasComics()) {
+                Button superHeroButton = new Button(superheroList.get(i).getName());
+                int finalI = i;
+                superHeroButton.setOnMouseClicked(event -> comicBox.comicBooks(superheroList.get(finalI), primaryStage));
+                getChildren().add(superHeroButton);
+            } else {
+                superheroNoComics.add(superheroList.get(i));
+            }
         }
     }
 }
