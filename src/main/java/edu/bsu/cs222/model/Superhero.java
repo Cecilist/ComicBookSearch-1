@@ -27,7 +27,7 @@ public class Superhero {
             List<Superhero> superheros = new ArrayList<>();
             JSONArray ids = superheroParser.getSuperId(characterData);
             JSONArray names = superheroParser.getSuperName(characterData);
-            JSONArray descriptions = superheroParser.getSuperDescript(characterData);
+            JSONArray descriptions = superheroParser.getSuperDescription(characterData);
             JSONArray thumbnailURLs = superheroParser.getSuperThumbnail(characterData);
             JSONArray comicTotals = superheroParser.getComicsTotal(characterData);
             for (int i = 0; i < ids.size(); i++) {
@@ -54,10 +54,10 @@ public class Superhero {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            Alert charDoesntExist = new Alert(Alert.AlertType.ERROR);
-            charDoesntExist.setTitle("Character Does Not Exist!");
-            charDoesntExist.setContentText("The Character does not exist, please try again!");
-            charDoesntExist.showAndWait();
+            Alert charDoesNotExist = new Alert(Alert.AlertType.ERROR);
+            charDoesNotExist.setTitle("Character Does Not Exist!");
+            charDoesNotExist.setContentText("The Character does not exist, please try again!");
+            charDoesNotExist.showAndWait();
             return null;
 
 

@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class ComicStage extends VBox {
-    private int comicPage = 1;
+    private int comicPage = 0;
 
     public void showComics(Superhero superHero, List<ComicBook> comicBooks, Stage primaryStage) {
         final int COMICBOOK_WIDTH = 5;
@@ -48,51 +48,65 @@ public class ComicStage extends VBox {
                 }
 
         });
-        HBox pageChooser = new HBox();
-        pageChooser.setAlignment(Pos.CENTER);
-        pageChooser.setSpacing(20);
-        if (superHero.getComicsTotal() > comicPage * 100) {
-            Label pageNumber = new Label("Page: " + comicPage);
-            Button moreButton = moreResults(superHero, primaryStage);
-            if (comicPage != 1) {
-                Button lessButton = lessResults(superHero, primaryStage);
-                pageChooser.getChildren().addAll(lessButton, pageNumber, moreButton);
-            } else {
-                pageChooser.getChildren().addAll(pageNumber, moreButton);
-            }
-        }
+        HBox pageChooser = HBoxPageChooser(superHero, primaryStage);
         Label loadingLabel = new Label("Loading comics, Please wait!");
         comicPane.add(loadingLabel, 0, 0, 5, 1);
         resultsBox.getChildren().addAll(characterBox, pageChooser, comicPane);
+        edu.bsu.cs222.view.primaryStage primarystage = new primaryStage();
         ScrollPane scrollPane = new ScrollPane(resultsBox);
-        primaryStage.setHeight(600);
-        primaryStage.setWidth(600);
         primaryStage.setScene(new Scene(scrollPane));
-        primaryStage.show();
+        primarystage.primaryStageEdit(primaryStage,600,600,superHero.getName()+" comics");
     }
 
-    private Button moreResults(Superhero superhero, Stage primaryStage) {
-        Button moreButton = new Button("More comics");
-        moreButton.setOnAction(event -> {
+    private Button nextResults(Superhero superhero, Stage primaryStage) {
+        Button nextButton = new Button("Next comics Page");
+        nextButton.setOnAction(event -> {
             comicPage += 1;
             comicBooks(superhero, primaryStage);
         });
-        return moreButton;
+        return nextButton;
     }
 
-    private Button lessResults(Superhero superhero, Stage primaryStage) {
-        Button lessButton = new Button("Less comics");
-        lessButton.setOnAction(event -> {
+    private Button previousResults(Superhero superhero, Stage primaryStage) {
+        Button previousButton = new Button("Previous comics Page");
+        previousButton.setOnAction(event -> {
             comicPage -= 1;
-            if (comicPage < 1) comicPage = 1;
+            if (comicPage < 0) comicPage = 0;
             comicBooks(superhero, primaryStage);
         });
-        return lessButton;
+        return previousButton;
     }
 
     public void comicBooks(Superhero superhero, Stage primaryStage) {
         ComicBook newComicBook = new ComicBook();
         List<ComicBook> comicBooks = newComicBook.getComicBookData(superhero.getId(), comicPage);
         showComics(superhero, comicBooks, primaryStage);
+    }
+    public HBox HBoxPageChooser(Superhero superHero, Stage primaryStage) {
+        HBox pageChooser = new HBox();
+        pageChooser.setAlignment(Pos.CENTER);
+        pageChooser.setSpacing(20);
+        Button backButton = backResults(primaryStage);
+        pageChooser.getChildren().add(backButton);
+        if (superHero.getComicsTotal() > (comicPage+1) * 100) {
+            Label pageNumber = new Label("Page: " + (comicPage + 1));
+            Button nextButton = nextResults(superHero, primaryStage);
+            if (comicPage != 0) {
+                Button previousButton = previousResults(superHero, primaryStage);
+                pageChooser.getChildren().addAll(previousButton, pageNumber, nextButton);
+            } else {
+                pageChooser.getChildren().addAll(pageNumber, nextButton);
+            }
+        }
+        return pageChooser;
+    }
+
+    private Button backResults(Stage primaryStage) {
+        Button backButton = new Button("Back to Search");
+        backButton.setOnAction(event -> {
+            SearchStage createStage = new SearchStage();
+            createStage.createStage( primaryStage);
+        });
+        return backButton;
     }
 }
