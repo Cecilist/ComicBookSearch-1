@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComicBook implements Comparable<ComicBook> {
+public class ComicBook {
     private final ArrayList<Creator> creators = new ArrayList<>();
     private String title;
     private String description;
@@ -55,7 +55,6 @@ public class ComicBook implements Comparable<ComicBook> {
             comicBooks.add(newComic);
 
         }
-        comicBooks.sort(ComicBook::compareTo);
 
         return comicBooks;
     }
@@ -81,8 +80,5 @@ public class ComicBook implements Comparable<ComicBook> {
         return onSaleDate;
     }
 
-    @Override
-    public int compareTo(ComicBook comicBook) {
-        return CharSequence.compare(onSaleDate, comicBook.onSaleDate);
-    }
+
 }

@@ -24,14 +24,12 @@ public class ComicBox extends VBox {
         VBox resultsBox = new VBox();
         CharacterDetailBox superDetails = new CharacterDetailBox();
         superDetails.showCharacterDetails(selectedHero);
-        HBox characterBox;
-        characterBox = superDetails;
         ComicGrid comicPane = new ComicGrid();
         Platform.runLater(() -> comicPane.createGrid(comicBooks));
         HBox pageChooser = createPageChooser();
         Label loadingLabel = new Label("Loading comics, Please wait!");
         comicPane.add(loadingLabel, 0, 0, 5, 1);
-        resultsBox.getChildren().addAll(characterBox, pageChooser, comicPane);
+        resultsBox.getChildren().addAll(superDetails, pageChooser, comicPane);
         ScrollPane scrollPane = new ScrollPane(resultsBox);
         primaryStage.setHeight(600);
         primaryStage.setWidth(600);
