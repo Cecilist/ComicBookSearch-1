@@ -80,7 +80,9 @@ public class ComicBook {
     }
 
     public String getFormattedSaleDate() {
+        if(onSaleDate != null)
         return onSaleDate.getMonth() + " " + onSaleDate.getDayOfMonth() + ", " + onSaleDate.getYear();
+        else return null;
     }
 
 
