@@ -25,18 +25,18 @@ public class Superhero {
         MarvelSuperheroParser superheroParser = new MarvelSuperheroParser();
         if (superheroParser.doesCharExist(characterData)) {
             List<Superhero> superheros = new ArrayList<>();
-            JSONArray ids = superheroParser.getSuperId(characterData);
-            JSONArray names = superheroParser.getSuperName(characterData);
-            JSONArray descriptions = superheroParser.getSuperDescript(characterData);
-            JSONArray thumbnailURLs = superheroParser.getSuperThumbnail(characterData);
-            JSONArray comicTotals = superheroParser.getComicsTotal(characterData);
+            List<String> ids = superheroParser.getSuperInformation(characterData, "id");
+            List<String> names = superheroParser.getSuperInformation(characterData, "name");
+            List<String> descriptions = superheroParser.getSuperInformation(characterData, "description");
+            List<String> thumbnailURLs = superheroParser.getSuperInformation(characterData, "thumbnail.path");
+            List<String> comicTotals = superheroParser.getSuperInformation(characterData, "comics.available");
             for (int i = 0; i < ids.size(); i++) {
                 Superhero newSuperhero = new Superhero();
-                newSuperhero.id = String.valueOf(ids.get(i));
-                newSuperhero.name = String.valueOf(names.get(i));
-                newSuperhero.description = String.valueOf(descriptions.get(i));
+                newSuperhero.id = (ids.get(i));
+                newSuperhero.name = (names.get(i));
+                newSuperhero.description = (descriptions.get(i));
                 newSuperhero.thumbnailURL = new URL(thumbnailURLs.get(i) + "/portrait_medium.jpg");
-                newSuperhero.comicsTotal = (int) comicTotals.get(i);
+                newSuperhero.comicsTotal = Integer.parseInt(comicTotals.get(i));
                 superheros.add(newSuperhero);
             }
             return superheros;
@@ -54,10 +54,10 @@ public class Superhero {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            Alert charDoesntExist = new Alert(Alert.AlertType.ERROR);
-            charDoesntExist.setTitle("Character Does Not Exist!");
-            charDoesntExist.setContentText("The Character does not exist, please try again!");
-            charDoesntExist.showAndWait();
+            Alert charDoesNotExist = new Alert(Alert.AlertType.ERROR);
+            charDoesNotExist.setTitle("Character Does Not Exist!");
+            charDoesNotExist.setContentText("The Character does not exist, please try again!");
+            charDoesNotExist.showAndWait();
             return null;
 
 
