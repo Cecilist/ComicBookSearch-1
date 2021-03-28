@@ -28,35 +28,50 @@ public class ComicBookTest {
     }
 
     @Test
-    public void getTitleTest() {
+    public void getTitle_TheAmazingSpiderMan_ReturnTheAmazingSpiderMan() {
 
         String title = comicBooks.get(2).getTitle();
         Assertions.assertEquals("The Amazing Spider-Man (1963) #1", title);
     }
 
     @Test
-    public void getDescriptTest() {
-        String descript = comicBooks.get(2).getDescription();
+    public void getDescription_TheAmazingSpiderMan_ReturnDescription() {
+        String description = comicBooks.get(2).getDescription();
         Assertions.assertEquals("Spider-Man, in one of his earliest adventures " +
-                "following Uncle Ben's death, must save a crew of astronauts aboard a malfunctioning space ship!", descript);
+                "following Uncle Ben's death, must save a crew of astronauts aboard a malfunctioning space ship!", description);
     }
 
     @Test
-    public void getOnSaleDateTest() {
+    public void getOnSaleDate_TheAmazingSpiderMan_ReturnMarch11963() {
         String saleDate = comicBooks.get(2).getFormattedSaleDate();
         Assertions.assertEquals("MARCH 1, 1963", saleDate);
     }
-
     @Test
-    public void getCreatorNameTest() {
-        String name = comicBooks.get(2).getCreators().get(0).getName();
-        Assertions.assertEquals("Sol Brodsky", name);
+    public void getOnSaleDate_WhatIfClassicVol42007_ReturnNull(){
+        String saleDate = comicBooks.get(0).getFormattedSaleDate();
+        Assertions.assertNull(saleDate);
     }
 
     @Test
-    public void getCreatorRoleTest() {
+    public void getCreatorName_TheAmazingSpiderMan_ReturnSolBrodsky() {
+        String name = comicBooks.get(2).getCreators().get(0).getName();
+        Assertions.assertEquals("Sol Brodsky", name);
+    }
+    @Test
+    public void getCreatorName_WhatIfClassicVol42007_ReturnsNull() {
+        String name = comicBooks.get(0).getCreators().get(0).getName();
+        Assertions.assertNull(name);
+    }
+
+    @Test
+    public void getCreatorRole_TheAmazingSpiderMan_ReturnInker() {
         String role = comicBooks.get(2).getCreators().get(0).getRole();
         Assertions.assertEquals("inker", role);
+    }
+    @Test
+    public void getCreatorRole_WhatIfClassicVol42007_ReturnsNull() {
+        String role = comicBooks.get(0).getCreators().get(0).getRole();
+        Assertions.assertNull(role);
     }
 
 }
