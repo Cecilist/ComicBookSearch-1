@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.bsu.cs222.ComicBookTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-03-09T01:35:05" hostname="DESKTOP-9G84R97" time="0.085">
+<testsuite name="edu.bsu.cs222.ComicBookTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-03-25T02:59:02" hostname="DESKTOP-P4I08IH" time="0.015">
   <properties/>
-  <testcase name="getTitleTest()" classname="edu.bsu.cs222.ComicBookTest" time="0.075"/>
-  <testcase name="getCreatorRoleTest()" classname="edu.bsu.cs222.ComicBookTest" time="0.001"/>
-  <testcase name="getDescriptTest()" classname="edu.bsu.cs222.ComicBookTest" time="0.001"/>
-  <testcase name="getCreatorNameTest()" classname="edu.bsu.cs222.ComicBookTest" time="0.004"/>
-  <testcase name="getsaleDateTest()" classname="edu.bsu.cs222.ComicBookTest" time="0.0"/>
+  <testcase name="getOnSaleDateTest()" classname="edu.bsu.cs222.ComicBookTest" time="0.015"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+  <system-err><![CDATA[log4j:WARN No appenders could be found for logger (com.jayway.jsonpath.internal.path.CompiledPath).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+java.time.format.DateTimeParseException: Text '-0001-11-30T00:00:00-0500' could not be parsed: Invalid value for YearOfEra (valid values 1 - 999999999/1000000000): -1
 ]]></system-err>
 </testsuite>

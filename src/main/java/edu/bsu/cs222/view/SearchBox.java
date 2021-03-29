@@ -14,21 +14,21 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class SearchStage extends VBox {
+public class SearchBox extends VBox {
     public void createStage(Stage primaryStage) {
         primaryStage primarystage = new primaryStage();
-        primarystage.primaryStageEdit(primaryStage,250,400,"Superhero Search");
-        VBox searchBox = getSearchBox();
-        Label titleLabel = getTitleLabel();
-        TextField searchBar = getSearchBar();
-        Button searchButton = getSearchButton(searchBar, primaryStage);
+        primarystage.primaryStageEdit(primaryStage, 300, 400, "Superhero Search");
+        VBox searchBox = createSearchBox();
+        Label titleLabel = createTitleLabel();
+        TextField searchBar = createSearchBar();
+        Button searchButton = createSearchButton(searchBar, primaryStage);
         searchButton.setDefaultButton(true);
         searchBox.getChildren().addAll(titleLabel, searchBar, searchButton);
         primaryStage.setScene(new Scene(searchBox));
         primaryStage.show();
     }
 
-    private VBox getSearchBox() {
+    private VBox createSearchBox() {
         VBox searchBox = new VBox();
         searchBox.setAlignment(Pos.CENTER);
         searchBox.setBackground(new Background(
@@ -37,7 +37,7 @@ public class SearchStage extends VBox {
         return searchBox;
     }
 
-    private Label getTitleLabel() {
+    private Label createTitleLabel() {
         Label titleLabel = new Label("Superhero Search");
         titleLabel.setTextFill(Color.web("#ffffffff"));
         titleLabel.setFont(new Font("Fantasy", 30));
@@ -45,17 +45,17 @@ public class SearchStage extends VBox {
         return titleLabel;
     }
 
-    private TextField getSearchBar() {
+    private TextField createSearchBar() {
         TextField searchBar = new TextField("Enter the name of a Marvel Superhero");
         searchBar.setMaxWidth(300);
         searchBar.setOnMouseClicked(event -> searchBar.clear());
         return searchBar;
     }
 
-    private Button getSearchButton(TextField articleName, Stage primaryStage) {
+    private Button createSearchButton(TextField articleName, Stage primaryStage) {
         Button searchButton = new Button("Search");
         searchButton.setOnAction(event -> {
-            HeroStage heroView = new HeroStage();
+            HeroBox heroView = new HeroBox();
             heroView.pickSuperhero(articleName.getText(), primaryStage);
         });
         return searchButton;
