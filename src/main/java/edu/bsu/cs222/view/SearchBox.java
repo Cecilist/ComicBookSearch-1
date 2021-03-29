@@ -15,15 +15,16 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class SearchBox extends VBox {
-    public void createStage(Stage primaryStage) {
+    public void createStage(Stage primaryStage, String SearchTerm, boolean isSuperhero) {
         primaryStage primarystage = new primaryStage();
-        primarystage.primaryStageEdit(primaryStage, 300, 400, "Superhero Search");
+        primarystage.primaryStageEdit(primaryStage, 300, 400, " Search");
         VBox searchBox = createSearchBox();
-        Label titleLabel = createTitleLabel();
+        Label titleLabel = createTitleLabel(SearchTerm);
+        Label SearchLabel = createSearchLabel(SearchTerm);
         TextField searchBar = createSearchBar();
-        Button searchButton = createSearchButton(searchBar, primaryStage);
+        Button searchButton = createSearchButton(SearchTerm,isSuperhero,searchBar, primaryStage);
         searchButton.setDefaultButton(true);
-        searchBox.getChildren().addAll(titleLabel, searchBar, searchButton);
+        searchBox.getChildren().addAll(titleLabel,SearchLabel, searchBar, searchButton);
         primaryStage.setScene(new Scene(searchBox));
         primaryStage.show();
     }
@@ -37,26 +38,40 @@ public class SearchBox extends VBox {
         return searchBox;
     }
 
-    private Label createTitleLabel() {
-        Label titleLabel = new Label("Superhero Search");
+    private Label createTitleLabel(String SearchTerm) {
+        Label titleLabel = new Label(SearchTerm +" Search");
         titleLabel.setTextFill(Color.web("#ffffffff"));
         titleLabel.setFont(new Font("Fantasy", 30));
         titleLabel.setPadding(new Insets(10, 10, 10, 10));
         return titleLabel;
     }
+    private Label createSearchLabel(String SearchTerm) {
+        Label titleLabel = new Label("Enter the name of a Marvel "+ SearchTerm);
+        titleLabel.setTextFill(Color.web("#ffffffff"));
+        titleLabel.setFont(new Font("Fantasy", 12));
+        titleLabel.setPadding(new Insets(10, 10, -10, 10));
+        return titleLabel;
+    }
+
 
     private TextField createSearchBar() {
-        TextField searchBar = new TextField("Enter the name of a Marvel Superhero");
+        TextField searchBar = new TextField("");
         searchBar.setMaxWidth(300);
         searchBar.setOnMouseClicked(event -> searchBar.clear());
         return searchBar;
     }
 
-    private Button createSearchButton(TextField articleName, Stage primaryStage) {
+    private Button createSearchButton(String searchTerm, boolean isSuperhero, TextField articleName, Stage primaryStage) {
         Button searchButton = new Button("Search");
         searchButton.setOnAction(event -> {
-            HeroBox heroView = new HeroBox();
-            heroView.pickSuperhero(articleName.getText(), primaryStage);
+            if (isSuperhero) {
+                HeroBox heroView = new HeroBox();
+                heroView.pickSuperhero(searchTerm,articleName.getText(), primaryStage);
+            }
+            else {
+                CreatorBox CreatorBox = new CreatorBox();
+                CreatorBox.pickCreator(searchTerm,articleName.getText(), primaryStage);
+            }
         });
         return searchButton;
     }

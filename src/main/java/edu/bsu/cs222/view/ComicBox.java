@@ -19,33 +19,34 @@ public class ComicBox extends VBox {
     private Superhero selectedHero;
     private Stage primaryStage;
 
-    public void showComics(List<ComicBook> comicBooks) {
+    public void showComics(List<ComicBook> comicBooks, String SearchTerm) {
 
         VBox resultsBox = new VBox();
         CharacterDetailBox superDetails = new CharacterDetailBox();
         superDetails.showCharacterDetails(selectedHero);
         ComicGrid comicPane = new ComicGrid();
         Platform.runLater(() -> comicPane.createGrid(comicBooks));
-        HBox pageChooser = createPageChooser();
+        HBox pageChooser = createPageChooser(SearchTerm);
         Label loadingLabel = new Label("Loading comics, Please wait!");
         comicPane.add(loadingLabel, 0, 0, 5, 1);
         resultsBox.getChildren().addAll(superDetails, pageChooser, comicPane);
         ScrollPane scrollPane = new ScrollPane(resultsBox);
-        primaryStage.setHeight(600);
-        primaryStage.setWidth(600);
+        primaryStage primaryStageEdit = new primaryStage();
+        primaryStageEdit.primaryStageEdit(primaryStage, 600, 600,"comic books");
         primaryStage.setScene(new Scene(scrollPane));
         primaryStage.show();
     }
 
-    private HBox createPageChooser() {
+    private HBox createPageChooser(String SearchTerm) {
         HBox pageChooser = new HBox();
         pageChooser.setAlignment(Pos.CENTER);
         pageChooser.setSpacing(20);
+        pageChooser.getChildren().add(newSearch());
         if (selectedHero.getComicsTotal() > comicPage * 100) {
             Label pageNumber = new Label("Page: " + comicPage);
-            Button moreButton = moreResults();
+            Button moreButton = moreResults(SearchTerm);
             if (comicPage != 1) {
-                Button lessButton = lessResults();
+                Button lessButton = lessResults(SearchTerm);
                 pageChooser.getChildren().addAll(lessButton, pageNumber, moreButton);
             } else {
                 pageChooser.getChildren().addAll(pageNumber, moreButton);
@@ -54,30 +55,38 @@ public class ComicBox extends VBox {
         return pageChooser;
     }
 
-    private Button moreResults() {
+    private Button moreResults(String SearchTerm) {
         Button moreButton = new Button("More comics");
         moreButton.setOnAction(event -> {
             comicPage += 1;
-            comicBooks(selectedHero, primaryStage);
+            comicBooks(selectedHero, primaryStage, SearchTerm);
         });
         return moreButton;
     }
 
-    private Button lessResults() {
+    private Button lessResults(String SearchTerm) {
         Button lessButton = new Button("Less comics");
         lessButton.setOnAction(event -> {
             comicPage -= 1;
             if (comicPage < 1) comicPage = 1;
-            comicBooks(selectedHero, primaryStage);
+            comicBooks(selectedHero, primaryStage, SearchTerm);
         });
         return lessButton;
     }
 
-    public void comicBooks(Superhero superhero, Stage primary) {
+    public void comicBooks(Superhero superhero, Stage primary, String SearchTerm) {
         selectedHero = superhero;
         primaryStage = primary;
         ComicBook newComicBook = new ComicBook();
-        List<ComicBook> comicBooks = newComicBook.getComicBookData(selectedHero.getId(), comicPage);
-        showComics(comicBooks);
+        List<ComicBook> comicBooks = newComicBook.getComicBookData(selectedHero.getId(), comicPage, SearchTerm);
+        showComics(comicBooks, SearchTerm);
+    }
+    private Button newSearch() {
+        Button newSearch = new Button("New search");
+        newSearch.setOnAction(event -> {
+            initialStage newInitialStage = new initialStage();
+            newInitialStage.createStage( primaryStage);
+        });
+        return newSearch;
     }
 }

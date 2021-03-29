@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class MarvelSuperheroConnection {
+public class MarvelSearchConnection {
 
-    public JSONArray MarvelCharacterConnector(String characterName) throws IOException {
+    public JSONArray MarvelSearchConnector(String Searchterm, String characterName) throws IOException {
         APIKey key = new APIKey();
-        String urlString = "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" + characterName +
+        String urlString = "https://gateway.marvel.com/v1/public/" + Searchterm +"?nameStartsWith=" + characterName +
                 "&ts=2&apikey=" + key.getPublicKey() + "&hash=" + key.getHashKey();
         URL url = new URL(urlString);
         URLConnection connection = url.openConnection();

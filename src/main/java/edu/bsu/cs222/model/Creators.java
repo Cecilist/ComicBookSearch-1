@@ -1,6 +1,6 @@
 package edu.bsu.cs222.model;
 
-public class Creator {
+public class Creators {
     private String name;
     private String role;
 

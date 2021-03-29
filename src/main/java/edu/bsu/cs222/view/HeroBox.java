@@ -25,16 +25,16 @@ public class HeroBox extends VBox {
     private List<Superhero> superheroNoComics;
     private Stage primaryStage;
 
-    public void pickSuperhero(String superheroName, Stage primaryStage) {
+    public void pickSuperhero(String searchTerm, String superheroName, Stage primaryStage) {
         this.primaryStage = primaryStage;
         Superhero newSuperhero = new Superhero();
         superheroNoComics = new ArrayList<>();
-        superheroList = newSuperhero.createSuperhero(superheroName);
+        superheroList = newSuperhero.createSuperhero(searchTerm,superheroName);
         if (superheroList != null) {
             getChildren().add(createInstructionLabel());
             setSpacing(5);
             setAlignment(Pos.CENTER);
-            createButtons();
+            createButtons(primaryStage, searchTerm);
             if (superheroNoComics.size() != 0) {
                 alertNoComic(superheroNoComics);
             }
@@ -67,13 +67,13 @@ public class HeroBox extends VBox {
         charHasNoComics.showAndWait();
     }
 
-    private void createButtons() {
+    private void createButtons(Stage primaryStage, String SearchTerm) {
         ComicBox comicBox = new ComicBox();
         for (int i = 0; i < superheroList.size(); i++) {
             if (superheroList.get(i).hasComics()) {
                 Button superHeroButton = new Button(superheroList.get(i).getName());
                 int finalI = i;
-                superHeroButton.setOnMouseClicked(event -> comicBox.comicBooks(superheroList.get(finalI), primaryStage));
+                superHeroButton.setOnMouseClicked(event -> comicBox.comicBooks(superheroList.get(finalI), primaryStage, SearchTerm));
                 getChildren().add(superHeroButton);
             } else {
                 superheroNoComics.add(superheroList.get(i));
