@@ -55,6 +55,7 @@ public class ComicBook {
                 newCreators.setName(comicCreatorsNames.get(x));
                 newCreators.setRole(comicCreatorsRoles.get(x));
                 newComic.creators.add(newCreators);
+
             }
             comicBooks.add(newComic);
 
