@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class MarvelComicBookDataStream {
+public class MarvelComicBookConnection {
     public JSONArray MarvelComicBookConnector(String characterId, int comicPage) throws IOException {
         APIKey key = new APIKey();
         String urlString = "https://gateway.marvel.com/v1/public/characters/" + characterId +

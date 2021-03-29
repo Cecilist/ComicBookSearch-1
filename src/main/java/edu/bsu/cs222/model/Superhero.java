@@ -49,7 +49,7 @@ public class Superhero {
         List<Superhero> superheros = new ArrayList<>();
         try {
             String encodedSuperheroName = URLEncoder.encode(superheroName, StandardCharsets.UTF_8.toString());
-            MarvelSuperheroDataStream dataStream = new MarvelSuperheroDataStream();
+            MarvelSuperheroConnection dataStream = new MarvelSuperheroConnection();
             superheros = buildSuperheros(dataStream.MarvelCharacterConnector(encodedSuperheroName));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

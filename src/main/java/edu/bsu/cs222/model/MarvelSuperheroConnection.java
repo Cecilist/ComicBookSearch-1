@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class MarvelSuperheroDataStream {
+public class MarvelSuperheroConnection {
 
     public JSONArray MarvelCharacterConnector(String characterName) throws IOException {
         APIKey key = new APIKey();
