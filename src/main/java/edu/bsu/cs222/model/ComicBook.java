@@ -20,7 +20,7 @@ public class ComicBook {
     }
 
     public List<ComicBook> getComicBookData(String characterId, int comicResultPage) {
-        MarvelComicBookDataStream comicBookStream = new MarvelComicBookDataStream();
+        MarvelComicBookConnection comicBookStream = new MarvelComicBookConnection();
         List<ComicBook> comicBookList = null;
         try {
             comicBookList = createComicBooks(comicBookStream.MarvelComicBookConnector(characterId, comicResultPage));
@@ -49,6 +49,7 @@ public class ComicBook {
 
             List<String> comicCreatorNames = comicBookParser.getComicCreatorName(comicBookData, i);
             List<String> comicCreatorRoles = comicBookParser.getComicCreatorRole(comicBookData, i);
+            if (comicCreatorNames.size() > 0)
             for (int x = 0; x < comicCreatorNames.size(); x++) {
                 Creator newCreator = new Creator();
                 newCreator.setName(comicCreatorNames.get(x));
