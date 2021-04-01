@@ -6,7 +6,7 @@ import net.minidev.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MarvelSuperheroParser {
+public class MarvelSearchParser {
     public boolean doesCharExist(JSONArray characterData) {
         JSONArray totalCount = JsonPath.read(characterData, "$..total");
         return ((int) totalCount.get(0) > 0);

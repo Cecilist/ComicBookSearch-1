@@ -22,7 +22,7 @@ public class Superhero {
     }
 
     public List<Superhero> buildSuperheros(JSONArray characterData) throws IOException {
-        MarvelSuperheroParser superheroParser = new MarvelSuperheroParser();
+        MarvelSearchParser superheroParser = new MarvelSearchParser();
         if (superheroParser.doesCharExist(characterData)) {
             List<Superhero> superheros = new ArrayList<>();
             List<String> ids = superheroParser.getSuperInformation(characterData, "id");
@@ -45,12 +45,12 @@ public class Superhero {
         }
     }
 
-    public List<Superhero> createSuperhero(String superheroName) {
+    public List<Superhero> createSuperhero(String searchterm,String superheroName) {
         List<Superhero> superheros = new ArrayList<>();
         try {
             String encodedSuperheroName = URLEncoder.encode(superheroName, StandardCharsets.UTF_8.toString());
-            MarvelSuperheroConnection dataStream = new MarvelSuperheroConnection();
-            superheros = buildSuperheros(dataStream.MarvelCharacterConnector(encodedSuperheroName));
+            MarvelSearchConnection dataStream = new MarvelSearchConnection();
+            superheros = buildSuperheros(dataStream.MarvelSearchConnector(searchterm,encodedSuperheroName));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -1,6 +1,6 @@
 package edu.bsu.cs222.view;
 
-import edu.bsu.cs222.model.Superhero;
+import edu.bsu.cs222.model.Creator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -20,27 +20,25 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HeroBox extends VBox {
-    private List<Superhero> superheroList;
-    private List<Superhero> superheroNoComics;
-    private Stage primaryStage;
+public class CreatorBox extends VBox {
+    private List<Creator> CreatorList;
+    private List<Creator> CreatorNoComics;
 
-    public void pickSuperhero(String searchTerm, String superheroName, Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        Superhero newSuperhero = new Superhero();
-        superheroNoComics = new ArrayList<>();
-        superheroList = newSuperhero.createSuperhero(searchTerm,superheroName);
-        if (superheroList != null) {
+    public void pickCreator(String searchTerm, String CreatorName, Stage primaryStage) {
+        Creator newCreator = new Creator();
+        CreatorNoComics = new ArrayList<>();
+        CreatorList = newCreator.createCreator(searchTerm,CreatorName);
+        if (CreatorList != null) {
             getChildren().add(createInstructionLabel());
             setSpacing(5);
             setAlignment(Pos.CENTER);
             createButtons(primaryStage, searchTerm);
-            if (superheroNoComics.size() != 0) {
-                alertNoComic(superheroNoComics);
+            if (CreatorNoComics.size() != 0) {
+                alertNoComic(CreatorNoComics);
             }
             setBackground(new Background(
                     new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
-            ScrollPane buttonScroll = new ScrollPane(HeroBox.this);
+            ScrollPane buttonScroll = new ScrollPane(CreatorBox.this);
             buttonScroll.setFitToWidth(true);
             primaryStage.setScene(new Scene(buttonScroll));
             primaryStage.show();
@@ -48,35 +46,35 @@ public class HeroBox extends VBox {
     }
 
     private Label createInstructionLabel() {
-        Label instruction = new Label("Please select a Superhero: ");
+        Label instruction = new Label("Please select a Creator: ");
         instruction.setTextFill(Color.web("#ffffffff"));
         instruction.setFont(Font.font("Fantasy", FontWeight.BOLD, 15));
         return instruction;
     }
 
-    private void alertNoComic(List<Superhero> superheroNoComics) {
+    private void alertNoComic(List<Creator> CreatorNoComics) {
         Alert charHasNoComics = new Alert(Alert.AlertType.INFORMATION);
         charHasNoComics.setTitle("Some Characters have no comics");
         StringBuilder noComicsAlertText = new StringBuilder();
         noComicsAlertText.append("The following Marvel characters exist but have no comics: ");
-        for (Superhero superheroNoComic : superheroNoComics) {
+        for (Creator CreatorNoComic : CreatorNoComics) {
             noComicsAlertText.append("\n");
-            noComicsAlertText.append(superheroNoComic.getName());
+            noComicsAlertText.append(CreatorNoComic.getName());
         }
         charHasNoComics.setContentText(noComicsAlertText.toString());
         charHasNoComics.showAndWait();
     }
 
     private void createButtons(Stage primaryStage, String SearchTerm) {
-        ComicBox comicBox = new ComicBox();
-        for (int i = 0; i < superheroList.size(); i++) {
-            if (superheroList.get(i).hasComics()) {
-                Button superHeroButton = new Button(superheroList.get(i).getName());
+        CreatorComicBox comicBox = new CreatorComicBox();
+        for (int i = 0; i < CreatorList.size(); i++) {
+            if (CreatorList.get(i).hasComics()) {
+                Button creatorButton = new Button(CreatorList.get(i).getName());
                 int finalI = i;
-                superHeroButton.setOnMouseClicked(event -> comicBox.comicBooks(superheroList.get(finalI), primaryStage, SearchTerm));
-                getChildren().add(superHeroButton);
+                creatorButton.setOnMouseClicked(event -> comicBox.comicBooks(CreatorList.get(finalI), primaryStage, SearchTerm));
+                getChildren().add(creatorButton);
             } else {
-                superheroNoComics.add(superheroList.get(i));
+                CreatorNoComics.add(CreatorList.get(i));
             }
         }
     }

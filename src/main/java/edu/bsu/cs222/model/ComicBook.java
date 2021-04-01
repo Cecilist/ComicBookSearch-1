@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ComicBook {
-    private final ArrayList<Creator> creators = new ArrayList<>();
+    private final ArrayList<Creators> creators = new ArrayList<>();
     private String title;
     private String description;
     private LocalDateTime onSaleDate;
@@ -19,11 +19,11 @@ public class ComicBook {
     public ComicBook() {
     }
 
-    public List<ComicBook> getComicBookData(String characterId, int comicResultPage) {
+    public List<ComicBook> getComicBookData(String characterId, int comicResultPage, String SearchTerm) {
         MarvelComicBookConnection comicBookStream = new MarvelComicBookConnection();
         List<ComicBook> comicBookList = null;
         try {
-            comicBookList = createComicBooks(comicBookStream.MarvelComicBookConnector(characterId, comicResultPage));
+            comicBookList = createComicBooks(comicBookStream.MarvelComicBookConnector(SearchTerm,characterId, comicResultPage));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,14 +47,15 @@ public class ComicBook {
                 e.printStackTrace();
             }
 
-            List<String> comicCreatorNames = comicBookParser.getComicCreatorName(comicBookData, i);
-            List<String> comicCreatorRoles = comicBookParser.getComicCreatorRole(comicBookData, i);
-            if (comicCreatorNames.size() > 0)
-            for (int x = 0; x < comicCreatorNames.size(); x++) {
-                Creator newCreator = new Creator();
-                newCreator.setName(comicCreatorNames.get(x));
-                newCreator.setRole(comicCreatorRoles.get(x));
-                newComic.creators.add(newCreator);
+            List<String> comicCreatorsNames = comicBookParser.getComicCreatorName(comicBookData, i);
+            List<String> comicCreatorsRoles = comicBookParser.getComicCreatorRole(comicBookData, i);
+            if (comicCreatorsNames.size() > 0)
+            for (int x = 0; x < comicCreatorsNames.size(); x++) {
+                Creators newCreators = new Creators();
+                newCreators.setName(comicCreatorsNames.get(x));
+                newCreators.setRole(comicCreatorsRoles.get(x));
+                newComic.creators.add(newCreators);
+
             }
             comicBooks.add(newComic);
 
@@ -72,7 +73,7 @@ public class ComicBook {
     }
 
 
-    public ArrayList<Creator> getCreators() {
+    public ArrayList<Creators> getCreators() {
         return creators;
     }
 
