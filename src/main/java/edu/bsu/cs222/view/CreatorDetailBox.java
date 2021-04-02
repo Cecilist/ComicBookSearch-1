@@ -31,7 +31,7 @@ public class CreatorDetailBox extends HBox {
         ImageView characterThumbnail = new ImageView(new Image(creator.getThumbnailURL().toString()));
         Label creatorName = new Label(creator.getName());
         TextArea creatorDescription = new TextArea("helped make " + creator.getSeriesTotal() + " Marvel series"+
-                "helped make " + creator.getStoriesTotal() + " Marvel series"+
+                "\nhelped make " + creator.getStoriesTotal() + " Marvel series"+
                 "\nhelped make " + creator.getComicsTotal() + " Marvel comics");
         creatorDescription.setWrapText(true);
         creatorDescription.setEditable(false);
