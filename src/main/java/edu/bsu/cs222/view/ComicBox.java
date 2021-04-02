@@ -29,6 +29,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class ComicBox extends VBox {
     private int comicPage = 1;
@@ -38,13 +41,15 @@ public class ComicBox extends VBox {
     private Button moreButton;
     private Button lessButton;
 
+    private final Executor executor = Executors.newSingleThreadExecutor();
+
     public void showComics(List<ComicBook> comicBooks, String SearchTerm) {
 
         VBox resultsBox = new VBox();
         CharacterDetailBox superDetails = new CharacterDetailBox();
         superDetails.showCharacterDetails(selectedHero);
         ComicGrid comicPane = new ComicGrid();
-        Platform.runLater(() -> runLater(comicPane,comicBooks));
+        Platform.runLater(() -> executor.execute(Objects.requireNonNull(runLater(comicPane, comicBooks))));
         HBox pageChooser = createPageChooser(SearchTerm);
         Label loadingLabel = new Label("Loading comics, Please wait!");
         comicPane.add(loadingLabel, 0, 0, 5, 1);
@@ -110,10 +115,11 @@ public class ComicBox extends VBox {
         });
         newSearchButton.setDisable(true);
     }
-    private void runLater(ComicGrid comicPane, List<ComicBook> comicBooks) {
+    private Runnable runLater(ComicGrid comicPane, List<ComicBook> comicBooks) {
         comicPane.createGrid(comicBooks);
         moreButton.setDisable(false);
         newSearchButton.setDisable(false);
         lessButton.setDisable(false);
+        return null;
     }
 }
