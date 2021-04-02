@@ -28,7 +28,7 @@ public class MarvelSearchParser {
         return ((int) totalCount.get(0) > 0);
     }
 
-    public List<String> getSuperInformation(JSONArray characterData, String searchTerm) {
+    public List<String> getInformation(JSONArray characterData, String searchTerm) {
         JSONArray information = JsonPath.read(characterData, "$..results[*]." + searchTerm);
         List<String> informationList = new ArrayList<>();
         for (Object o : information) {

@@ -34,18 +34,16 @@ public class Superhero {
     private URL thumbnailURL;
     private int comicsTotal;
 
-    public Superhero() {
-    }
 
     public List<Superhero> buildSuperheros(JSONArray characterData) throws IOException {
         MarvelSearchParser superheroParser = new MarvelSearchParser();
         if (superheroParser.doesCharExist(characterData)) {
             List<Superhero> superheros = new ArrayList<>();
-            List<String> ids = superheroParser.getSuperInformation(characterData, "id");
-            List<String> names = superheroParser.getSuperInformation(characterData, "name");
-            List<String> descriptions = superheroParser.getSuperInformation(characterData, "description");
-            List<String> thumbnailURLs = superheroParser.getSuperInformation(characterData, "thumbnail.path");
-            List<String> comicTotals = superheroParser.getSuperInformation(characterData, "comics.available");
+            List<String> ids = superheroParser.getInformation(characterData, "id");
+            List<String> names = superheroParser.getInformation(characterData, "name");
+            List<String> descriptions = superheroParser.getInformation(characterData, "description");
+            List<String> thumbnailURLs = superheroParser.getInformation(characterData, "thumbnail.path");
+            List<String> comicTotals = superheroParser.getInformation(characterData, "comics.available");
             for (int i = 0; i < ids.size(); i++) {
                 Superhero newSuperhero = new Superhero();
                 newSuperhero.id = (ids.get(i));

@@ -30,8 +30,9 @@ public class CreatorDetailBox extends HBox {
         setMaxHeight(30);
         ImageView characterThumbnail = new ImageView(new Image(creator.getThumbnailURL().toString()));
         Label creatorName = new Label(creator.getName());
-        TextArea creatorDescription = new TextArea(creator.getDescription() +
-                "\nAppears in " + creator.getComicsTotal() + " Marvel comics");
+        TextArea creatorDescription = new TextArea("helped make " + creator.getSeriesTotal() + " Marvel series"+
+                "helped make " + creator.getStoriesTotal() + " Marvel series"+
+                "\nhelped make " + creator.getComicsTotal() + " Marvel comics");
         creatorDescription.setWrapText(true);
         creatorDescription.setEditable(false);
         creatorDetails.getChildren().addAll(creatorName, creatorDescription);

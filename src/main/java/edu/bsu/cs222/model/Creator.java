@@ -30,25 +30,27 @@ import java.util.List;
 public class Creator {
     private String name;
     private String id;
-    private String description;
     private URL thumbnailURL;
     private int comicsTotal;
-
-    public Creator() {
-    }
+    private String seriesTotal;
+    private String storiesTotal;
 
     public List<Creator> buildCreator(JSONArray characterData) throws IOException {
-        MarvelSearchParser superheroParser = new MarvelSearchParser();
-        if (superheroParser.doesCharExist(characterData)) {
+        MarvelSearchParser CreatorParser = new MarvelSearchParser();
+        if (CreatorParser.doesCharExist(characterData)) {
             List<Creator> Creators = new ArrayList<>();
-            List<String> ids = superheroParser.getSuperInformation(characterData, "id");
-            List<String> names = superheroParser.getSuperInformation(characterData, "fullName");
-            List<String> thumbnailURLs = superheroParser.getSuperInformation(characterData, "thumbnail.path");
-            List<String> comicTotals = superheroParser.getSuperInformation(characterData, "comics.available");
+            List<String> ids = CreatorParser.getInformation(characterData, "id");
+            List<String> names = CreatorParser.getInformation(characterData, "fullName");
+            List<String> thumbnailURLs = CreatorParser.getInformation(characterData, "thumbnail.path");
+            List<String> comicTotals = CreatorParser.getInformation(characterData, "comics.available");
+            List<String> seriesTotals = CreatorParser.getInformation(characterData, "series.available");
+            List<String> storiesTotals = CreatorParser.getInformation(characterData, "stories.available");
             for (int i = 0; i < ids.size(); i++) {
                 Creator newCreator = new Creator();
                 newCreator.id = (ids.get(i));
                 newCreator.name = (names.get(i));
+                newCreator.seriesTotal = (seriesTotals.get(i));
+                newCreator.storiesTotal = (storiesTotals.get(i));
                 newCreator.thumbnailURL = new URL(thumbnailURLs.get(i) + "/portrait_medium.jpg");
                 newCreator.comicsTotal = Integer.parseInt(comicTotals.get(i));
                 Creators.add(newCreator);
@@ -76,7 +78,6 @@ public class Creator {
 
 
         }
-
         return Creators;
     }
 
@@ -84,9 +85,6 @@ public class Creator {
         return name;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
     public URL getThumbnailURL() {
         return thumbnailURL;
@@ -104,4 +102,11 @@ public class Creator {
         return comicsTotal > 0;
     }
 
+    public String getSeriesTotal() {
+        return seriesTotal;
+    }
+
+    public String getStoriesTotal() {
+        return storiesTotal;
+    }
 }

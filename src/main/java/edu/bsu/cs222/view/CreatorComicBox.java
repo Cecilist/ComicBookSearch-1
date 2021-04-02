@@ -34,6 +34,9 @@ public class CreatorComicBox extends VBox {
     private int comicPage = 1;
     private Creator selectedCreator;
     private Stage primaryStage;
+    private Button newSearchButton;
+    private Button moreButton;
+    private Button lessButton;
 
     public void showCreatorComics(List<ComicBook> comicBooks, String SearchTerm) {
 
@@ -41,7 +44,7 @@ public class CreatorComicBox extends VBox {
         CreatorDetailBox CreatorDetails = new CreatorDetailBox();
         CreatorDetails.showCreatorDetails(selectedCreator);
         ComicGrid comicPane = new ComicGrid();
-        Platform.runLater(() -> comicPane.createGrid(comicBooks));
+        Platform.runLater(() -> runLater(comicPane,comicBooks));
         HBox pageChooser = createPageChooser(SearchTerm);
         Label loadingLabel = new Label("Loading comics, Please wait!");
         comicPane.add(loadingLabel, 0, 0, 5, 1);
@@ -57,12 +60,14 @@ public class CreatorComicBox extends VBox {
         HBox pageChooser = new HBox();
         pageChooser.setAlignment(Pos.CENTER);
         pageChooser.setSpacing(20);
-        pageChooser.getChildren().add(newSearch());
+        newSearch();
+        pageChooser.getChildren().add(newSearchButton);
         if (selectedCreator.getComicsTotal() > comicPage * 100) {
             Label pageNumber = new Label("Page: " + comicPage);
-            Button moreButton = moreResults(SearchTerm);
+            moreResults(SearchTerm);
+            moreButton.setDisable(true);
             if (comicPage != 1) {
-                Button lessButton = lessResults(SearchTerm);
+                lessResults(SearchTerm);
                 pageChooser.getChildren().addAll(lessButton, pageNumber, moreButton);
             } else {
                 pageChooser.getChildren().addAll(pageNumber, moreButton);
@@ -71,23 +76,23 @@ public class CreatorComicBox extends VBox {
         return pageChooser;
     }
 
-    private Button moreResults(String SearchTerm) {
-        Button moreButton = new Button("More comics");
+    private void moreResults(String SearchTerm) {
+        moreButton = new Button("More comics");
         moreButton.setOnAction(event -> {
             comicPage += 1;
             comicBooks(selectedCreator, primaryStage, SearchTerm);
         });
-        return moreButton;
+        moreButton.setDisable(true);
     }
 
-    private Button lessResults(String SearchTerm) {
-        Button lessButton = new Button("Less comics");
+    private void lessResults(String SearchTerm) {
+        lessButton = new Button("Less comics");
         lessButton.setOnAction(event -> {
             comicPage -= 1;
             if (comicPage < 1) comicPage = 1;
             comicBooks(selectedCreator, primaryStage, SearchTerm);
         });
-        return lessButton;
+        lessButton.setDisable(true);
     }
 
     public void comicBooks(Creator creator, Stage primary, String SearchTerm) {
@@ -97,12 +102,19 @@ public class CreatorComicBox extends VBox {
         List<ComicBook> comicBooks = newComicBook.getComicBookData(selectedCreator.getId(), comicPage, SearchTerm);
         showCreatorComics(comicBooks, SearchTerm);
     }
-    private Button newSearch() {
-        Button newSearch = new Button("New search");
-        newSearch.setOnAction(event -> {
+    private void newSearch() {
+        newSearchButton = new Button("New search");
+        newSearchButton.setDisable(true);
+        newSearchButton.setOnAction(event -> {
             initialStage newInitialStage = new initialStage();
             newInitialStage.createStage( primaryStage);
         });
-        return newSearch;
+        newSearchButton.setDisable(true);
+    }
+    private void runLater(ComicGrid comicPane, List<ComicBook> comicBooks) {
+        comicPane.createGrid(comicBooks);
+        moreButton.setDisable(false);
+        newSearchButton.setDisable(false);
+        lessButton.setDisable(false);
     }
 }
