@@ -30,6 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+
 public class SearchBox extends VBox {
     public void createStage(Stage primaryStage, String SearchTerm, boolean isSuperhero) {
         primaryStage primarystage = new primaryStage();
@@ -37,10 +38,12 @@ public class SearchBox extends VBox {
         VBox searchBox = createSearchBox();
         Label titleLabel = createTitleLabel(SearchTerm);
         Label SearchLabel = createSearchLabel(SearchTerm);
+        SearchTerm = SearchTerm + "s";
         TextField searchBar = createSearchBar();
         Button searchButton = createSearchButton(SearchTerm,isSuperhero,searchBar, primaryStage);
         searchButton.setDefaultButton(true);
-        searchBox.getChildren().addAll(titleLabel,SearchLabel, searchBar, searchButton);
+        Button backButton = backButton(primaryStage);
+        searchBox.getChildren().addAll(titleLabel,SearchLabel, searchBar, searchButton,backButton);
         primaryStage.setScene(new Scene(searchBox));
         primaryStage.show();
     }
@@ -90,5 +93,14 @@ public class SearchBox extends VBox {
             }
         });
         return searchButton;
+    }
+    private Button backButton(Stage primaryStage) {
+        Button backButton = new Button("Back");
+        backButton.setOnAction(event -> {
+            initialStage newInitialStage = new initialStage();
+            newInitialStage.createStage( primaryStage);
+        });
+        //backButton.setDisable(true);
+        return backButton;
     }
 }

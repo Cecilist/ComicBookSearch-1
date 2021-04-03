@@ -70,9 +70,10 @@ public class CreatorBox extends VBox {
 
     private void alertNoComic(List<Creator> CreatorNoComics) {
         Alert charHasNoComics = new Alert(Alert.AlertType.INFORMATION);
-        charHasNoComics.setTitle("Some Characters have no comics");
+        charHasNoComics.setTitle("Creators with no comics found");
         StringBuilder noComicsAlertText = new StringBuilder();
-        noComicsAlertText.append("The following Marvel characters exist but have no comics: ");
+        noComicsAlertText.append("The following creators exist in Marvel's database, however are not " +
+                "associated with any comics: ");
         for (Creator CreatorNoComic : CreatorNoComics) {
             noComicsAlertText.append("\n");
             noComicsAlertText.append(CreatorNoComic.getName());
