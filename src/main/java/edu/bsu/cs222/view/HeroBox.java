@@ -58,6 +58,7 @@ public class HeroBox extends VBox {
                     new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
             ScrollPane buttonScroll = new ScrollPane(HeroBox.this);
             buttonScroll.setFitToWidth(true);
+            buttonScroll.setFitToHeight(true);
             primaryStage.setScene(new Scene(buttonScroll));
             primaryStage.show();
         }

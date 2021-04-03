@@ -56,6 +56,7 @@ public class CreatorBox extends VBox {
                     new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
             ScrollPane buttonScroll = new ScrollPane(CreatorBox.this);
             buttonScroll.setFitToWidth(true);
+            buttonScroll.setFitToHeight(true);
             primaryStage.setScene(new Scene(buttonScroll));
             primaryStage.show();
         }
