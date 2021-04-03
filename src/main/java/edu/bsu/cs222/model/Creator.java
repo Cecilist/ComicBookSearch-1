@@ -14,7 +14,6 @@ import java.util.List;
 public class Creator {
     private String name;
     private String id;
-    private String description;
     private URL thumbnailURL;
     private int comicsTotal;
 
@@ -66,10 +65,6 @@ public class Creator {
 
     public String getName() {
         return name;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public URL getThumbnailURL() {

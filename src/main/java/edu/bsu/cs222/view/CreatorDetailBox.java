@@ -2,7 +2,6 @@ package edu.bsu.cs222.view;
 
 import edu.bsu.cs222.model.Creator;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -14,10 +13,7 @@ public class CreatorDetailBox extends HBox {
         setMaxHeight(30);
         ImageView characterThumbnail = new ImageView(new Image(creator.getThumbnailURL().toString()));
         Label creatorName = new Label(creator.getName());
-        TextArea creatorDescription = new TextArea(creator.getDescription() +
-                "\nAppears in " + creator.getComicsTotal() + " Marvel comics");
-        creatorDescription.setWrapText(true);
-        creatorDescription.setEditable(false);
+        Label creatorDescription = new Label("/nCreated in in " + creator.getComicsTotal() + " Marvel comics");
         creatorDetails.getChildren().addAll(creatorName, creatorDescription);
         getChildren().addAll(characterThumbnail, creatorDetails);
     }
