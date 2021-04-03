@@ -100,7 +100,6 @@ public class SearchBox extends VBox {
             initialStage newInitialStage = new initialStage();
             newInitialStage.createStage( primaryStage);
         });
-        //backButton.setDisable(true);
         return backButton;
     }
 }
