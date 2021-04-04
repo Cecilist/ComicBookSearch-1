@@ -1,3 +1,19 @@
+//  <Program to search for comics and creators that Marvel has available information on.>
+//  Copyright (C) <2021>  <Lloyd Rowe, Jacob Cecil, Christopher Willis, Christopher Parrish>
+
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program, SEE THE Copyright.txt FILE IN RESOURCES.  If not, see <https://www.gnu.org/licenses/>.
+
 package edu.bsu.cs222.view;
 
 import edu.bsu.cs222.model.Creator;
@@ -40,6 +56,7 @@ public class CreatorBox extends VBox {
                     new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
             ScrollPane buttonScroll = new ScrollPane(CreatorBox.this);
             buttonScroll.setFitToWidth(true);
+            buttonScroll.setFitToHeight(true);
             primaryStage.setScene(new Scene(buttonScroll));
             primaryStage.show();
         }
@@ -54,9 +71,10 @@ public class CreatorBox extends VBox {
 
     private void alertNoComic(List<Creator> CreatorNoComics) {
         Alert charHasNoComics = new Alert(Alert.AlertType.INFORMATION);
-        charHasNoComics.setTitle("Some Characters have no comics");
+        charHasNoComics.setTitle("Creators with no comics found");
         StringBuilder noComicsAlertText = new StringBuilder();
-        noComicsAlertText.append("The following Marvel characters exist but have no comics: ");
+        noComicsAlertText.append("The following creators exist in Marvel's database, however are not " +
+                "associated with any comics: ");
         for (Creator CreatorNoComic : CreatorNoComics) {
             noComicsAlertText.append("\n");
             noComicsAlertText.append(CreatorNoComic.getName());

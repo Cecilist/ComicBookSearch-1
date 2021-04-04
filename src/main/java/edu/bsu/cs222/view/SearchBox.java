@@ -1,3 +1,19 @@
+//  <Program to search for comics and creators that Marvel has available information on.>
+//  Copyright (C) <2021>  <Lloyd Rowe, Jacob Cecil, Christopher Willis, Christopher Parrish>
+
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program, SEE THE Copyright.txt FILE IN RESOURCES.  If not, see <https://www.gnu.org/licenses/>.
+
 package edu.bsu.cs222.view;
 
 import javafx.geometry.Insets;
@@ -14,6 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+
 public class SearchBox extends VBox {
     public void createStage(Stage primaryStage, String SearchTerm, boolean isSuperhero) {
         primaryStage primarystage = new primaryStage();
@@ -21,10 +38,12 @@ public class SearchBox extends VBox {
         VBox searchBox = createSearchBox();
         Label titleLabel = createTitleLabel(SearchTerm);
         Label SearchLabel = createSearchLabel(SearchTerm);
+        SearchTerm = SearchTerm + "s";
         TextField searchBar = createSearchBar();
         Button searchButton = createSearchButton(SearchTerm,isSuperhero,searchBar, primaryStage);
         searchButton.setDefaultButton(true);
-        searchBox.getChildren().addAll(titleLabel,SearchLabel, searchBar, searchButton);
+        Button backButton = backButton(primaryStage);
+        searchBox.getChildren().addAll(titleLabel,SearchLabel, searchBar, searchButton,backButton);
         primaryStage.setScene(new Scene(searchBox));
         primaryStage.show();
     }
@@ -74,5 +93,13 @@ public class SearchBox extends VBox {
             }
         });
         return searchButton;
+    }
+    private Button backButton(Stage primaryStage) {
+        Button backButton = new Button("Back");
+        backButton.setOnAction(event -> {
+            initialStage newInitialStage = new initialStage();
+            newInitialStage.createStage( primaryStage);
+        });
+        return backButton;
     }
 }
