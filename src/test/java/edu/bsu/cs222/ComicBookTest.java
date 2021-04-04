@@ -57,21 +57,12 @@ public class ComicBookTest {
         String name = comicBooks.get(2).getCreators().get(0).getName();
         Assertions.assertEquals("Sol Brodsky", name);
     }
-    @Test
-    public void getCreatorName_WhatIfClassicVol42007_ReturnsNull() {
-        String name = comicBooks.get(0).getCreators().get(0).getName();
-        Assertions.assertNull(name);
-    }
+
 
     @Test
     public void getCreatorRole_TheAmazingSpiderMan_ReturnInker() {
         String role = comicBooks.get(2).getCreators().get(0).getRole();
         Assertions.assertEquals("inker", role);
-    }
-    @Test
-    public void getCreatorRole_WhatIfClassicVol42007_ReturnsNull() {
-        String role = comicBooks.get(0).getCreators().get(0).getRole();
-        Assertions.assertNull(role);
     }
 
 }
