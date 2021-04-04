@@ -30,6 +30,7 @@ import java.util.List;
 public class Creator {
     private String name;
     private String id;
+    private String role;
     private URL thumbnailURL;
     private int comicsTotal;
     private String seriesTotal;
@@ -85,6 +86,9 @@ public class Creator {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public URL getThumbnailURL() {
         return thumbnailURL;
@@ -108,5 +112,17 @@ public class Creator {
 
     public String getStoriesTotal() {
         return storiesTotal;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getCreators() {
+        return getRole() + ": " + getName() + "\n";
     }
 }

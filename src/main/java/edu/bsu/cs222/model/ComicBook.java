@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ComicBook {
-    private final ArrayList<Creators> creators = new ArrayList<>();
+    private final ArrayList<Creator> creators = new ArrayList<>();
     private String title;
     private String description;
     private LocalDateTime onSaleDate;
@@ -67,10 +67,10 @@ public class ComicBook {
             List<String> comicCreatorsRoles = comicBookParser.getComicCreatorRole(comicBookData, i);
             if (comicCreatorsNames.size() > 0)
             for (int x = 0; x < comicCreatorsNames.size(); x++) {
-                Creators newCreators = new Creators();
-                newCreators.setName(comicCreatorsNames.get(x));
-                newCreators.setRole(comicCreatorsRoles.get(x));
-                newComic.creators.add(newCreators);
+                Creator newCreator = new Creator();
+                newCreator.setName(comicCreatorsNames.get(x));
+                newCreator.setRole(comicCreatorsRoles.get(x));
+                newComic.creators.add(newCreator);
 
             }
             comicBooks.add(newComic);
@@ -89,7 +89,7 @@ public class ComicBook {
     }
 
 
-    public ArrayList<Creators> getCreators() {
+    public ArrayList<Creator> getCreators() {
         return creators;
     }
 
