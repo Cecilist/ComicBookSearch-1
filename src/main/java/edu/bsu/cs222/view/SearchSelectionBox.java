@@ -16,7 +16,9 @@
 
 package edu.bsu.cs222.view;
 
+import edu.bsu.cs222.model.Character;
 import edu.bsu.cs222.model.Creator;
+import edu.bsu.cs222.model.MarvelObject;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -36,25 +38,33 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreatorBox extends VBox {
-    private List<Creator> CreatorList;
-    private List<Creator> CreatorNoComics;
+public class SearchSelectionBox extends VBox {
+    private List<MarvelObject> marvelObjectList;
+    private List<MarvelObject> noComicList;
 
-    public void pickCreator(String searchTerm, String CreatorName, Stage primaryStage) {
-        Creator newCreator = new Creator();
-        CreatorNoComics = new ArrayList<>();
-        CreatorList = newCreator.createCreator(searchTerm,CreatorName);
-        if (CreatorList != null) {
+    public void pickSearchOption(String searchTerm, String characterName, Stage primaryStage) {
+        noComicList = new ArrayList<>();
+        marvelObjectList = new ArrayList<>();
+
+        if (searchTerm.equals("characters")) {
+            Character newCharacter = new Character();
+            marvelObjectList.addAll(newCharacter.createCharacter(searchTerm, characterName));
+        } else {
+            Creator newCreator = new Creator();
+            marvelObjectList.addAll(newCreator.createCreator(searchTerm, characterName));
+        }
+
+        if (marvelObjectList != null) {
             getChildren().add(createInstructionLabel());
             setSpacing(5);
             setAlignment(Pos.CENTER);
             createButtons(primaryStage, searchTerm);
-            if (CreatorNoComics.size() != 0) {
-                alertNoComic(CreatorNoComics);
+            if (noComicList.size() != 0) {
+                alertNoComic(noComicList);
             }
             setBackground(new Background(
                     new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
-            ScrollPane buttonScroll = new ScrollPane(CreatorBox.this);
+            ScrollPane buttonScroll = new ScrollPane(SearchSelectionBox.this);
             buttonScroll.setFitToWidth(true);
             buttonScroll.setFitToHeight(true);
             primaryStage.setScene(new Scene(buttonScroll));
@@ -63,21 +73,20 @@ public class CreatorBox extends VBox {
     }
 
     private Label createInstructionLabel() {
-        Label instruction = new Label("Please select a Creator: ");
+        Label instruction = new Label("Please select a Character: ");
         instruction.setTextFill(Color.web("#ffffffff"));
         instruction.setFont(Font.font("Fantasy", FontWeight.BOLD, 15));
         return instruction;
     }
 
-    private void alertNoComic(List<Creator> CreatorNoComics) {
+    private void alertNoComic(List<MarvelObject> characterNoComics) {
         Alert charHasNoComics = new Alert(Alert.AlertType.INFORMATION);
-        charHasNoComics.setTitle("Creators with no comics found");
+        charHasNoComics.setTitle("Some Characters have no comics");
         StringBuilder noComicsAlertText = new StringBuilder();
-        noComicsAlertText.append("The following creators exist in Marvel's database, however are not " +
-                "associated with any comics: ");
-        for (Creator CreatorNoComic : CreatorNoComics) {
+        noComicsAlertText.append("The following Marvel characters exist but have no comics: ");
+        for (MarvelObject characterNoComic : characterNoComics) {
             noComicsAlertText.append("\n");
-            noComicsAlertText.append(CreatorNoComic.getName());
+            noComicsAlertText.append(characterNoComic.getName());
         }
         charHasNoComics.setContentText(noComicsAlertText.toString());
         charHasNoComics.showAndWait();
@@ -85,14 +94,14 @@ public class CreatorBox extends VBox {
 
     private void createButtons(Stage primaryStage, String SearchTerm) {
         ComicBox comicBox = new ComicBox();
-        for (int i = 0; i < CreatorList.size(); i++) {
-            if (CreatorList.get(i).hasComics()) {
-                Button creatorButton = new Button(CreatorList.get(i).getName());
+        for (int i = 0; i < marvelObjectList.size(); i++) {
+            if (marvelObjectList.get(i).hasComics()) {
+                Button characterButton = new Button(marvelObjectList.get(i).getName());
                 int finalI = i;
-                creatorButton.setOnMouseClicked(event -> comicBox.comicBooks(CreatorList.get(finalI), primaryStage, SearchTerm));
-                getChildren().add(creatorButton);
+                characterButton.setOnMouseClicked(event -> comicBox.comicBooks(marvelObjectList.get(finalI), primaryStage, SearchTerm));
+                getChildren().add(characterButton);
             } else {
-                CreatorNoComics.add(CreatorList.get(i));
+                noComicList.add(marvelObjectList.get(i));
             }
         }
     }

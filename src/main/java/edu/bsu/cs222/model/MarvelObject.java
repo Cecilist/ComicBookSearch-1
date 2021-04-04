@@ -7,5 +7,7 @@ public abstract class MarvelObject {
     public abstract String getId();
 
     public abstract int getComicsTotal();
+
+    public abstract boolean hasComics();
 }
 

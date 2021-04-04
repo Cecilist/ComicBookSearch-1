@@ -27,7 +27,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Superhero extends MarvelObject {
+public class Character extends MarvelObject {
     private String name;
     private String id;
     private String description;
@@ -35,36 +35,36 @@ public class Superhero extends MarvelObject {
     private int comicsTotal;
 
 
-    public List<Superhero> buildSuperheros(JSONArray characterData) throws IOException {
-        MarvelSearchParser superheroParser = new MarvelSearchParser();
-        if (superheroParser.doesCharExist(characterData)) {
-            List<Superhero> superheros = new ArrayList<>();
-            List<String> ids = superheroParser.getInformation(characterData, "id");
-            List<String> names = superheroParser.getInformation(characterData, "name");
-            List<String> descriptions = superheroParser.getInformation(characterData, "description");
-            List<String> thumbnailURLs = superheroParser.getInformation(characterData, "thumbnail.path");
-            List<String> comicTotals = superheroParser.getInformation(characterData, "comics.available");
+    public List<Character> buildCharacters(JSONArray characterData) throws IOException {
+        MarvelSearchParser characterParser = new MarvelSearchParser();
+        if (characterParser.doesCharExist(characterData)) {
+            List<Character> characters = new ArrayList<>();
+            List<String> ids = characterParser.getInformation(characterData, "id");
+            List<String> names = characterParser.getInformation(characterData, "name");
+            List<String> descriptions = characterParser.getInformation(characterData, "description");
+            List<String> thumbnailURLs = characterParser.getInformation(characterData, "thumbnail.path");
+            List<String> comicTotals = characterParser.getInformation(characterData, "comics.available");
             for (int i = 0; i < ids.size(); i++) {
-                Superhero newSuperhero = new Superhero();
-                newSuperhero.id = (ids.get(i));
-                newSuperhero.name = (names.get(i));
-                newSuperhero.description = (descriptions.get(i));
-                newSuperhero.thumbnailURL = new URL(thumbnailURLs.get(i) + "/portrait_medium.jpg");
-                newSuperhero.comicsTotal = Integer.parseInt(comicTotals.get(i));
-                superheros.add(newSuperhero);
+                Character newCharacter = new Character();
+                newCharacter.id = (ids.get(i));
+                newCharacter.name = (names.get(i));
+                newCharacter.description = (descriptions.get(i));
+                newCharacter.thumbnailURL = new URL(thumbnailURLs.get(i) + "/portrait_medium.jpg");
+                newCharacter.comicsTotal = Integer.parseInt(comicTotals.get(i));
+                characters.add(newCharacter);
             }
-            return superheros;
+            return characters;
         } else {
-            throw new IOException("Bad Superhero Name");
+            throw new IOException("Bad Character Name");
         }
     }
 
-    public List<Superhero> createSuperhero(String searchterm,String superheroName) {
-        List<Superhero> superheros = new ArrayList<>();
+    public List<Character> createCharacter(String searchterm, String characterName) {
+        List<Character> characters = new ArrayList<>();
         try {
-            String encodedSuperheroName = URLEncoder.encode(superheroName, StandardCharsets.UTF_8.toString());
+            String encodedCharacterName = URLEncoder.encode(characterName, StandardCharsets.UTF_8.toString());
             MarvelSearchConnection dataStream = new MarvelSearchConnection();
-            superheros = buildSuperheros(dataStream.MarvelSearchConnector(searchterm,encodedSuperheroName));
+            characters = buildCharacters(dataStream.MarvelSearchConnector(searchterm, encodedCharacterName));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -77,7 +77,7 @@ public class Superhero extends MarvelObject {
 
         }
 
-        return superheros;
+        return characters;
     }
 
     public String getName() {

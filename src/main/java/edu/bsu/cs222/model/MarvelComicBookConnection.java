@@ -32,7 +32,7 @@ public class MarvelComicBookConnection {
         URL url = new URL(urlString);
         URLConnection connection = url.openConnection();
         connection.setRequestProperty("User-Agent",
-                "Superhero Search/0.1.2 (http://www.cs.bsu.edu/~pvg/courses/cs222Sp21; lnrowe@bsu.edu)");
+                "Character Search/0.1.2 (http://www.cs.bsu.edu/~pvg/courses/cs222Sp21; lnrowe@bsu.edu)");
         return JsonPath.read(connection.getInputStream(), "*");
     }
 

@@ -56,8 +56,8 @@ public class ComicBox extends VBox {
     public void showComics(List<ComicBook> comicBooks) {
         VBox resultsBox = new VBox();
         if (selected instanceof Character) {
-            SuperheroDetailBox superDetails = new SuperheroDetailBox();
-            superDetails.showSuperheroDetails((Character) selected);
+            CharacterDetailBox superDetails = new CharacterDetailBox();
+            superDetails.showCharacterDetails((Character) selected);
             resultsBox.getChildren().add(superDetails);
         } else {
             CreatorDetailBox creatorDetails = new CreatorDetailBox();

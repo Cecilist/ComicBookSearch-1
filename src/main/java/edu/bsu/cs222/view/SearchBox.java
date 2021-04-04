@@ -32,7 +32,7 @@ import javafx.stage.Stage;
 
 
 public class SearchBox extends VBox {
-    public void createStage(Stage primaryStage, String searchTerm, boolean isSuperhero) {
+    public void createStage(Stage primaryStage, String searchTerm, boolean isCharacter) {
         primaryStage primarystage = new primaryStage();
         primarystage.primaryStageEdit(primaryStage, 300, 400, " Search");
         VBox searchBox = createSearchBox();
@@ -40,7 +40,7 @@ public class SearchBox extends VBox {
         Label SearchLabel = createSearchLabel(searchTerm);
         searchTerm = searchTerm + "s";
         TextField searchBar = createSearchBar();
-        Button searchButton = createSearchButton(searchTerm, isSuperhero, searchBar, primaryStage);
+        Button searchButton = createSearchButton(searchTerm, isCharacter, searchBar, primaryStage);
         searchButton.setDefaultButton(true);
         Button backButton = backButton(primaryStage);
         searchBox.getChildren().addAll(titleLabel, SearchLabel, searchBar, searchButton, backButton);
@@ -81,16 +81,15 @@ public class SearchBox extends VBox {
         return searchBar;
     }
 
-    private Button createSearchButton(String searchTerm, boolean isSuperhero, TextField articleName, Stage primaryStage) {
+    private Button createSearchButton(String searchTerm, boolean isCharacter, TextField articleName, Stage primaryStage) {
         Button searchButton = new Button("Search");
         searchButton.setOnAction(event -> {
-            if (isSuperhero) {
-                HeroBox heroView = new HeroBox();
-                heroView.pickSuperhero(searchTerm,articleName.getText(), primaryStage);
-            }
-            else {
-                CreatorBox CreatorBox = new CreatorBox();
-                CreatorBox.pickCreator(searchTerm,articleName.getText(), primaryStage);
+            if (isCharacter) {
+                SearchSelectionBox heroView = new SearchSelectionBox();
+                heroView.pickSearchOption(searchTerm, articleName.getText(), primaryStage);
+            } else {
+                SearchSelectionBox CreatorBox = new SearchSelectionBox();
+                CreatorBox.pickSearchOption(searchTerm, articleName.getText(), primaryStage);
             }
         });
         return searchButton;
