@@ -31,7 +31,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -66,7 +65,10 @@ public class ComicBox extends VBox {
             resultsBox.getChildren().add(creatorDetails);
         }
         ComicGrid comicPane = new ComicGrid();
-        Platform.runLater(() -> executor.execute(Objects.requireNonNull(runLater(comicPane, comicBooks))));
+        Platform.runLater(() -> {
+            comicPane.createGrid(comicBooks);
+            executor.execute(this::runLater);
+        });
         HBox pageChooser = createPageChooser();
         Label loadingLabel = new Label("Loading comics, Please wait!");
         comicPane.add(loadingLabel, 0, 0, 5, 1);
@@ -78,13 +80,14 @@ public class ComicBox extends VBox {
         primaryStage.show();
     }
 
+
     private HBox createPageChooser() {
         HBox pageChooser = new HBox();
         pageChooser.setAlignment(Pos.CENTER);
         pageChooser.setSpacing(20);
         newSearch();
         pageChooser.getChildren().add(newSearchButton);
-        if (selected.getComicsTotal() > comicPage * 100) {
+        if (isMoreComics()) {
             Label pageNumber = new Label("Page: " + comicPage);
             moreResults();
             if (comicPage != 1) {
@@ -127,11 +130,17 @@ public class ComicBox extends VBox {
         newSearchButton.setDisable(true);
     }
 
-    private Runnable runLater(ComicGrid comicPane, List<ComicBook> comicBooks) {
-        comicPane.createGrid(comicBooks);
-        moreButton.setDisable(false);
+    private Boolean isMoreComics() {
+        return selected.getComicsTotal() > comicPage * 100;
+    }
+
+    private void runLater() {
         newSearchButton.setDisable(false);
-        lessButton.setDisable(false);
-        return null;
+        if (isMoreComics()) {
+            moreButton.setDisable(false);
+        }
+        if (comicPage > 1) {
+            lessButton.setDisable(false);
+        }
     }
 }
