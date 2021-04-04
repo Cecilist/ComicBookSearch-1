@@ -58,7 +58,7 @@ public class Creator extends MarvelObject {
             }
             return Creators;
         } else {
-            throw new IOException("Bad Superhero Name");
+            throw new IOException("Bad Character Name");
         }
     }
 

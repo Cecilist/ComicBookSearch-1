@@ -16,10 +16,10 @@
 
 package edu.bsu.cs222.view;
 
+import edu.bsu.cs222.model.Character;
 import edu.bsu.cs222.model.ComicBook;
 import edu.bsu.cs222.model.Creator;
 import edu.bsu.cs222.model.MarvelObject;
-import edu.bsu.cs222.model.Superhero;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -55,9 +55,9 @@ public class ComicBox extends VBox {
 
     public void showComics(List<ComicBook> comicBooks) {
         VBox resultsBox = new VBox();
-        if (selected instanceof Superhero) {
+        if (selected instanceof Character) {
             SuperheroDetailBox superDetails = new SuperheroDetailBox();
-            superDetails.showSuperheroDetails((Superhero) selected);
+            superDetails.showSuperheroDetails((Character) selected);
             resultsBox.getChildren().add(superDetails);
         } else {
             CreatorDetailBox creatorDetails = new CreatorDetailBox();
