@@ -24,19 +24,19 @@ edu/bsu/cs222/model/MarvelComicBookConnection.java
  edu.bsu.cs222.model.MarvelComicBookConnection
 edu/bsu/cs222/model/MarvelSearchConnection.java
  edu.bsu.cs222.model.MarvelSearchConnection
-edu/bsu/cs222/model/Superhero.java
- edu.bsu.cs222.model.Superhero
-edu/bsu/cs222/view/CreatorDetailBox.java
- edu.bsu.cs222.view.CreatorDetailBox
-edu/bsu/cs222/model/MarvelObject.java
- edu.bsu.cs222.model.MarvelObject
-edu/bsu/cs222/view/SuperheroDetailBox.java
- edu.bsu.cs222.view.SuperheroDetailBox
-edu/bsu/cs222/model/Creator.java
- edu.bsu.cs222.model.Creator
 edu/bsu/cs222/view/ComicBox.java
  edu.bsu.cs222.view.ComicBox
 edu/bsu/cs222/view/HeroBox.java
  edu.bsu.cs222.view.HeroBox
 edu/bsu/cs222/view/CreatorBox.java
  edu.bsu.cs222.view.CreatorBox
+edu/bsu/cs222/view/SuperheroDetailBox.java
+ edu.bsu.cs222.view.SuperheroDetailBox
+edu/bsu/cs222/model/Creator.java
+ edu.bsu.cs222.model.Creator
+edu/bsu/cs222/model/MarvelObject.java
+ edu.bsu.cs222.model.MarvelObject
+edu/bsu/cs222/view/CreatorDetailBox.java
+ edu.bsu.cs222.view.CreatorDetailBox
+edu/bsu/cs222/model/Superhero.java
+ edu.bsu.cs222.model.Superhero
