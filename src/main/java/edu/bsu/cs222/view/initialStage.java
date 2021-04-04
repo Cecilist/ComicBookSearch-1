@@ -63,7 +63,7 @@ public class initialStage extends VBox {
         Button superheroSearchButton = new Button("Superhero Search");
         superheroSearchButton.setOnAction(event -> {
             SearchBox createStage = new SearchBox();
-            createStage.createStage(primaryStage, "Character", true);
+            createStage.createStage(primaryStage, "character", true);
         });
         return superheroSearchButton;
     }
@@ -71,7 +71,7 @@ public class initialStage extends VBox {
         Button superheroSearchButton = new Button("Creator Search");
         superheroSearchButton.setOnAction(event -> {
             SearchBox createStage = new SearchBox();
-            createStage.createStage(primaryStage, "Creator", false);
+            createStage.createStage(primaryStage, "creator", false);
         });
         return superheroSearchButton;
     }
