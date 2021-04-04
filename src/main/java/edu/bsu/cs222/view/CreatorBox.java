@@ -84,7 +84,7 @@ public class CreatorBox extends VBox {
     }
 
     private void createButtons(Stage primaryStage, String SearchTerm) {
-        CreatorComicBox comicBox = new CreatorComicBox();
+        ComicBox comicBox = new ComicBox();
         for (int i = 0; i < CreatorList.size(); i++) {
             if (CreatorList.get(i).hasComics()) {
                 Button creatorButton = new Button(CreatorList.get(i).getName());

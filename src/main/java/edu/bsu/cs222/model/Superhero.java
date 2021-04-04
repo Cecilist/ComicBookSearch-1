@@ -27,7 +27,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Superhero {
+public class Superhero extends MarvelObject {
     private String name;
     private String id;
     private String description;

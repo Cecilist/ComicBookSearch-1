@@ -2,18 +2,18 @@ edu/bsu/cs222/view/ComicBox.java
  edu.bsu.cs222.view.ComicBox
 edu/bsu/cs222/model/MarvelSearchParser.java
  edu.bsu.cs222.model.MarvelSearchParser
-edu/bsu/cs222/view/CharacterDetailBox.java
- edu.bsu.cs222.view.CharacterDetailBox
 edu/bsu/cs222/model/APIKey.java
  edu.bsu.cs222.model.APIKey
 edu/bsu/cs222/view/CreatorBox.java
  edu.bsu.cs222.view.CreatorBox
-edu/bsu/cs222/view/CreatorComicBox.java
- edu.bsu.cs222.view.CreatorComicBox
 edu/bsu/cs222/model/MarvelComicBookDataParser.java
  edu.bsu.cs222.model.MarvelComicBookDataParser
+edu/bsu/cs222/view/SuperheroDetailBox.java
+ edu.bsu.cs222.view.SuperheroDetailBox
 edu/bsu/cs222/model/Creator.java
  edu.bsu.cs222.model.Creator
+edu/bsu/cs222/model/MarvelObject.java
+ edu.bsu.cs222.model.MarvelObject
 edu/bsu/cs222/model/ComicBook.java
  edu.bsu.cs222.model.ComicBook
 edu/bsu/cs222/view/initialStage.java
