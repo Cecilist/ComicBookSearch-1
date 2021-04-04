@@ -32,18 +32,18 @@ import javafx.stage.Stage;
 
 
 public class SearchBox extends VBox {
-    public void createStage(Stage primaryStage, String SearchTerm, boolean isSuperhero) {
+    public void createStage(Stage primaryStage, String searchTerm, boolean isSuperhero) {
         primaryStage primarystage = new primaryStage();
         primarystage.primaryStageEdit(primaryStage, 300, 400, " Search");
         VBox searchBox = createSearchBox();
-        Label titleLabel = createTitleLabel(SearchTerm);
-        Label SearchLabel = createSearchLabel(SearchTerm);
-        SearchTerm = SearchTerm + "s";
+        Label titleLabel = createTitleLabel(searchTerm);
+        Label SearchLabel = createSearchLabel(searchTerm);
+        searchTerm = searchTerm + "s";
         TextField searchBar = createSearchBar();
-        Button searchButton = createSearchButton(SearchTerm,isSuperhero,searchBar, primaryStage);
+        Button searchButton = createSearchButton(searchTerm, isSuperhero, searchBar, primaryStage);
         searchButton.setDefaultButton(true);
         Button backButton = backButton(primaryStage);
-        searchBox.getChildren().addAll(titleLabel,SearchLabel, searchBar, searchButton,backButton);
+        searchBox.getChildren().addAll(titleLabel, SearchLabel, searchBar, searchButton, backButton);
         primaryStage.setScene(new Scene(searchBox));
         primaryStage.show();
     }
@@ -57,15 +57,16 @@ public class SearchBox extends VBox {
         return searchBox;
     }
 
-    private Label createTitleLabel(String SearchTerm) {
-        Label titleLabel = new Label(SearchTerm +" Search");
+    private Label createTitleLabel(String searchTerm) {
+        Label titleLabel = new Label(searchTerm + " Search");
         titleLabel.setTextFill(Color.web("#ffffffff"));
         titleLabel.setFont(new Font("Fantasy", 30));
         titleLabel.setPadding(new Insets(10, 10, 10, 10));
         return titleLabel;
     }
-    private Label createSearchLabel(String SearchTerm) {
-        Label titleLabel = new Label("Enter the name of a Marvel "+ SearchTerm);
+
+    private Label createSearchLabel(String searchTerm) {
+        Label titleLabel = new Label("Enter the name of a Marvel " + searchTerm);
         titleLabel.setTextFill(Color.web("#ffffffff"));
         titleLabel.setFont(new Font("Fantasy", 12));
         titleLabel.setPadding(new Insets(10, 10, -10, 10));
