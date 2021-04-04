@@ -15,8 +15,8 @@ public class CharacterTest {
 
     {
         try {
-            charData = JsonPath.read(inputStream, "*");
-            spiderMan = spiderMan.buildSuperheros(charData).get(0);
+            JSONArray charData = JsonPath.read(inputStream, "*");
+            spiderMan = spiderMan.buildCharacters(charData).get(0);
         } catch (IOException e) {
             e.printStackTrace();
         }
