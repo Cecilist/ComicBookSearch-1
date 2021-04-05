@@ -27,13 +27,13 @@ import java.util.List;
 public class ComicGrid extends GridPane {
     public void createGrid(List<ComicBook> comicBooks) {
         final int COMICBOOK_WIDTH = 5;
-        int comicCount = comicBooks.size();
-        int comicNumber = 0;
-        for (int i = 0; i < comicCount; i++)
+        int numOfComics = comicBooks.size();
+        int comicCount = 0;
+        for (int i = 0; i < numOfComics; i++)
             for (int x = 0; x < COMICBOOK_WIDTH; x++) {
-                if (comicNumber < comicCount) {
+                if (comicCount < numOfComics) {
                     Button comicButton = new Button();
-                    ComicBook comicCharacter = comicBooks.get(comicNumber);
+                    ComicBook comicCharacter = comicBooks.get(comicCount);
                     ImageView comicThumbnail = new ImageView(new Image(comicCharacter.getThumbnailURL().toString()));
                     comicButton.setGraphic(comicThumbnail);
                     add(comicButton, x, i);
@@ -41,7 +41,7 @@ public class ComicGrid extends GridPane {
                         ComicDetailStage detailStage = new ComicDetailStage();
                         detailStage.showComicDetail(comicCharacter);
                     });
-                    comicNumber++;
+                    comicCount++;
                 }
             }
     }
