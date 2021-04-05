@@ -83,7 +83,7 @@ public class SearchBox extends VBox {
         RadioButton creatorButton = new RadioButton("Creator");
         characterButton.setTextFill(Color.web("#ffffffff"));
         characterButton.setFont(new Font("Fantasy", 12));
-        characterButton.isSelected();
+        characterButton.setSelected(true);
         characterButton.setToggleGroup(searchTypeGroup);
         characterButton.setUserData("characters");
         creatorButton.setUserData("creators");
