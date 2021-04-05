@@ -19,31 +19,27 @@ package edu.bsu.cs222.view;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
 public class SearchBox extends VBox {
-    public void createStage(Stage primaryStage, String searchTerm) {
+    private ToggleGroup searchTypeGroup;
+
+    public void createStage(Stage primaryStage) {
         PrimaryStage primarystage = new PrimaryStage();
         primarystage.primaryStageEdit(primaryStage, 300, 400, " Search");
         VBox searchBox = createSearchBox();
-        Label titleLabel = createTitleLabel(searchTerm);
-        Label SearchLabel = createSearchLabel(searchTerm);
-        searchTerm = searchTerm + "s";
+        Label titleLabel = createTitleLabel();
+        Label searchLabel = createSearchLabel();
+        HBox searchTypeSelector = creatorSearchTypeSelector();
         TextField searchBar = createSearchBar();
-        Button searchButton = createSearchButton(searchTerm, searchBar, primaryStage);
+        Button searchButton = createSearchButton(searchBar, primaryStage);
         searchButton.setDefaultButton(true);
-        Button backButton = backButton(primaryStage);
-        searchBox.getChildren().addAll(titleLabel, SearchLabel, searchBar, searchButton, backButton);
+        searchBox.getChildren().addAll(titleLabel, searchLabel, searchTypeSelector, searchBar, searchButton);
         primaryStage.setScene(new Scene(searchBox));
         primaryStage.show();
     }
@@ -57,20 +53,20 @@ public class SearchBox extends VBox {
         return searchBox;
     }
 
-    private Label createTitleLabel(String searchTerm) {
-        Label titleLabel = new Label(searchTerm + " Search");
+    private Label createTitleLabel() {
+        Label titleLabel = new Label("Comic Book Search");
         titleLabel.setTextFill(Color.web("#ffffffff"));
         titleLabel.setFont(new Font("Fantasy", 30));
         titleLabel.setPadding(new Insets(10, 10, 10, 10));
         return titleLabel;
     }
 
-    private Label createSearchLabel(String searchTerm) {
-        Label titleLabel = new Label("Enter the name of a Marvel " + searchTerm);
-        titleLabel.setTextFill(Color.web("#ffffffff"));
-        titleLabel.setFont(new Font("Fantasy", 12));
-        titleLabel.setPadding(new Insets(10, 10, -10, 10));
-        return titleLabel;
+    private Label createSearchLabel() {
+        Label searchLabel = new Label("Select a search term and then enter the name below");
+        searchLabel.setTextFill(Color.web("#ffffffff"));
+        searchLabel.setFont(new Font("Fantasy", 12));
+        searchLabel.setPadding(new Insets(10, 10, -10, 10));
+        return searchLabel;
     }
 
 
@@ -81,21 +77,36 @@ public class SearchBox extends VBox {
         return searchBar;
     }
 
-    private Button createSearchButton(String searchTerm, TextField articleName, Stage primaryStage) {
+    private HBox creatorSearchTypeSelector() {
+        searchTypeGroup = new ToggleGroup();
+        RadioButton characterButton = new RadioButton("Character");
+        RadioButton creatorButton = new RadioButton("Creator");
+        characterButton.setTextFill(Color.web("#ffffffff"));
+        characterButton.setFont(new Font("Fantasy", 12));
+        characterButton.setSelected(true);
+        characterButton.setToggleGroup(searchTypeGroup);
+        characterButton.setUserData("characters");
+        creatorButton.setUserData("creators");
+        creatorButton.setToggleGroup(searchTypeGroup);
+        creatorButton.setTextFill(Color.web("#ffffffff"));
+        creatorButton.setFont(new Font("Fantasy", 12));
+        HBox creatorSearchTypeBox = new HBox(characterButton, creatorButton);
+        creatorSearchTypeBox.setAlignment(Pos.CENTER);
+        creatorSearchTypeBox.setSpacing(20);
+        return creatorSearchTypeBox;
+    }
+
+    private Button createSearchButton(TextField articleName, Stage primaryStage) {
         Button searchButton = new Button("Search");
         searchButton.setOnAction(event -> {
             SearchSelectionBox heroView = new SearchSelectionBox();
+            String searchTerm = getSearchTerm();
             heroView.pickSearchOption(searchTerm, articleName.getText(), primaryStage);
         });
         return searchButton;
     }
 
-    private Button backButton(Stage primaryStage) {
-        Button backButton = new Button("Back");
-        backButton.setOnAction(event -> {
-            InitialStage newInitialStage = new InitialStage();
-            newInitialStage.createStage(primaryStage);
-        });
-        return backButton;
+    private String getSearchTerm() {
+        return searchTypeGroup.getSelectedToggle().getUserData().toString();
     }
 }

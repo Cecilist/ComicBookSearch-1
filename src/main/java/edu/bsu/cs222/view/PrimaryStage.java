@@ -25,4 +25,8 @@ public class PrimaryStage {
         primaryStage.setTitle(title);
         primaryStage.centerOnScreen();
     }
+
+    public void refreshStage(Stage primaryStage) {
+        primaryStage.setWidth(primaryStage.getWidth() + 0.0001);
+    }
 }
