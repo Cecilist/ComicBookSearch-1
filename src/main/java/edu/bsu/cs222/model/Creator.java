@@ -27,7 +27,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Creator {
+public class Creator extends MarvelObject {
     private String name;
     private String id;
     private String role;
@@ -58,7 +58,7 @@ public class Creator {
             }
             return Creators;
         } else {
-            throw new IOException("Bad Superhero Name");
+            throw new IOException("Bad Character Name");
         }
     }
 
@@ -67,13 +67,13 @@ public class Creator {
         try {
             String encodedCreatorName = URLEncoder.encode(CreatorName, StandardCharsets.UTF_8.toString());
             MarvelSearchConnection dataStream = new MarvelSearchConnection();
-            Creators = buildCreator(dataStream.MarvelSearchConnector(searchTerm,encodedCreatorName));
+            Creators = buildCreator(dataStream.MarvelSearchConnector(searchTerm, encodedCreatorName));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
             Alert charDoesNotExist = new Alert(Alert.AlertType.ERROR);
-            charDoesNotExist.setTitle(searchTerm +" Does Not Exist!");
-            charDoesNotExist.setContentText("The "+searchTerm +"does not exist, please try again!");
+            charDoesNotExist.setTitle(searchTerm + " Does Not Exist!");
+            charDoesNotExist.setContentText("The " + searchTerm + "does not exist, please try again!");
             charDoesNotExist.showAndWait();
             return null;
 

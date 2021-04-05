@@ -32,18 +32,18 @@ import javafx.stage.Stage;
 
 
 public class SearchBox extends VBox {
-    public void createStage(Stage primaryStage, String SearchTerm, boolean isSuperhero) {
-        primaryStage primarystage = new primaryStage();
+    public void createStage(Stage primaryStage, String searchTerm) {
+        PrimaryStage primarystage = new PrimaryStage();
         primarystage.primaryStageEdit(primaryStage, 300, 400, " Search");
         VBox searchBox = createSearchBox();
-        Label titleLabel = createTitleLabel(SearchTerm);
-        Label SearchLabel = createSearchLabel(SearchTerm);
-        SearchTerm = SearchTerm + "s";
+        Label titleLabel = createTitleLabel(searchTerm);
+        Label SearchLabel = createSearchLabel(searchTerm);
+        searchTerm = searchTerm + "s";
         TextField searchBar = createSearchBar();
-        Button searchButton = createSearchButton(SearchTerm,isSuperhero,searchBar, primaryStage);
+        Button searchButton = createSearchButton(searchTerm, searchBar, primaryStage);
         searchButton.setDefaultButton(true);
         Button backButton = backButton(primaryStage);
-        searchBox.getChildren().addAll(titleLabel,SearchLabel, searchBar, searchButton,backButton);
+        searchBox.getChildren().addAll(titleLabel, SearchLabel, searchBar, searchButton, backButton);
         primaryStage.setScene(new Scene(searchBox));
         primaryStage.show();
     }
@@ -57,15 +57,16 @@ public class SearchBox extends VBox {
         return searchBox;
     }
 
-    private Label createTitleLabel(String SearchTerm) {
-        Label titleLabel = new Label(SearchTerm +" Search");
+    private Label createTitleLabel(String searchTerm) {
+        Label titleLabel = new Label(searchTerm + " Search");
         titleLabel.setTextFill(Color.web("#ffffffff"));
         titleLabel.setFont(new Font("Fantasy", 30));
         titleLabel.setPadding(new Insets(10, 10, 10, 10));
         return titleLabel;
     }
-    private Label createSearchLabel(String SearchTerm) {
-        Label titleLabel = new Label("Enter the name of a Marvel "+ SearchTerm);
+
+    private Label createSearchLabel(String searchTerm) {
+        Label titleLabel = new Label("Enter the name of a Marvel " + searchTerm);
         titleLabel.setTextFill(Color.web("#ffffffff"));
         titleLabel.setFont(new Font("Fantasy", 12));
         titleLabel.setPadding(new Insets(10, 10, -10, 10));
@@ -80,25 +81,20 @@ public class SearchBox extends VBox {
         return searchBar;
     }
 
-    private Button createSearchButton(String searchTerm, boolean isSuperhero, TextField articleName, Stage primaryStage) {
+    private Button createSearchButton(String searchTerm, TextField articleName, Stage primaryStage) {
         Button searchButton = new Button("Search");
         searchButton.setOnAction(event -> {
-            if (isSuperhero) {
-                HeroBox heroView = new HeroBox();
-                heroView.pickSuperhero(searchTerm,articleName.getText(), primaryStage);
-            }
-            else {
-                CreatorBox CreatorBox = new CreatorBox();
-                CreatorBox.pickCreator(searchTerm,articleName.getText(), primaryStage);
-            }
+            SearchSelectionBox heroView = new SearchSelectionBox();
+            heroView.pickSearchOption(searchTerm, articleName.getText(), primaryStage);
         });
         return searchButton;
     }
+
     private Button backButton(Stage primaryStage) {
         Button backButton = new Button("Back");
         backButton.setOnAction(event -> {
-            initialStage newInitialStage = new initialStage();
-            newInitialStage.createStage( primaryStage);
+            InitialStage newInitialStage = new InitialStage();
+            newInitialStage.createStage(primaryStage);
         });
         return backButton;
     }

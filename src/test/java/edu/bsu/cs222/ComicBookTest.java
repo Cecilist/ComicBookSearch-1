@@ -46,8 +46,9 @@ public class ComicBookTest {
         String saleDate = comicBooks.get(2).getFormattedSaleDate();
         Assertions.assertEquals("MARCH 1, 1963", saleDate);
     }
+
     @Test
-    public void getOnSaleDate_WhatIfClassicVol42007_ReturnNull(){
+    public void getOnSaleDate_WhatIfClassicVol42007_ReturnNull() {
         String saleDate = comicBooks.get(0).getFormattedSaleDate();
         Assertions.assertNull(saleDate);
     }

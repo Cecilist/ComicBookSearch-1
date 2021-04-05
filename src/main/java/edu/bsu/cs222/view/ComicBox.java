@@ -16,8 +16,10 @@
 
 package edu.bsu.cs222.view;
 
+import edu.bsu.cs222.model.Character;
 import edu.bsu.cs222.model.ComicBook;
-import edu.bsu.cs222.model.Superhero;
+import edu.bsu.cs222.model.Creator;
+import edu.bsu.cs222.model.MarvelObject;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -29,49 +31,67 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class ComicBox extends VBox {
+    private final Executor executor = Executors.newSingleThreadExecutor();
     private int comicPage = 1;
-    private Superhero selectedHero;
+    private MarvelObject selected;
     private Stage primaryStage;
     private Button newSearchButton;
     private Button moreButton;
     private Button lessButton;
+    private String searchTerm;
 
-    private final Executor executor = Executors.newSingleThreadExecutor();
+    public void comicBooks(MarvelObject selected, Stage primary, String searchTerm) {
+        this.selected = selected;
+        primaryStage = primary;
+        this.searchTerm = searchTerm;
+        ComicBook newComicBook = new ComicBook();
+        List<ComicBook> comicBooks = newComicBook.getComicBookData(selected.getId(), comicPage, searchTerm);
+        showComics(comicBooks);
+    }
 
-    public void showComics(List<ComicBook> comicBooks, String SearchTerm) {
-
+    public void showComics(List<ComicBook> comicBooks) {
         VBox resultsBox = new VBox();
-        CharacterDetailBox superDetails = new CharacterDetailBox();
-        superDetails.showCharacterDetails(selectedHero);
+        if (selected instanceof Character) {
+            CharacterDetailBox superDetails = new CharacterDetailBox();
+            superDetails.showCharacterDetails((Character) selected);
+            resultsBox.getChildren().add(superDetails);
+        } else {
+            CreatorDetailBox creatorDetails = new CreatorDetailBox();
+            creatorDetails.showCreatorDetails((Creator) selected);
+            resultsBox.getChildren().add(creatorDetails);
+        }
         ComicGrid comicPane = new ComicGrid();
-        Platform.runLater(() -> executor.execute(Objects.requireNonNull(runLater(comicPane, comicBooks))));
-        HBox pageChooser = createPageChooser(SearchTerm);
+        Platform.runLater(() -> {
+            comicPane.createGrid(comicBooks);
+            executor.execute(this::runLater);
+        });
+        HBox pageChooser = createPageChooser();
         Label loadingLabel = new Label("Loading comics, Please wait!");
         comicPane.add(loadingLabel, 0, 0, 5, 1);
-        resultsBox.getChildren().addAll(superDetails, pageChooser, comicPane);
+        resultsBox.getChildren().addAll(pageChooser, comicPane);
         ScrollPane scrollPane = new ScrollPane(resultsBox);
-        primaryStage primaryStageEdit = new primaryStage();
-        primaryStageEdit.primaryStageEdit(primaryStage, 600, 600,"comic books");
+        PrimaryStage primaryStageEdit = new PrimaryStage();
+        primaryStageEdit.primaryStageEdit(primaryStage, 600, 600, "comic books");
         primaryStage.setScene(new Scene(scrollPane));
         primaryStage.show();
     }
 
-    private HBox createPageChooser(String SearchTerm) {
+
+    private HBox createPageChooser() {
         HBox pageChooser = new HBox();
         pageChooser.setAlignment(Pos.CENTER);
         pageChooser.setSpacing(20);
         newSearch();
         pageChooser.getChildren().add(newSearchButton);
-        if (selectedHero.getComicsTotal() > comicPage * 100) {
+        if (isMoreComics()) {
             Label pageNumber = new Label("Page: " + comicPage);
-             moreResults(SearchTerm);
+            moreResults();
             if (comicPage != 1) {
-                lessResults(SearchTerm);
+                lessResults();
                 pageChooser.getChildren().addAll(lessButton, pageNumber, moreButton);
             } else {
                 pageChooser.getChildren().addAll(pageNumber, moreButton);
@@ -80,46 +100,47 @@ public class ComicBox extends VBox {
         return pageChooser;
     }
 
-    private void moreResults(String SearchTerm) {
+    private void moreResults() {
         moreButton = new Button("More comics");
 
         moreButton.setOnAction(event -> {
             comicPage += 1;
-            comicBooks(selectedHero, primaryStage, SearchTerm);
+            comicBooks(selected, primaryStage, searchTerm);
         });
         moreButton.setDisable(true);
     }
 
-    private void lessResults(String SearchTerm) {
+    private void lessResults() {
         lessButton = new Button("Less comics");
         lessButton.setOnAction(event -> {
             comicPage -= 1;
             if (comicPage < 1) comicPage = 1;
-            comicBooks(selectedHero, primaryStage, SearchTerm);
+            comicBooks(selected, primaryStage, searchTerm);
         });
         lessButton.setDisable(true);
     }
 
-    public void comicBooks(Superhero superhero, Stage primary, String SearchTerm) {
-        selectedHero = superhero;
-        primaryStage = primary;
-        ComicBook newComicBook = new ComicBook();
-        List<ComicBook> comicBooks = newComicBook.getComicBookData(selectedHero.getId(), comicPage, SearchTerm);
-        showComics(comicBooks, SearchTerm);
-    }
+
     private void newSearch() {
         newSearchButton = new Button("New search");
         newSearchButton.setOnAction(event -> {
-            initialStage newInitialStage = new initialStage();
-            newInitialStage.createStage( primaryStage);
+            InitialStage newInitialStage = new InitialStage();
+            newInitialStage.createStage(primaryStage);
         });
         newSearchButton.setDisable(true);
     }
-    private Runnable runLater(ComicGrid comicPane, List<ComicBook> comicBooks) {
-        comicPane.createGrid(comicBooks);
-        moreButton.setDisable(false);
+
+    private Boolean isMoreComics() {
+        return selected.getComicsTotal() > comicPage * 100;
+    }
+
+    private void runLater() {
         newSearchButton.setDisable(false);
-        lessButton.setDisable(false);
-        return null;
+        if (moreButton != null) {
+            moreButton.setDisable(false);
+        }
+        if (lessButton != null) {
+            lessButton.setDisable(false);
+        }
     }
 }

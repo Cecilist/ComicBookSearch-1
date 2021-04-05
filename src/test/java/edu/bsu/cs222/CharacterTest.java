@@ -1,7 +1,7 @@
 package edu.bsu.cs222;
 
 import com.jayway.jsonpath.JsonPath;
-import edu.bsu.cs222.model.Superhero;
+import edu.bsu.cs222.model.Character;
 import net.minidev.json.JSONArray;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,15 +9,14 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class SuperheroTest {
+public class CharacterTest {
     private final InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("spiderCharacter.json");
-    private JSONArray charData;
-    private Superhero spiderMan = new Superhero();
+    private Character spiderMan = new Character();
 
     {
         try {
-            charData = JsonPath.read(inputStream, "*");
-            spiderMan = spiderMan.buildSuperheros(charData).get(0);
+            JSONArray charData = JsonPath.read(inputStream, "*");
+            spiderMan = spiderMan.buildCharacters(charData).get(0);
         } catch (IOException e) {
             e.printStackTrace();
         }

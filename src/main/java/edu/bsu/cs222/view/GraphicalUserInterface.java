@@ -29,7 +29,7 @@ public class GraphicalUserInterface extends Application {
     @Override
     public void start(Stage primaryStage) {
         BasicConfigurator.configure();
-        initialStage searchView = new initialStage();
+        InitialStage searchView = new InitialStage();
         searchView.createStage(primaryStage);
     }
 

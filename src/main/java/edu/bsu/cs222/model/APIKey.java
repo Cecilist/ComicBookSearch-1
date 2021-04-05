@@ -26,7 +26,6 @@ import java.util.Scanner;
 public class APIKey {
     private String publicKey;
     private String hashKey;
-    private String searchTerm;
 
     public APIKey() {
         File apiFile = new File
@@ -55,11 +54,4 @@ public class APIKey {
         return publicKey;
     }
 
-    public String getSearchTerm() {
-        return searchTerm;
-    }
-
-    public void setSearchTerm(String searchTerm) {
-        this.searchTerm = searchTerm;
-    }
 }

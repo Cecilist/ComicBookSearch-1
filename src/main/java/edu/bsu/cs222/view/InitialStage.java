@@ -29,16 +29,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class initialStage extends VBox {
+public class InitialStage extends VBox {
     public void createStage(Stage primaryStage) {
-        primaryStage primarystage = new primaryStage();
-        primarystage.primaryStageEdit(primaryStage,275,400,"Search Selector");
+        PrimaryStage primarystage = new PrimaryStage();
+        primarystage.primaryStageEdit(primaryStage, 275, 400, "Search Selector");
         VBox searchBox = guiStage();
         Label titleLabel = createTitleLabel();
-        Button superheroSearchButton = createSuperheroSearchButton( primaryStage);
-        Button creatorSearchButton = createCreatorSearchButton( primaryStage);
-        superheroSearchButton.setDefaultButton(true);
-        searchBox.getChildren().addAll(titleLabel, superheroSearchButton,creatorSearchButton);
+        Button characterSearchButton = createCharacterSearchButton(primaryStage);
+        Button creatorSearchButton = createCreatorSearchButton(primaryStage);
+        characterSearchButton.setDefaultButton(true);
+        searchBox.getChildren().addAll(titleLabel, characterSearchButton, creatorSearchButton);
         primaryStage.setScene(new Scene(searchBox));
         primaryStage.show();
     }
@@ -59,20 +59,22 @@ public class initialStage extends VBox {
         titleLabel.setPadding(new Insets(10, 10, 10, 10));
         return titleLabel;
     }
-    private Button createSuperheroSearchButton(Stage primaryStage) {
-        Button superheroSearchButton = new Button("Superhero Search");
-        superheroSearchButton.setOnAction(event -> {
+
+    private Button createCharacterSearchButton(Stage primaryStage) {
+        Button characterSearchButton = new Button("Character Search");
+        characterSearchButton.setOnAction(event -> {
             SearchBox createStage = new SearchBox();
-            createStage.createStage( primaryStage,"character",true);
+            createStage.createStage(primaryStage, "character");
         });
-        return superheroSearchButton;
+        return characterSearchButton;
     }
+
     private Button createCreatorSearchButton(Stage primaryStage) {
-        Button superheroSearchButton = new Button("Creator Search");
-        superheroSearchButton.setOnAction(event -> {
+        Button characterSearchButton = new Button("Creator Search");
+        characterSearchButton.setOnAction(event -> {
             SearchBox createStage = new SearchBox();
-            createStage.createStage( primaryStage,"creator",false);
+            createStage.createStage(primaryStage, "creator");
         });
-        return superheroSearchButton;
+        return characterSearchButton;
     }
 }
