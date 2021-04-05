@@ -24,9 +24,9 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class MarvelComicBookConnection {
-    public JSONArray MarvelComicBookConnector(String SearchTerm,String characterId, int comicPage) throws IOException {
+    public JSONArray MarvelComicBookConnector(String SearchTerm, String characterId, int comicPage) throws IOException {
         APIKey key = new APIKey();
-        String urlString = "https://gateway.marvel.com/v1/public/"+SearchTerm+"/" + characterId +
+        String urlString = "https://gateway.marvel.com/v1/public/" + SearchTerm + "/" + characterId +
                 "/comics?format=comic&formatType=comic&noVariants=true&orderBy=onsaleDate&limit=100&offset=" + (comicPage - 1) * 100 +
                 "&ts=2&apikey=" + key.getPublicKey() + "&hash=" + key.getHashKey();
         URL url = new URL(urlString);

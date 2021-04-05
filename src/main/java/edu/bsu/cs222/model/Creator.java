@@ -67,13 +67,13 @@ public class Creator extends MarvelObject {
         try {
             String encodedCreatorName = URLEncoder.encode(CreatorName, StandardCharsets.UTF_8.toString());
             MarvelSearchConnection dataStream = new MarvelSearchConnection();
-            Creators = buildCreator(dataStream.MarvelSearchConnector(searchTerm,encodedCreatorName));
+            Creators = buildCreator(dataStream.MarvelSearchConnector(searchTerm, encodedCreatorName));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
             Alert charDoesNotExist = new Alert(Alert.AlertType.ERROR);
-            charDoesNotExist.setTitle(searchTerm +" Does Not Exist!");
-            charDoesNotExist.setContentText("The "+searchTerm +"does not exist, please try again!");
+            charDoesNotExist.setTitle(searchTerm + " Does Not Exist!");
+            charDoesNotExist.setContentText("The " + searchTerm + "does not exist, please try again!");
             charDoesNotExist.showAndWait();
             return null;
 

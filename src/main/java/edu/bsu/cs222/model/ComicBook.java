@@ -39,7 +39,7 @@ public class ComicBook {
         MarvelComicBookConnection comicBookStream = new MarvelComicBookConnection();
         List<ComicBook> comicBookList = null;
         try {
-            comicBookList = createComicBooks(comicBookStream.MarvelComicBookConnector(SearchTerm,characterId, comicResultPage));
+            comicBookList = createComicBooks(comicBookStream.MarvelComicBookConnector(SearchTerm, characterId, comicResultPage));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -66,13 +66,13 @@ public class ComicBook {
             List<String> comicCreatorsNames = comicBookParser.getComicCreatorName(comicBookData, i);
             List<String> comicCreatorsRoles = comicBookParser.getComicCreatorRole(comicBookData, i);
             if (comicCreatorsNames.size() > 0)
-            for (int x = 0; x < comicCreatorsNames.size(); x++) {
-                Creator newCreator = new Creator();
-                newCreator.setName(comicCreatorsNames.get(x));
-                newCreator.setRole(comicCreatorsRoles.get(x));
-                newComic.creators.add(newCreator);
+                for (int x = 0; x < comicCreatorsNames.size(); x++) {
+                    Creator newCreator = new Creator();
+                    newCreator.setName(comicCreatorsNames.get(x));
+                    newCreator.setRole(comicCreatorsRoles.get(x));
+                    newComic.creators.add(newCreator);
 
-            }
+                }
             comicBooks.add(newComic);
 
         }
@@ -98,8 +98,8 @@ public class ComicBook {
     }
 
     public String getFormattedSaleDate() {
-        if(onSaleDate != null)
-        return onSaleDate.getMonth() + " " + onSaleDate.getDayOfMonth() + ", " + onSaleDate.getYear();
+        if (onSaleDate != null)
+            return onSaleDate.getMonth() + " " + onSaleDate.getDayOfMonth() + ", " + onSaleDate.getYear();
         else return null;
     }
 

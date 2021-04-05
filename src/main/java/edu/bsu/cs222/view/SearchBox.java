@@ -33,7 +33,7 @@ import javafx.stage.Stage;
 
 public class SearchBox extends VBox {
     public void createStage(Stage primaryStage, String searchTerm) {
-        primaryStage primarystage = new primaryStage();
+        PrimaryStage primarystage = new PrimaryStage();
         primarystage.primaryStageEdit(primaryStage, 300, 400, " Search");
         VBox searchBox = createSearchBox();
         Label titleLabel = createTitleLabel(searchTerm);
@@ -93,8 +93,8 @@ public class SearchBox extends VBox {
     private Button backButton(Stage primaryStage) {
         Button backButton = new Button("Back");
         backButton.setOnAction(event -> {
-            initialStage newInitialStage = new initialStage();
-            newInitialStage.createStage( primaryStage);
+            InitialStage newInitialStage = new InitialStage();
+            newInitialStage.createStage(primaryStage);
         });
         return backButton;
     }

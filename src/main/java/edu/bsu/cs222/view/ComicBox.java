@@ -74,7 +74,7 @@ public class ComicBox extends VBox {
         comicPane.add(loadingLabel, 0, 0, 5, 1);
         resultsBox.getChildren().addAll(pageChooser, comicPane);
         ScrollPane scrollPane = new ScrollPane(resultsBox);
-        primaryStage primaryStageEdit = new primaryStage();
+        PrimaryStage primaryStageEdit = new PrimaryStage();
         primaryStageEdit.primaryStageEdit(primaryStage, 600, 600, "comic books");
         primaryStage.setScene(new Scene(scrollPane));
         primaryStage.show();
@@ -124,7 +124,7 @@ public class ComicBox extends VBox {
     private void newSearch() {
         newSearchButton = new Button("New search");
         newSearchButton.setOnAction(event -> {
-            initialStage newInitialStage = new initialStage();
+            InitialStage newInitialStage = new InitialStage();
             newInitialStage.createStage(primaryStage);
         });
         newSearchButton.setDisable(true);
@@ -136,10 +136,10 @@ public class ComicBox extends VBox {
 
     private void runLater() {
         newSearchButton.setDisable(false);
-        if (isMoreComics()) {
+        if (moreButton != null) {
             moreButton.setDisable(false);
         }
-        if (comicPage > 1) {
+        if (lessButton != null) {
             lessButton.setDisable(false);
         }
     }

@@ -29,9 +29,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class initialStage extends VBox {
+public class InitialStage extends VBox {
     public void createStage(Stage primaryStage) {
-        primaryStage primarystage = new primaryStage();
+        PrimaryStage primarystage = new PrimaryStage();
         primarystage.primaryStageEdit(primaryStage, 275, 400, "Search Selector");
         VBox searchBox = guiStage();
         Label titleLabel = createTitleLabel();
