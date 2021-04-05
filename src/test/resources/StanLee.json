@@ -1,0 +1,336 @@
+{
+  "code": 200,
+  "status": "Ok",
+  "copyright": "© 2021 MARVEL",
+  "attributionText": "Data provided by Marvel. © 2021 MARVEL",
+  "attributionHTML": "<a href=\"http://marvel.com\">Data provided by Marvel. © 2021 MARVEL</a>",
+  "etag": "18e1722f55081363b00dfc9934aa20bec402f993",
+  "data": {
+    "offset": 0,
+    "limit": 20,
+    "total": 1,
+    "count": 1,
+    "results": [
+      {
+        "id": 30,
+        "firstName": "Stan",
+        "middleName": "",
+        "lastName": "Lee",
+        "suffix": "",
+        "fullName": "Stan Lee",
+        "modified": "2020-07-30T17:02:29-0400",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/9/d0/4bc37d9d8f541",
+          "extension": "jpg"
+        },
+        "resourceURI": "http://gateway.marvel.com/v1/public/creators/30",
+        "comics": {
+          "available": 1662,
+          "collectionURI": "http://gateway.marvel.com/v1/public/creators/30/comics",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/90528",
+              "name": "Adventure Into Fear (1970) #1"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/90529",
+              "name": "Adventure Into Fear (1970) #2"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/90530",
+              "name": "Adventure Into Fear (1970) #3"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/90531",
+              "name": "Adventure Into Fear (1970) #4"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/90532",
+              "name": "Adventure Into Fear (1970) #5"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/90533",
+              "name": "Adventure Into Fear (1970) #6"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/90534",
+              "name": "Adventure Into Fear (1970) #7"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/90535",
+              "name": "Adventure Into Fear (1970) #8"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/90536",
+              "name": "Adventure Into Fear (1970) #9"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/4455",
+              "name": "All-New Official Handbook of the Marvel Universe A to Z (2006) #7"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/5373",
+              "name": "All-New Official Handbook of the Marvel Universe A to Z (2006) #11"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/6325",
+              "name": "All-New Official Handbook of the Marvel Universe a to Z: Update (2007) #2"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/53306",
+              "name": "All-New X-Men (Hardcover)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/12555",
+              "name": "All-Winners Comics (1941) #1"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/12566",
+              "name": "All-Winners Comics (1941) #2"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/12568",
+              "name": "All-Winners Comics (1941) #3"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/17722",
+              "name": "Amazing Adult Fantasy (1961) #7"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/17723",
+              "name": "Amazing Adult Fantasy (1961) #8"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/17724",
+              "name": "Amazing Adult Fantasy (1961) #9"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/17717",
+              "name": "Amazing Adult Fantasy (1961) #10"
+            }
+          ],
+          "returned": 20
+        },
+        "series": {
+          "available": 518,
+          "collectionURI": "http://gateway.marvel.com/v1/public/creators/30/series",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/2113",
+              "name": "Adventure Into Fear (1970 - 1975)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/1023",
+              "name": "All-New Official Handbook of the Marvel Universe A to Z (2006)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/1147",
+              "name": "All-New Official Handbook of the Marvel Universe a to Z: Update (2007)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/19988",
+              "name": "All-New X-Men (2015)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/2114",
+              "name": "All-Winners Comics (1941 - 1947)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/3616",
+              "name": "Amazing Adult Fantasy (1961 - 1962)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/3617",
+              "name": "Amazing Adventures (1961)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/2987",
+              "name": "Amazing Fantasy (1962)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/15280",
+              "name": "Amazing Fantasy 15: Spider-Man! (2011 - 2012)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/2707",
+              "name": "AMAZING FANTASY OMNIBUS HC (2007)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/454",
+              "name": "Amazing Spider-Man (1999 - 2013)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/2984",
+              "name": "Amazing Spider-Man Annual (1964 - 2018)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/29345",
+              "name": "Amazing Spider-Man Epic Collection: Cosmic Adventures (2020)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/18084",
+              "name": "Amazing Spider-Man Epic Collection: Cosmic Adventures (2013)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/18316",
+              "name": "Amazing Spider-Man Epic Collection: Ghosts of the Past (2014)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/18146",
+              "name": "Amazing Spider-Man Epic Collection: Great Power (2014)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/30442",
+              "name": "Amazing Spider-Man Epic Collection: Great Power (2020)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/20691",
+              "name": "Amazing Spider-Man Epic Collection: Great Responsibility (2016)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/19263",
+              "name": "Amazing Spider-Man Epic Collection: Round Robin (2015)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/24403",
+              "name": "Amazing Spider-Man Epic Collection: Spider-Man No More (2018)"
+            }
+          ],
+          "returned": 20
+        },
+        "stories": {
+          "available": 3295,
+          "collectionURI": "http://gateway.marvel.com/v1/public/creators/30/stories",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/33",
+              "name": "In this volume, Peter faces some of his greatest challenges and his most harrowing foes such as Doc Ock and the Kingpin. Featuri",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/35",
+              "name": "Telepathic teacher Charles Xavier assembles his first recruits Ñ Cyclops, Angel, Iceman, Beast and Marvel Girl Ñ and trains them",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/64",
+              "name": "Following a team-up with Spider-Man, the Punisher heads to the remote scrap of dirt known as Grand Nixon Island to take down an ",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/107",
+              "name": "This collection gathers the team-ups and battles between Spider-Man and Superman, the Hulk and Batman, and the X-Men and the New",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/207",
+              "name": "This remastered edition collects the first-ever full reprinting of THE FANTASTIC FOUR (Vol. 1) #1-10, including never-before rep",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/223",
+              "name": "Featuring the origin of the wondrous wall-crawler as young Peter Parker leans \"With great power comes great responsibility\", pav",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/224",
+              "name": "In 1940, as America prepared for war, a frail young man volunteered for an experiment that transformed him into the premiere phy",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/225",
+              "name": "In order to save his beloved homeworld of Zenn-La, Norrin Radd sacrificed himself, becoming the herald of Galactus. Upon coming ",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/414",
+              "name": "Included in the volume are \"THIS MAN, THIS MONSTER,\" the story of an anguished Thing; the debut of the Black Panther and Klaw; a",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/483",
+              "name": "Interior #483",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/487",
+              "name": "Interior #487",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/611",
+              "name": "Interior #611",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/613",
+              "name": "Interior #613",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/699",
+              "name": "Interior #699",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/711",
+              "name": "Interior #711",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/713",
+              "name": "Interior #713",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/957",
+              "name": "1 of ?",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/959",
+              "name": "2 of ?",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/961",
+              "name": "3 of ?",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/965",
+              "name": "3 of 6 - Civil War",
+              "type": "interiorStory"
+            }
+          ],
+          "returned": 20
+        },
+        "events": {
+          "available": 3,
+          "collectionURI": "http://gateway.marvel.com/v1/public/creators/30/events",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/events/238",
+              "name": "Civil War"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/events/251",
+              "name": "House of M"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/events/266",
+              "name": "Other - Evolve or Die"
+            }
+          ],
+          "returned": 3
+        },
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/creators/30/stan_lee?utm_campaign=apiRef&utm_source=f68be3ef212bbce1cfefed726396718d"
+          }
+        ]
+      }
+    ]
+  }
+}
