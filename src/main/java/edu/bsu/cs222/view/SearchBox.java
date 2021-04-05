@@ -81,15 +81,11 @@ public class SearchBox extends VBox {
         searchTypeGroup = new ToggleGroup();
         RadioButton characterButton = new RadioButton("Character");
         RadioButton creatorButton = new RadioButton("Creator");
-        characterButton.setTextFill(Color.web("#ffffffff"));
-        characterButton.setFont(new Font("Fantasy", 12));
+        createRadioButton(characterButton);
         characterButton.setSelected(true);
-        characterButton.setToggleGroup(searchTypeGroup);
         characterButton.setUserData("characters");
         creatorButton.setUserData("creators");
-        creatorButton.setToggleGroup(searchTypeGroup);
-        creatorButton.setTextFill(Color.web("#ffffffff"));
-        creatorButton.setFont(new Font("Fantasy", 12));
+        createRadioButton(creatorButton);
         HBox creatorSearchTypeBox = new HBox(characterButton, creatorButton);
         creatorSearchTypeBox.setAlignment(Pos.CENTER);
         creatorSearchTypeBox.setSpacing(20);
@@ -105,7 +101,11 @@ public class SearchBox extends VBox {
         });
         return searchButton;
     }
-
+    private void createRadioButton(RadioButton Button) {
+        Button.setToggleGroup(searchTypeGroup);
+        Button.setTextFill(Color.web("#ffffffff"));
+        Button.setFont(new Font("Fantasy", 12));
+    }
     private String getSearchTerm() {
         return searchTypeGroup.getSelectedToggle().getUserData().toString();
     }

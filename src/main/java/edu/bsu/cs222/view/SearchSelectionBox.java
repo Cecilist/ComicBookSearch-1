@@ -50,10 +50,17 @@ public class SearchSelectionBox extends VBox {
 
         if (searchTerm.equals("characters")) {
             Character newCharacter = new Character();
-            marvelObjectList.addAll(newCharacter.createCharacter(searchTerm, characterName));
+            List<Character> charactersList;
+            charactersList=newCharacter.createCharacter(searchTerm, characterName);
+            if(!charactersList.isEmpty())
+                marvelObjectList.addAll(charactersList);
+
         } else {
             Creator newCreator = new Creator();
-            marvelObjectList.addAll(newCreator.createCreator(searchTerm, characterName));
+            List<Creator> creatorList;
+            creatorList=newCreator.createCreator(searchTerm, characterName);
+            if(!creatorList.isEmpty())
+                marvelObjectList.addAll(creatorList);
         }
 
         if (marvelObjectList != null) {
@@ -61,7 +68,7 @@ public class SearchSelectionBox extends VBox {
             setSpacing(5);
             setAlignment(Pos.CENTER);
             createButtons(searchTerm);
-            if (noComicList.size() != 0) {
+            if (!noComicList.isEmpty()) {
                 alertNoComic(noComicList);
             }
             setBackground(new Background(

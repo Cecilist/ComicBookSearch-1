@@ -23,6 +23,7 @@ import edu.bsu.cs222.model.MarvelObject;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -31,11 +32,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 public class ComicBox extends VBox {
-    private final Executor executor = Executors.newSingleThreadExecutor();
     private int comicPage = 1;
     private MarvelObject selected;
     private Stage primaryStage;
@@ -65,10 +63,7 @@ public class ComicBox extends VBox {
             resultsBox.getChildren().add(creatorDetails);
         }
         ComicGrid comicPane = new ComicGrid();
-        Platform.runLater(() -> {
-            comicPane.createGrid(comicBooks);
-            executor.execute(this::runLater);
-        });
+        Platform.runLater(() -> runLaterDisplayComics(comicBooks, comicPane));
         HBox pageChooser = createPageChooser();
         Label loadingLabel = new Label("Loading comics, Please wait!");
         comicPane.add(loadingLabel, 0, 0, 5, 1);
@@ -78,6 +73,22 @@ public class ComicBox extends VBox {
         primaryStageEdit.primaryStageEdit(primaryStage, 600, 600, "comic books");
         primaryStage.setScene(new Scene(scrollPane));
         primaryStage.show();
+    }
+
+    private void runLaterDisplayComics(List<ComicBook>comicBooks, ComicGrid comicPane) {
+        if (comicBooks.size() != 0){
+            comicPane.createGrid(comicBooks);
+            enableButtons();
+        }else{
+            Alert APIError = new Alert(Alert.AlertType.INFORMATION);
+            APIError.setTitle("API error");
+            APIError.setContentText("No more comic books exist in marvels Api \n Returning to previous page");
+            APIError.showAndWait();
+            comicPage -= 1;
+            if (comicPage < 1) comicPage = 1;
+            comicBooks(selected, primaryStage, searchTerm);
+
+        }
     }
 
 
@@ -134,7 +145,7 @@ public class ComicBox extends VBox {
         return selected.getComicsTotal() > comicPage * 100;
     }
 
-    private void runLater() {
+    private void enableButtons() {
         newSearchButton.setDisable(false);
         if (moreButton != null) {
             moreButton.setDisable(false);
