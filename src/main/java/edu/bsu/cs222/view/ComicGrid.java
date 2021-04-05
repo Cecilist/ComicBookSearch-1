@@ -25,7 +25,7 @@ import javafx.scene.layout.GridPane;
 import java.util.List;
 
 public class ComicGrid extends GridPane {
-    public Runnable createGrid(List<ComicBook> comicBooks) {
+    public void createGrid(List<ComicBook> comicBooks) {
         final int COMICBOOK_WIDTH = 5;
         int numOfComics = comicBooks.size();
         int comicCount = 0;
@@ -44,6 +44,5 @@ public class ComicGrid extends GridPane {
                     comicCount++;
                 }
             }
-        return null;
     }
 }

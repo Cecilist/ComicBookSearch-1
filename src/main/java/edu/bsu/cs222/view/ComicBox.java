@@ -63,21 +63,7 @@ public class ComicBox extends VBox {
             resultsBox.getChildren().add(creatorDetails);
         }
         ComicGrid comicPane = new ComicGrid();
-        Platform.runLater(() -> {
-            if (comicBooks.size() != 0){
-                comicPane.createGrid(comicBooks);
-                runLater();
-            }else{
-                Alert APIError = new Alert(Alert.AlertType.INFORMATION);
-                APIError.setTitle("API error");
-                APIError.setContentText("No more comic books exist in marvels Api \n Returning to previous page");
-                APIError.showAndWait();
-                comicPage -= 1;
-                if (comicPage < 1) comicPage = 1;
-                comicBooks(selected, primaryStage, searchTerm);
-
-            }
-        });
+        Platform.runLater(() -> runLaterDisplayComics(comicBooks, comicPane));
         HBox pageChooser = createPageChooser();
         Label loadingLabel = new Label("Loading comics, Please wait!");
         comicPane.add(loadingLabel, 0, 0, 5, 1);
@@ -87,6 +73,22 @@ public class ComicBox extends VBox {
         primaryStageEdit.primaryStageEdit(primaryStage, 600, 600, "comic books");
         primaryStage.setScene(new Scene(scrollPane));
         primaryStage.show();
+    }
+
+    private void runLaterDisplayComics(List<ComicBook>comicBooks, ComicGrid comicPane) {
+        if (comicBooks.size() != 0){
+            comicPane.createGrid(comicBooks);
+            enableButtons();
+        }else{
+            Alert APIError = new Alert(Alert.AlertType.INFORMATION);
+            APIError.setTitle("API error");
+            APIError.setContentText("No more comic books exist in marvels Api \n Returning to previous page");
+            APIError.showAndWait();
+            comicPage -= 1;
+            if (comicPage < 1) comicPage = 1;
+            comicBooks(selected, primaryStage, searchTerm);
+
+        }
     }
 
 
@@ -143,7 +145,7 @@ public class ComicBox extends VBox {
         return selected.getComicsTotal() > comicPage * 100;
     }
 
-    private void runLater() {
+    private void enableButtons() {
         newSearchButton.setDisable(false);
         if (moreButton != null) {
             moreButton.setDisable(false);
