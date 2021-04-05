@@ -124,8 +124,8 @@ public class ComicBox extends VBox {
     private void newSearch() {
         newSearchButton = new Button("New search");
         newSearchButton.setOnAction(event -> {
-            InitialStage newInitialStage = new InitialStage();
-            newInitialStage.createStage(primaryStage);
+            SearchBox searchBox = new SearchBox();
+            searchBox.createStage(primaryStage);
         });
         newSearchButton.setDisable(true);
     }
