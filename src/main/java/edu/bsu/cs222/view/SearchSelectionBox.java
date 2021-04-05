@@ -41,8 +41,10 @@ import java.util.List;
 public class SearchSelectionBox extends VBox {
     private List<MarvelObject> marvelObjectList;
     private List<MarvelObject> noComicList;
+    private Stage primaryStage;
 
     public void pickSearchOption(String searchTerm, String characterName, Stage primaryStage) {
+        this.primaryStage = primaryStage;
         noComicList = new ArrayList<>();
         marvelObjectList = new ArrayList<>();
 
@@ -58,7 +60,7 @@ public class SearchSelectionBox extends VBox {
             getChildren().add(createInstructionLabel());
             setSpacing(5);
             setAlignment(Pos.CENTER);
-            createButtons(primaryStage, searchTerm);
+            createButtons(searchTerm);
             if (noComicList.size() != 0) {
                 alertNoComic(noComicList);
             }
@@ -69,6 +71,7 @@ public class SearchSelectionBox extends VBox {
             buttonScroll.setFitToHeight(true);
             primaryStage.setScene(new Scene(buttonScroll));
             primaryStage.show();
+            refreshStage();
         }
     }
 
@@ -92,7 +95,7 @@ public class SearchSelectionBox extends VBox {
         charHasNoComics.showAndWait();
     }
 
-    private void createButtons(Stage primaryStage, String SearchTerm) {
+    private void createButtons(String SearchTerm) {
         ComicBox comicBox = new ComicBox();
         for (int i = 0; i < marvelObjectList.size(); i++) {
             if (marvelObjectList.get(i).hasComics()) {
@@ -104,5 +107,9 @@ public class SearchSelectionBox extends VBox {
                 noComicList.add(marvelObjectList.get(i));
             }
         }
+    }
+
+    public void refreshStage() {
+        primaryStage.setWidth(primaryStage.getWidth() + 0.0001);
     }
 }

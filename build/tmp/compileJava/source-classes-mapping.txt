@@ -1,5 +1,5 @@
-edu/bsu/cs222/view/SearchSelectionBox.java
- edu.bsu.cs222.view.SearchSelectionBox
+edu/bsu/cs222/model/Character.java
+ edu.bsu.cs222.model.Character
 edu/bsu/cs222/model/MarvelSearchParser.java
  edu.bsu.cs222.model.MarvelSearchParser
 edu/bsu/cs222/view/CharacterDetailBox.java
@@ -20,17 +20,17 @@ edu/bsu/cs222/model/MarvelSearchConnection.java
  edu.bsu.cs222.model.MarvelSearchConnection
 edu/bsu/cs222/view/ComicGrid.java
  edu.bsu.cs222.view.ComicGrid
-edu/bsu/cs222/view/PrimaryStage.java
- edu.bsu.cs222.view.PrimaryStage
+edu/bsu/cs222/view/GraphicalUserInterface.java
+ edu.bsu.cs222.view.GraphicalUserInterface
 edu/bsu/cs222/view/ComicDetailStage.java
  edu.bsu.cs222.view.ComicDetailStage
 edu/bsu/cs222/view/CreatorDetailBox.java
  edu.bsu.cs222.view.CreatorDetailBox
-edu/bsu/cs222/model/Character.java
- edu.bsu.cs222.model.Character
 edu/bsu/cs222/view/ComicBox.java
  edu.bsu.cs222.view.ComicBox
-edu/bsu/cs222/view/GraphicalUserInterface.java
- edu.bsu.cs222.view.GraphicalUserInterface
 edu/bsu/cs222/view/SearchBox.java
  edu.bsu.cs222.view.SearchBox
+edu/bsu/cs222/view/PrimaryStage.java
+ edu.bsu.cs222.view.PrimaryStage
+edu/bsu/cs222/view/SearchSelectionBox.java
+ edu.bsu.cs222.view.SearchSelectionBox

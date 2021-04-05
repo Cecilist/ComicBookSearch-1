@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.bsu.cs222.ComicBookTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-04-05T02:00:06" hostname="DESKTOP-P4I08IH" time="0.013">
+<testsuite name="edu.bsu.cs222.ComicBookTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-04-05T02:01:28" hostname="DESKTOP-P4I08IH" time="0.011">
   <properties/>
-  <testcase name="getOnSaleDate_TheAmazingSpiderMan_ReturnMarch11963()" classname="edu.bsu.cs222.ComicBookTest" time="0.006"/>
+  <testcase name="getOnSaleDate_TheAmazingSpiderMan_ReturnMarch11963()" classname="edu.bsu.cs222.ComicBookTest" time="0.005"/>
   <testcase name="getCreatorName_TheAmazingSpiderMan_ReturnSolBrodsky()" classname="edu.bsu.cs222.ComicBookTest" time="0.0"/>
   <testcase name="getOnSaleDate_WhatIfClassicVol42007_ReturnNull()" classname="edu.bsu.cs222.ComicBookTest" time="0.001"/>
   <testcase name="getDescription_TheAmazingSpiderMan_ReturnDescription()" classname="edu.bsu.cs222.ComicBookTest" time="0.001"/>
