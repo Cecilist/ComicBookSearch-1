@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.bsu.cs222.ComicBookTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-03-25T02:59:02" hostname="DESKTOP-P4I08IH" time="0.015">
+<testsuite name="edu.bsu.cs222.ComicBookTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-04-05T01:42:08" hostname="DESKTOP-P4I08IH" time="0.012">
   <properties/>
-  <testcase name="getOnSaleDateTest()" classname="edu.bsu.cs222.ComicBookTest" time="0.015"/>
+  <testcase name="getOnSaleDate_TheAmazingSpiderMan_ReturnMarch11963()" classname="edu.bsu.cs222.ComicBookTest" time="0.006"/>
+  <testcase name="getCreatorName_TheAmazingSpiderMan_ReturnSolBrodsky()" classname="edu.bsu.cs222.ComicBookTest" time="0.001"/>
+  <testcase name="getOnSaleDate_WhatIfClassicVol42007_ReturnNull()" classname="edu.bsu.cs222.ComicBookTest" time="0.001"/>
+  <testcase name="getDescription_TheAmazingSpiderMan_ReturnDescription()" classname="edu.bsu.cs222.ComicBookTest" time="0.001"/>
+  <testcase name="getTitle_TheAmazingSpiderMan_ReturnTheAmazingSpiderMan()" classname="edu.bsu.cs222.ComicBookTest" time="0.0"/>
+  <testcase name="getCreatorRole_TheAmazingSpiderMan_ReturnInker()" classname="edu.bsu.cs222.ComicBookTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[log4j:WARN No appenders could be found for logger (com.jayway.jsonpath.internal.path.CompiledPath).
-log4j:WARN Please initialize the log4j system properly.
-log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
-java.time.format.DateTimeParseException: Text '-0001-11-30T00:00:00-0500' could not be parsed: Invalid value for YearOfEra (valid values 1 - 999999999/1000000000): -1
-]]></system-err>
+  <system-err><![CDATA[]]></system-err>
 </testsuite>

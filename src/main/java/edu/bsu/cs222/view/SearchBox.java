@@ -92,7 +92,7 @@ public class SearchBox extends VBox {
         creatorButton.setFont(new Font("Fantasy", 12));
         HBox creatorSearchTypeBox = new HBox(characterButton, creatorButton);
         creatorSearchTypeBox.setAlignment(Pos.CENTER);
-        creatorSearchTypeBox.setSpacing(10);
+        creatorSearchTypeBox.setSpacing(20);
         return creatorSearchTypeBox;
     }
 
