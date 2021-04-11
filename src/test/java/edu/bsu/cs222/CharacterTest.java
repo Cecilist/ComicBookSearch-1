@@ -4,22 +4,26 @@ import com.jayway.jsonpath.JsonPath;
 import edu.bsu.cs222.model.Character;
 import net.minidev.json.JSONArray;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 public class CharacterTest {
-    private final InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("spiderCharacter.json");
-    private Character spiderMan = new Character();
+    private Character spiderMan;
 
-    {
+    @BeforeEach
+    public void testSetup(){
+        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("spiderCharacter.json");
+        spiderMan= new Character();
         try {
             JSONArray charData = JsonPath.read(inputStream, "*");
             spiderMan = spiderMan.buildCharacters(charData).get(0);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     @Test
