@@ -13,6 +13,7 @@ public class CreatorTest {
     private final InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("StanLee.json");
     private Creator stanLee = new Creator();
 
+
     {
         try {
             JSONArray charData = JsonPath.read(inputStream, "*");

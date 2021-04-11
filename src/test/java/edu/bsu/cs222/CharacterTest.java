@@ -14,7 +14,7 @@ public class CharacterTest {
     private Character spiderMan;
 
     @BeforeEach
-    public void testSetup(){
+    public void setup(){
         InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("spiderCharacter.json");
         spiderMan= new Character();
         try {

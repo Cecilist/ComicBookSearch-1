@@ -15,7 +15,7 @@ public class ComicBookTest {
     private List<ComicBook> comicBooks;
 
     @BeforeEach
-    public void testSetup() {
+    public void setup() {
         InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("spider.json");
         JSONArray comicData = null;
         try {
