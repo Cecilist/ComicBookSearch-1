@@ -27,7 +27,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Creator extends MarvelObject {
+public class Creator implements MarvelObject {
     private String name;
     private String id;
     private String role;

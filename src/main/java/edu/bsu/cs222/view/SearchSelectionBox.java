@@ -52,18 +52,18 @@ public class SearchSelectionBox extends VBox {
             Character newCharacter = new Character();
             List<Character> charactersList;
             charactersList=newCharacter.createCharacter(searchTerm, characterName);
-            if(!charactersList.isEmpty())
+            if(charactersList!=null)
                 marvelObjectList.addAll(charactersList);
 
         } else {
             Creator newCreator = new Creator();
             List<Creator> creatorList;
             creatorList=newCreator.createCreator(searchTerm, characterName);
-            if(!creatorList.isEmpty())
+            if(creatorList !=null)
                 marvelObjectList.addAll(creatorList);
         }
 
-        if (marvelObjectList != null) {
+        if (marvelObjectList.size() != 0) {
             getChildren().add(createInstructionLabel());
             setSpacing(5);
             setAlignment(Pos.CENTER);
