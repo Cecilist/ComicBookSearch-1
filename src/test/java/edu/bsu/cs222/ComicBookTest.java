@@ -4,7 +4,7 @@ import com.jayway.jsonpath.JsonPath;
 import edu.bsu.cs222.model.ComicBook;
 import net.minidev.json.JSONArray;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -12,10 +12,10 @@ import java.io.InputStream;
 import java.util.List;
 
 public class ComicBookTest {
-    public static List<ComicBook> comicBooks;
+    private List<ComicBook> comicBooks;
 
-    @BeforeAll
-    public static void testSetup() {
+    @BeforeEach
+    public void testSetup() {
         InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("spider.json");
         JSONArray comicData = null;
         try {
