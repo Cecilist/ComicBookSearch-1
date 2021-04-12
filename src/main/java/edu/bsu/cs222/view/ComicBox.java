@@ -16,10 +16,8 @@
 
 package edu.bsu.cs222.view;
 
+import edu.bsu.cs222.model.*;
 import edu.bsu.cs222.model.Character;
-import edu.bsu.cs222.model.ComicBook;
-import edu.bsu.cs222.model.Creator;
-import edu.bsu.cs222.model.MarvelObject;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -31,6 +29,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 public class ComicBox extends VBox {
@@ -46,9 +45,20 @@ public class ComicBox extends VBox {
         this.selected = selected;
         primaryStage = primary;
         this.searchTerm = searchTerm;
-        ComicBook newComicBook = new ComicBook();
-        List<ComicBook> comicBooks = newComicBook.getComicBookData(selected.getId(), comicPage, searchTerm);
+        MarvelComicBookDataParser comicBookDataParser = new MarvelComicBookDataParser();
+        List<ComicBook> comicBooks = null;
+        try {
+            comicBooks = comicBookDataParser.retrieveComicBookData(selected.getId(), comicPage, searchTerm);
+        } catch (MalformedURLException e) {
+            showURLError();
+        }
         showComics(comicBooks);
+    }
+    private void showURLError(){
+        Alert URLError = new Alert(Alert.AlertType.ERROR);
+        URLError.setTitle("URL ERROR");
+        URLError.setContentText("There was an error with the URL");
+        URLError.showAndWait();
     }
 
     public void showComics(List<ComicBook> comicBooks) {

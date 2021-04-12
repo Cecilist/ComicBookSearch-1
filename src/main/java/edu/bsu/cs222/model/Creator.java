@@ -67,7 +67,8 @@ public class Creator implements MarvelObject {
         try {
             String encodedCreatorName = URLEncoder.encode(CreatorName, StandardCharsets.UTF_8.toString());
             MarvelSearchConnection dataStream = new MarvelSearchConnection();
-            Creators = buildCreator(dataStream.MarvelSearchConnector(searchTerm, encodedCreatorName));
+            dataStream.setSearchType("CREATOR");
+            Creators = buildCreator(dataStream.MarvelSearchConnector(encodedCreatorName));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {

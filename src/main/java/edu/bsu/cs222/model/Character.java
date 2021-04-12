@@ -64,7 +64,7 @@ public class Character implements MarvelObject {
         try {
             String encodedCharacterName = URLEncoder.encode(characterName, StandardCharsets.UTF_8.toString());
             MarvelSearchConnection dataStream = new MarvelSearchConnection();
-            characters = buildCharacters(dataStream.MarvelSearchConnector(searchterm, encodedCharacterName));
+            characters = buildCharacters(dataStream.MarvelSearchConnector(encodedCharacterName));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {

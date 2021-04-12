@@ -83,8 +83,8 @@ public class SearchBox extends VBox {
         RadioButton creatorButton = new RadioButton("Creator");
         createRadioButton(characterButton);
         characterButton.setSelected(true);
-        characterButton.setUserData("characters");
-        creatorButton.setUserData("creators");
+        characterButton.setUserData("CHARACTER");
+        creatorButton.setUserData("CREATOR");
         createRadioButton(creatorButton);
         HBox creatorSearchTypeBox = new HBox(characterButton, creatorButton);
         creatorSearchTypeBox.setAlignment(Pos.CENTER);
