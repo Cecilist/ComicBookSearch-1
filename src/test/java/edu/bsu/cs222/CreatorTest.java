@@ -19,7 +19,7 @@ public class CreatorTest {
         InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("StanLee.json");
         try {
             JSONArray charData = JsonPath.read(inputStream, "*");
-            MarvelSearchParser searchParser=new MarvelSearchParser();
+            MarvelSearchParser searchParser = new MarvelSearchParser();
             searchParser.setCharacterData(charData);
             stanLee = searchParser.buildCreators().get(0);
         } catch (IOException e) {

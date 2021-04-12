@@ -20,7 +20,7 @@ public class CharacterTest {
         spiderMan = new Character();
         try {
             JSONArray charData = JsonPath.read(inputStream, "*");
-            MarvelSearchParser searchParser= new MarvelSearchParser();
+            MarvelSearchParser searchParser = new MarvelSearchParser();
             searchParser.setCharacterData(charData);
             spiderMan = searchParser.buildCharacters().get(0);
         } catch (IOException e) {

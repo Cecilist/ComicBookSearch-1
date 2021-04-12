@@ -56,7 +56,7 @@ public class MarvelSearchParser {
         return creators;
     }
 
-    public List<Character>  retrieveCharacterData(String characterName) throws IOException {
+    public List<Character> retrieveCharacterData(String characterName) throws IOException {
         String encodedCharacterName = URLEncoder.encode(characterName, StandardCharsets.UTF_8.toString());
         MarvelSearchConnection dataStream = new MarvelSearchConnection();
         dataStream.setSearchType("CHARACTERS");
@@ -95,7 +95,7 @@ public class MarvelSearchParser {
         this.index = index;
     }
 
-    public void setCharacterData(JSONArray characterData){
-        this.characterData=characterData;
+    public void setCharacterData(JSONArray characterData) {
+        this.characterData = characterData;
     }
 }
