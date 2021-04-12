@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class CharacterTest {
+public class CharacterParserTest {
     private Character spiderMan;
 
     @BeforeEach

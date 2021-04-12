@@ -13,7 +13,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.util.List;
 
-public class ComicBookTest {
+public class ComicBookParserTest {
     ComicBook comicBook;
 
     @BeforeEach
