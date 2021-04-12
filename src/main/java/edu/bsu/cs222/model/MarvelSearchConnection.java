@@ -28,8 +28,7 @@ public class MarvelSearchConnection {
 
 
     public JSONArray MarvelSearchConnector(String characterName) throws IOException {
-        if(searchType == null)
-        {
+        if (searchType == null) {
             throw new IOException("You must first set the search term");
         }
         APIKey key = new APIKey();
@@ -42,7 +41,7 @@ public class MarvelSearchConnection {
         return JsonPath.read(connection.getInputStream(), "*");
     }
 
-    public void setSearchType(String searchTerm){
+    public void setSearchType(String searchTerm) {
         searchType = SearchType.valueOf(searchTerm);
     }
 

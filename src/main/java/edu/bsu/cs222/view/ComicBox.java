@@ -16,8 +16,8 @@
 
 package edu.bsu.cs222.view;
 
-import edu.bsu.cs222.model.*;
 import edu.bsu.cs222.model.Character;
+import edu.bsu.cs222.model.*;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -54,7 +54,8 @@ public class ComicBox extends VBox {
         }
         showComics(comicBooks);
     }
-    private void showURLError(){
+
+    private void showURLError() {
         Alert URLError = new Alert(Alert.AlertType.ERROR);
         URLError.setTitle("URL ERROR");
         URLError.setContentText("There was an error with the URL");
@@ -85,11 +86,11 @@ public class ComicBox extends VBox {
         primaryStage.show();
     }
 
-    private void runLaterDisplayComics(List<ComicBook>comicBooks, ComicGrid comicPane) {
-        if (comicBooks.size() != 0){
+    private void runLaterDisplayComics(List<ComicBook> comicBooks, ComicGrid comicPane) {
+        if (comicBooks.size() != 0) {
             comicPane.createGrid(comicBooks);
             enableButtons();
-        }else{
+        } else {
             Alert APIError = new Alert(Alert.AlertType.INFORMATION);
             APIError.setTitle("API error");
             APIError.setContentText("No more comic books exist in marvels Api \n Returning to previous page");

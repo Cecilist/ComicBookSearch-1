@@ -19,6 +19,7 @@ package edu.bsu.cs222.view;
 import edu.bsu.cs222.model.Character;
 import edu.bsu.cs222.model.Creator;
 import edu.bsu.cs222.model.MarvelObject;
+import edu.bsu.cs222.model.MarvelSearchParser;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -35,6 +36,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,19 +49,26 @@ public class SearchSelectionBox extends VBox {
         this.primaryStage = primaryStage;
         noComicList = new ArrayList<>();
         marvelObjectList = new ArrayList<>();
+        MarvelSearchParser searchParser = new MarvelSearchParser();
 
-        if (searchTerm.equals("characters")) {
-            Character newCharacter = new Character();
-            List<Character> charactersList;
-            charactersList=newCharacter.createCharacter(searchTerm, characterName);
-            if(charactersList!=null)
+        if (searchTerm.equals("CHARACTERS")) {
+            List<Character> charactersList = null;
+            try {
+                charactersList = searchParser.retrieveCharacterData(characterName);
+            } catch (IOException e) {
+                showIOAlert();
+            }
+            if (charactersList != null)
                 marvelObjectList.addAll(charactersList);
 
         } else {
-            Creator newCreator = new Creator();
-            List<Creator> creatorList;
-            creatorList=newCreator.createCreator(searchTerm, characterName);
-            if(creatorList !=null)
+            List<Creator> creatorList = null;
+            try {
+                creatorList = searchParser.retrieveCreatorData(characterName);
+            } catch (IOException e) {
+                showIOAlert();
+            }
+            if (creatorList != null)
                 marvelObjectList.addAll(creatorList);
         }
 
@@ -114,6 +123,13 @@ public class SearchSelectionBox extends VBox {
                 noComicList.add(marvelObjectList.get(i));
             }
         }
+    }
+
+    private void showIOAlert() {
+        Alert IOAlert = new Alert(Alert.AlertType.ERROR);
+        IOAlert.setTitle("IOEXCEPTION");
+        IOAlert.setContentText("There was a problem when getting character or creator data");
+        IOAlert.showAndWait();
     }
 
     public void refreshStage() {

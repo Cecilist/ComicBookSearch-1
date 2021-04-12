@@ -1,17 +1,18 @@
 package edu.bsu.cs222.model;
 
 public enum SearchType {
-    CHARACTER{
+    CHARACTERS {
         @Override
-        public String asLowerCase(){
-            return CHARACTER.toString().toLowerCase();
+        public String asLowerCase() {
+            return CHARACTERS.toString().toLowerCase();
         }
     },
-    CREATOR{
+    CREATORS {
         @Override
-        public String asLowerCase(){
-            return CHARACTER.toString().toLowerCase();
+        public String asLowerCase() {
+            return CREATORS.toString().toLowerCase();
         }
     };
+
     public abstract String asLowerCase();
 }

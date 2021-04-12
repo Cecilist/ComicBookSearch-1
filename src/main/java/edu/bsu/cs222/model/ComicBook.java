@@ -31,20 +31,32 @@ public class ComicBook {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public ArrayList<Creator> getCreators() {
         return creators;
     }
-    public void addCreator(Creator newCreator){
+
+    public void addCreator(Creator newCreator) {
         creators.add(newCreator);
     }
 
     public URL getThumbnailURL() {
         return thumbnailURL;
+    }
+
+    public void setThumbnailURL(URL thumbnailURL) {
+        this.thumbnailURL = thumbnailURL;
     }
 
     public String getFormattedSaleDate() {
@@ -53,20 +65,7 @@ public class ComicBook {
         else return null;
     }
 
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public void setOnSaleDate(LocalDateTime onSaleDate) {
         this.onSaleDate = onSaleDate;
-    }
-
-    public void setThumbnailURL(URL thumbnailURL) {
-        this.thumbnailURL = thumbnailURL;
     }
 }

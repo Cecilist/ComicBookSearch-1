@@ -34,7 +34,7 @@ public class ComicBookTest {
             e.printStackTrace();
         }
         assert comicBooks != null;
-        comicBook=comicBooks.get(2);
+        comicBook = comicBooks.get(2);
     }
 
     @Test

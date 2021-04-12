@@ -25,9 +25,9 @@ import java.net.URLConnection;
 
 public class MarvelComicBookConnection {
     private SearchType searchType;
+
     public JSONArray MarvelComicBookConnector(String characterId, int comicPage) throws IOException {
-        if(searchType == null)
-        {
+        if (searchType == null) {
             throw new IOException("You must first set the search term");
         }
         APIKey key = new APIKey();
@@ -40,7 +40,8 @@ public class MarvelComicBookConnection {
                 "Character Search/0.1.2 (http://www.cs.bsu.edu/~pvg/courses/cs222Sp21; lnrowe@bsu.edu)");
         return JsonPath.read(connection.getInputStream(), "*");
     }
-    public void setSearchType(String searchTerm){
+
+    public void setSearchType(String searchTerm) {
         searchType = SearchType.valueOf(searchTerm);
     }
 

@@ -45,20 +45,21 @@ public class MarvelComicBookDataParser {
         }
         return createComicBooks();
     }
-    public void setMarvelData(JSONArray marvelData){
+
+    public void setMarvelData(JSONArray marvelData) {
         this.marvelData = marvelData;
     }
 
     public List<ComicBook> createComicBooks() throws MalformedURLException {
         List<ComicBook> comicBooks = new ArrayList<>();
-        for(int i=0; i<numOfComics(); i++){
+        for (int i = 0; i < numOfComics(); i++) {
             setIndex(i);
             ComicBook newComic = new ComicBook();
             newComic.setTitle(getComicTitle());
             newComic.setDescription(getComicDescription());
             newComic.setOnSaleDate(getOnSaleDate());
             newComic.setThumbnailURL(getThumbnailURL());
-            for(int x=0; x<numOfCreators(); x++) {
+            for (int x = 0; x < numOfCreators(); x++) {
                 Creator newCreator = new Creator();
                 newCreator.setName((getComicCreatorName(x)));
                 newCreator.setRole(getComicCreatorRole(x));
@@ -69,15 +70,17 @@ public class MarvelComicBookDataParser {
         return comicBooks;
     }
 
-    public int numOfComics(){
+    public int numOfComics() {
         JSONArray total = read(marvelData, "$..['count']");
         return (int) total.get(0);
     }
+
     public int numOfCreators() {
-        JSONArray creators = read(marvelData, "$..['results']["+index+"]['creators']['available']");
+        JSONArray creators = read(marvelData, "$..['results'][" + index + "]['creators']['available']");
         return (int) creators.get(0);
 
     }
+
     public String getComicTitle() {
         JSONArray titles = read(marvelData, "$..['results'][" + index + "]['title']");
         return String.valueOf(titles.get(0));
@@ -94,11 +97,9 @@ public class MarvelComicBookDataParser {
                 (marvelData, "$..['results'][" + index + "]['dates'][0]['date']");
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'-'SSSS");
         LocalDateTime onSaleDate;
-        try{
-            onSaleDate =LocalDateTime.parse(String.valueOf(timestamp.get(0)), dateFormat);
-        }
-        catch(DateTimeException e)
-        {
+        try {
+            onSaleDate = LocalDateTime.parse(String.valueOf(timestamp.get(0)), dateFormat);
+        } catch (DateTimeException e) {
             return null;
         }
         return onSaleDate;
@@ -106,13 +107,13 @@ public class MarvelComicBookDataParser {
     }
 
     public String getComicCreatorName(int creatorIndex) {
-        JSONArray creatorName = read(marvelData, "$..['results'][" + index + "]['creators']['items']["+creatorIndex+"]['name']");
+        JSONArray creatorName = read(marvelData, "$..['results'][" + index + "]['creators']['items'][" + creatorIndex + "]['name']");
 
         return String.valueOf(creatorName.get(0));
     }
 
     public String getComicCreatorRole(int creatorIndex) {
-        JSONArray creatorRole = JsonPath.read(marvelData, "$..['results'][" + index + "]['creators']['items']["+creatorIndex+"]['role']");
+        JSONArray creatorRole = JsonPath.read(marvelData, "$..['results'][" + index + "]['creators']['items'][" + creatorIndex + "]['role']");
         return String.valueOf(creatorRole.get(0));
     }
 
