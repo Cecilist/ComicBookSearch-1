@@ -79,7 +79,7 @@ public class ComicBook {
         this.price = price;
     }
 
-    public boolean isHasDigital() {
+    public boolean isDigital() {
         return hasDigital;
     }
 

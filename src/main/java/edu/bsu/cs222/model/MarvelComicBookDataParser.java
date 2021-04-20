@@ -59,7 +59,8 @@ public class MarvelComicBookDataParser {
             newComic.setDescription(getComicDescription());
             newComic.setOnSaleDate(getOnSaleDate());
             newComic.setThumbnailURL(getThumbnailURL());
-            if (getHasDigital()) {
+            newComic.setHasDigital(getHasDigital());
+            if (newComic.isDigital()) {
                 newComic.setPrice(getDigitalPrice());
             }
             for (int x = 0; x < numOfCreators(); x++) {

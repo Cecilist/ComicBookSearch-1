@@ -18,16 +18,14 @@ package edu.bsu.cs222.view;
 
 import edu.bsu.cs222.model.ComicBook;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -37,32 +35,48 @@ import java.nio.charset.StandardCharsets;
 
 public class ComicDetailStage extends Stage {
     private final GraphicalUserInterface gui = new GraphicalUserInterface();
+    private ComicBook comicSelected;
     public void showComicDetail(ComicBook comicSelected) {
-        HBox comicDetailBox = new HBox();
+        this.comicSelected = comicSelected;
+        HBox comicDescriptionBox = new HBox();
+        VBox comicDetailBox = new VBox();
+        HBox comicButtonBox = new HBox();
         ImageView comicThumbnail = new ImageView(new Image(comicSelected.getThumbnailURL().toString()));
-        StringBuilder creators = new StringBuilder();
-        for (int i = 0; i < comicSelected.getCreators().size(); i++) {
-            creators.append(comicSelected.getCreators().get(i).getCreators());
-        }
-        TextArea comicDescription = new TextArea("Comic Book Title:\n" + comicSelected.getTitle() + "\n" +
-                "On Sale Date: " + comicSelected.getFormattedSaleDate() + "\nDescription: \n" +
-                comicSelected.getDescription() + "\nCreators: \n" + creators);
-        comicDescription.appendText("\nSearch for this comic on eBay!");
-        Button ebayButton = createEbayButton(comicSelected);
-        comicDescription.setWrapText(true);
-        comicDescription.setEditable(false);
-        comicDetailBox.getChildren().addAll(comicThumbnail, comicDescription, ebayButton);
-        if (comicSelected.isHasDigital()) {
-            comicDescription.appendText("\nMarvel App Sale Price: " + comicSelected.getPrice());
+        StringBuilder creators = createCreators();
+        TextArea comicDescription = createComicDescription(creators);
+        Button ebayButton = createEbayButton();
+        comicDescriptionBox.getChildren().addAll(comicThumbnail, comicDescription);
+        comicButtonBox.getChildren().add(ebayButton);
+        comicButtonBox.setAlignment(Pos.CENTER);
+        comicDetailBox.getChildren().addAll(comicDescriptionBox, comicButtonBox);
+        if (comicSelected.isDigital()) {
+            comicDescription.appendText("Marvel App Sale Price: $" + comicSelected.getPrice());
             Button playStore = createMarvelPlayStoreButton();
             Button appStore = createMarvelAppStoreButton();
-            comicDetailBox.getChildren().addAll(playStore, appStore);
+            comicButtonBox.getChildren().addAll(playStore, appStore);
         }
-        comicDetailBox.setBackground(new Background(
+        comicDescription.setBackground(new Background(
                 new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
         Stage comicDetailStage = new Stage();
         comicDetailStage.setScene(new Scene(comicDetailBox));
         comicDetailStage.show();
+    }
+
+    private TextArea createComicDescription(StringBuilder creators) {
+        TextArea comicDescription = new TextArea("Comic Book Title:\n" + comicSelected.getTitle() + "\n" +
+                "On Sale Date: " + comicSelected.getFormattedSaleDate() + "\nDescription: \n" +
+                comicSelected.getDescription() + "\nCreators: \n" + creators);
+        comicDescription.setWrapText(true);
+        comicDescription.setEditable(false);
+        return comicDescription;
+    }
+
+    private StringBuilder createCreators() {
+        StringBuilder creators = new StringBuilder();
+        for (int i = 0; i < comicSelected.getCreators().size(); i++) {
+            creators.append(comicSelected.getCreators().get(i).getCreators());
+        }
+        return creators;
     }
 
     private Button createMarvelPlayStoreButton() {
@@ -89,7 +103,7 @@ public class ComicDetailStage extends Stage {
         return appStore;
     }
 
-    private Button createEbayButton(ComicBook comicSelected) {
+    private Button createEbayButton() {
         Button URLClick = new Button("Find on eBay");
         String encodedTitle = null;
         try {
