@@ -102,9 +102,6 @@ public class ComicBox extends VBox {
             enableButtons();
         } else {
             showAPIError();
-            comicPage -= 1;
-            if (comicPage < 1) comicPage = 1;
-            createComicBooks();
 
         }
     }
@@ -112,7 +109,7 @@ public class ComicBox extends VBox {
     private void showAPIError() {
         Alert APIError = new Alert(Alert.AlertType.INFORMATION);
         APIError.setTitle("API error");
-        APIError.setContentText("No more comic books exist in marvels Api \n Returning to previous page");
+        APIError.setContentText("No comic books exist in marvels Api");
         APIError.showAndWait();
     }
 
