@@ -25,7 +25,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
-public class SearchBox extends VBox {
+public class SearchBox extends HBox {
     private ToggleGroup searchTypeGroup;
 
     public VBox createStage(Stage primaryStage) {
@@ -34,7 +34,7 @@ public class SearchBox extends VBox {
         HBox searchTypeSelector = creatorSearchCategorySelector();
         TextField searchBar = createSearchBar();
         Button searchButton = createSearchButton(searchBar, primaryStage);
-        HBox creatorSearchHBox = new HBox(searchLabel,searchBar, searchButton);
+        HBox creatorSearchHBox = new HBox(searchLabel, searchBar, searchButton);
         searchButton.setDefaultButton(true);
         searchBox.getChildren().addAll( searchTypeSelector,creatorSearchHBox );
         return searchBox;

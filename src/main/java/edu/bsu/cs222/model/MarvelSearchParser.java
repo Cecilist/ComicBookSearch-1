@@ -41,9 +41,6 @@ public class MarvelSearchParser {
         else
             return buildCharacters();
 
-
-
-
     }
 
     public List<MarvelObject> buildCreators() throws MalformedURLException {

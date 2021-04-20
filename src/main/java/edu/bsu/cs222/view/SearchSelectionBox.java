@@ -53,7 +53,7 @@ public class SearchSelectionBox extends VBox {
         if (searchCategory.equals("CHARACTERS")) {
             List<MarvelObject> charactersList = null;
             try {
-                charactersList = searchParser.retrieveData(characterName,searchTerm);
+                charactersList = searchParser.retrieveData(searchTerm, searchCategory);
             } catch (IOException e) {
                 showIOAlert();
             }
@@ -63,7 +63,7 @@ public class SearchSelectionBox extends VBox {
         } else {
             List<MarvelObject> creatorList = null;
             try {
-                creatorList = searchParser.retrieveData(characterName, searchTerm);
+                creatorList = searchParser.retrieveData(searchTerm, searchCategory);
             } catch (IOException e) {
                 showIOAlert();
             }

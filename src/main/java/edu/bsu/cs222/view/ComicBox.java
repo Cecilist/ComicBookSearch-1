@@ -63,10 +63,10 @@ public class ComicBox extends VBox {
     }
 
     public void showComics(List<ComicBook> comicBooks) {
-        VBox resultsBox = new VBox();
+
         SearchBox SearchHBox = new SearchBox();
         VBox HBoxSearchHBox = SearchHBox.createStage(primaryStage);
-        resultsBox.getChildren().add(HBoxSearchHBox);
+        getChildren().add(HBoxSearchHBox);
         if (selected instanceof Character) {
             CharacterDetailBox superDetails = new CharacterDetailBox();
             superDetails.showCharacterDetails((Character) selected);
