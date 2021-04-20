@@ -88,7 +88,9 @@ public class SearchSelectionBox extends VBox {
             primaryStage.setScene(new Scene(buttonScroll));
             primaryStage.show();
             refreshStage();
-        }
+        } else
+            showDoesntExist();
+
     }
 
     private Label createInstructionLabel() {
@@ -130,6 +132,13 @@ public class SearchSelectionBox extends VBox {
         IOAlert.setTitle("IOEXCEPTION");
         IOAlert.setContentText("There was a problem when getting character or creator data");
         IOAlert.showAndWait();
+    }
+
+    private void showDoesntExist() {
+        Alert doesntExist = new Alert(Alert.AlertType.ERROR);
+        doesntExist.setTitle("Not Found");
+        doesntExist.setContentText("The term that you searched for doesn't exist!");
+        doesntExist.showAndWait();
     }
 
     public void refreshStage() {

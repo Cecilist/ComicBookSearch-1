@@ -26,6 +26,8 @@ public class ComicBook {
     private String description;
     private LocalDateTime onSaleDate;
     private URL thumbnailURL;
+    private boolean hasDigital;
+    private double price;
 
     public String getTitle() {
         return title;
@@ -67,5 +69,21 @@ public class ComicBook {
 
     public void setOnSaleDate(LocalDateTime onSaleDate) {
         this.onSaleDate = onSaleDate;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public boolean isHasDigital() {
+        return hasDigital;
+    }
+
+    public void setHasDigital(boolean hasDigital) {
+        this.hasDigital = hasDigital;
     }
 }

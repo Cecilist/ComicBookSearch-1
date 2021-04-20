@@ -59,6 +59,9 @@ public class MarvelComicBookDataParser {
             newComic.setDescription(getComicDescription());
             newComic.setOnSaleDate(getOnSaleDate());
             newComic.setThumbnailURL(getThumbnailURL());
+            if (getHasDigital()) {
+                newComic.setPrice(getDigitalPrice());
+            }
             for (int x = 0; x < numOfCreators(); x++) {
                 Creator newCreator = new Creator();
                 newCreator.setName((getComicCreatorName(x)));
@@ -123,7 +126,19 @@ public class MarvelComicBookDataParser {
         return new URL(thumbnail.get(0) + "/portrait_medium.jpg");
     }
 
+    public boolean getHasDigital() {
+        JSONArray digital = read(marvelData, "$..results[" + index + "].prices[1]");
+        return !digital.isEmpty();
+    }
+
+    public double getDigitalPrice() {
+
+        JSONArray price = read(marvelData, "$..results[" + index + "].prices[1].price");
+        return (double) price.get(0);
+    }
+
     public void setIndex(int index) {
         this.index = index;
     }
 }
+
