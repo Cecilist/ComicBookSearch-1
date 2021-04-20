@@ -31,16 +31,23 @@ public class MarvelSearchParser {
     private JSONArray characterData;
     private int index;
 
-    public List<Creator> retrieveCreatorData(String creatorName) throws IOException {
+    public List<MarvelObject> retrieveData(String creatorName, String searchType) throws IOException {
         String encodedCreatorName = URLEncoder.encode(creatorName, StandardCharsets.UTF_8.toString());
         MarvelSearchConnection dataStream = new MarvelSearchConnection();
-        dataStream.setSearchType("CREATORS");
+        dataStream.setSearchType(searchType);
         characterData = dataStream.MarvelSearchConnector(encodedCreatorName);
-        return buildCreators();
+        if(searchType.equals("CREATORS"))
+            return buildCreators();
+        else
+            return buildCharacters();
+
+
+
+
     }
 
-    public List<Creator> buildCreators() throws MalformedURLException {
-        List<Creator> creators = new ArrayList<>();
+    public List<MarvelObject> buildCreators() throws MalformedURLException {
+        List<MarvelObject> creators = new ArrayList<>();
         for (int i = 0; i < characterCount(); i++) {
             setIndex(i);
             Creator newCreator = new Creator();
@@ -56,16 +63,10 @@ public class MarvelSearchParser {
         return creators;
     }
 
-    public List<Character> retrieveCharacterData(String characterName) throws IOException {
-        String encodedCharacterName = URLEncoder.encode(characterName, StandardCharsets.UTF_8.toString());
-        MarvelSearchConnection dataStream = new MarvelSearchConnection();
-        dataStream.setSearchType("CHARACTERS");
-        characterData = dataStream.MarvelSearchConnector(encodedCharacterName);
-        return buildCharacters();
-    }
 
-    public List<Character> buildCharacters() throws IOException {
-        List<Character> characters = new ArrayList<>();
+
+    public List<MarvelObject> buildCharacters() throws IOException {
+        List<MarvelObject> characters = new ArrayList<>();
         for (int i = 0; i < characterCount(); i++) {
             setIndex(i);
             Character newCharacter = new Character();
