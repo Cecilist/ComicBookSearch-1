@@ -40,6 +40,8 @@ public class ComicBox extends VBox {
     private Button moreButton;
     private Button lessButton;
     private String searchTerm;
+    private final int COMIC_LIMIT = 100;
+
 
     public void comicBooks(MarvelObject selected, Stage primary, String searchCategory) {
         this.selected = selected;
@@ -108,7 +110,7 @@ public class ComicBox extends VBox {
         pageChooser.setSpacing(20);
         newSearch();
         pageChooser.getChildren().add(newSearchButton);
-        if (isMoreComics()) {
+        if (hasMoreComics()) {
             Label pageNumber = new Label("Page: " + comicPage);
             moreResults();
             if (comicPage != 1) {
@@ -151,8 +153,8 @@ public class ComicBox extends VBox {
         newSearchButton.setDisable(true);
     }
 
-    private Boolean isMoreComics() {
-        return selected.getComicsTotal() > comicPage * 100;
+    private Boolean hasMoreComics() {
+        return selected.getComicsTotal() > comicPage * COMIC_LIMIT;
     }
 
     private void enableButtons() {
