@@ -75,7 +75,7 @@ public class ComicBox extends VBox {
             getChildren().add(creatorDetails);
         }
         ComicGrid comicPane = new ComicGrid();
-        Platform.runLater(() -> runLaterDisplayComics(comicBooks, comicPane));
+        Platform.runLater(() -> displayComics(comicBooks, comicPane));
         HBox pageChooser = createPageChooser();
         Label loadingLabel = new Label("Loading comics, Please wait!");
         comicPane.add(loadingLabel, 0, 0, 5, 1);
@@ -87,7 +87,7 @@ public class ComicBox extends VBox {
         primaryStage.show();
     }
 
-    private void runLaterDisplayComics(List<ComicBook> comicBooks, ComicGrid comicPane) {
+    private void displayComics(List<ComicBook> comicBooks, ComicGrid comicPane) {
         if (comicBooks.size() != 0) {
             comicPane.createGrid(comicBooks);
             enableButtons();
