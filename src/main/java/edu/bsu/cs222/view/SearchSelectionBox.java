@@ -16,8 +16,7 @@
 
 package edu.bsu.cs222.view;
 
-import edu.bsu.cs222.model.Character;
-import edu.bsu.cs222.model.Creator;
+
 import edu.bsu.cs222.model.MarvelObject;
 import edu.bsu.cs222.model.MarvelSearchParser;
 import javafx.geometry.Insets;
@@ -52,9 +51,9 @@ public class SearchSelectionBox extends VBox {
         MarvelSearchParser searchParser = new MarvelSearchParser();
 
         if (searchTerm.equals("CHARACTERS")) {
-            List<Character> charactersList = null;
+            List<MarvelObject> charactersList = null;
             try {
-                charactersList = searchParser.retrieveCharacterData(characterName);
+                charactersList = searchParser.retrieveData(characterName,searchTerm);
             } catch (IOException e) {
                 showIOAlert();
             }
@@ -62,9 +61,9 @@ public class SearchSelectionBox extends VBox {
                 marvelObjectList.addAll(charactersList);
 
         } else {
-            List<Creator> creatorList = null;
+            List<MarvelObject> creatorList = null;
             try {
-                creatorList = searchParser.retrieveCreatorData(characterName);
+                creatorList = searchParser.retrieveData(characterName, searchTerm);
             } catch (IOException e) {
                 showIOAlert();
             }
