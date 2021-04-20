@@ -50,34 +50,35 @@ public class SearchSelectionBox extends VBox {
         noComicList = new ArrayList<>();
         marvelObjectList = new ArrayList<>();
         MarvelSearchParser searchParser = new MarvelSearchParser();
-
-
             try {
                 marvelObjectList = searchParser.retrieveData(searchTerm, searchCategory);
             } catch (IOException e) {
                 showIOAlert(e);
             }
-
-
         if (!marvelObjectList.isEmpty()) {
-            getChildren().add(createInstructionLabel());
-            setSpacing(5);
-            setAlignment(Pos.CENTER);
             createButtons(searchCategory);
             if (!noComicList.isEmpty()) {
                 alertNoComic(noComicList);
             }
-            setBackground(new Background(
-                    new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
-            ScrollPane buttonScroll = new ScrollPane(SearchSelectionBox.this);
-            buttonScroll.setFitToWidth(true);
-            buttonScroll.setFitToHeight(true);
-            primaryStage.setScene(new Scene(buttonScroll));
-            primaryStage.show();
-            refreshStage();
+            styleBox();
+
         } else
             showDoesntExist();
 
+    }
+
+    private void styleBox() {
+        getChildren().add(createInstructionLabel());
+        setSpacing(5);
+        setAlignment(Pos.CENTER);
+        setBackground(new Background(
+                new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
+        ScrollPane buttonScroll = new ScrollPane(SearchSelectionBox.this);
+        buttonScroll.setFitToWidth(true);
+        buttonScroll.setFitToHeight(true);
+        primaryStage.setScene(new Scene(buttonScroll));
+        primaryStage.show();
+        refreshStage();
     }
 
     private Label createInstructionLabel() {
