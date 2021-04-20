@@ -2,6 +2,7 @@ package edu.bsu.cs222;
 
 import com.jayway.jsonpath.JsonPath;
 import edu.bsu.cs222.model.Character;
+import edu.bsu.cs222.model.MarvelObject;
 import edu.bsu.cs222.model.MarvelSearchParser;
 import net.minidev.json.JSONArray;
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class CharacterParserTest {
-    private Character spiderMan;
+    private MarvelObject spiderMan;
 
     @BeforeEach
     public void setup() {
@@ -36,7 +37,8 @@ public class CharacterParserTest {
 
     @Test
     void getDescription_SpiderMan_ReturnDescription() {
-        Assertions.assertEquals('B', spiderMan.getDescription().charAt(0));
+        Character charSpiderMan = (Character)spiderMan;
+        Assertions.assertEquals('B', charSpiderMan.getDescription().charAt(0));
     }
 
     @Test

@@ -2,6 +2,7 @@ package edu.bsu.cs222;
 
 import com.jayway.jsonpath.JsonPath;
 import edu.bsu.cs222.model.Creator;
+import edu.bsu.cs222.model.MarvelObject;
 import edu.bsu.cs222.model.MarvelSearchParser;
 import net.minidev.json.JSONArray;
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class CreatorParserTest {
-    private Creator stanLee = new Creator();
+    private MarvelObject stanLee = new Creator();
 
     @BeforeEach
     public void setup() {
