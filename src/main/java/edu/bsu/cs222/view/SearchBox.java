@@ -79,8 +79,8 @@ public class SearchBox extends HBox {
         RadioButton creatorButton = new RadioButton("Creator");
         createRadioButton(characterButton);
         characterButton.setSelected(true);
-        characterButton.setUserData("characters");
-        creatorButton.setUserData("creators");
+        characterButton.setUserData("CHARACTERS");
+        creatorButton.setUserData("CREATORS");
         createRadioButton(creatorButton);
         Label termLabel = createTermLabel();
         HBox creatorSearchTypeBox = new HBox(termLabel,characterButton, creatorButton);
@@ -97,11 +97,13 @@ public class SearchBox extends HBox {
         });
         return searchButton;
     }
+
     private void createRadioButton(RadioButton Button) {
         Button.setToggleGroup(searchTypeGroup);
         Button.setTextFill(Color.web("#ffffffff"));
         Button.setFont(new Font("Fantasy", 12));
     }
+
     private String getSearchTerm() {
         return searchTypeGroup.getSelectedToggle().getUserData().toString();
     }

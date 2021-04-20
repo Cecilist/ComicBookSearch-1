@@ -1,13 +1,14 @@
 package edu.bsu.cs222.model;
 
-public abstract class MarvelObject {
+public interface MarvelObject {
 
-    public abstract String getName();
+    String getName();
 
-    public abstract String getId();
+    String getId();
 
-    public abstract int getComicsTotal();
+    int getComicsTotal();
 
-    public abstract boolean hasComics();
+    boolean hasComics();
 }
+
 
