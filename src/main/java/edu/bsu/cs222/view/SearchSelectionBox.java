@@ -55,8 +55,9 @@ public class SearchSelectionBox extends VBox {
             try {
                 charactersList = searchParser.retrieveData(searchTerm, searchCategory);
             } catch (IOException e) {
-                showIOAlert();
+                showIOAlert(e);
             }
+
             if (charactersList != null)
                 marvelObjectList.addAll(charactersList);
 
@@ -65,7 +66,7 @@ public class SearchSelectionBox extends VBox {
             try {
                 creatorList = searchParser.retrieveData(searchTerm, searchCategory);
             } catch (IOException e) {
-                showIOAlert();
+                showIOAlert(e);
             }
             if (creatorList != null)
                 marvelObjectList.addAll(creatorList);
@@ -126,10 +127,10 @@ public class SearchSelectionBox extends VBox {
         }
     }
 
-    private void showIOAlert() {
+    private void showIOAlert(IOException e) {
         Alert IOAlert = new Alert(Alert.AlertType.ERROR);
         IOAlert.setTitle("IOEXCEPTION");
-        IOAlert.setContentText("There was a problem when getting character or creator data");
+        IOAlert.setContentText(e.toString());
         IOAlert.showAndWait();
     }
 
