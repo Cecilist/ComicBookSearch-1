@@ -36,6 +36,7 @@ import java.nio.charset.StandardCharsets;
 public class ComicDetailStage extends Stage {
     private final GraphicalUserInterface gui = new GraphicalUserInterface();
     private ComicBook comicSelected;
+
     public void showComicDetail(ComicBook comicSelected) {
         this.comicSelected = comicSelected;
         HBox comicDescriptionBox = new HBox();

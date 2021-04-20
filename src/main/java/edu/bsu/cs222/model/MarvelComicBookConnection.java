@@ -24,8 +24,8 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class MarvelComicBookConnection {
-    private SearchType searchType;
     private final String FILE_NAME = "apiInformation.txt";
+    private SearchType searchType;
 
     public JSONArray MarvelComicBookConnector(String characterId, int comicPage) throws IOException {
         if (searchType == null) {
