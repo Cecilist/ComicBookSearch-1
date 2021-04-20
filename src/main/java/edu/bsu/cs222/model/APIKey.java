@@ -16,38 +16,29 @@
 
 package edu.bsu.cs222.model;
 
-import javafx.application.Platform;
-import javafx.scene.control.Alert;
-
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class APIKey {
-    private String publicKey;
-    private String hashKey;
+    private final String PUBLIC_KEY;
+    private final String HASH_KEY;
 
-    public APIKey() {
-        Alert badApi = new Alert(Alert.AlertType.ERROR);
-        badApi.setContentText("Bad API file");
-        try {
-            File apiFile = new File
-                    (Objects.requireNonNull(getClass().getClassLoader().getResource("apiInformation.txt")).getFile());
-            Scanner fileReader = new Scanner(apiFile);
-            publicKey = fileReader.nextLine();
-            hashKey = fileReader.nextLine();
-        } catch (Exception e) {
-            badApi.showAndWait();
-            Platform.exit();
-        }
+    public APIKey(String fileName) throws FileNotFoundException {
+        File apiFile = new File
+                (Objects.requireNonNull(getClass().getClassLoader().getResource(fileName)).getFile());
+        Scanner fileReader = new Scanner(apiFile);
+        PUBLIC_KEY = fileReader.nextLine();
+        HASH_KEY = fileReader.nextLine();
     }
 
-    public String getHashKey() {
-        return hashKey;
+    public String getHASH_KEY() {
+        return HASH_KEY;
     }
 
-    public String getPublicKey() {
-        return publicKey;
+    public String getPUBLIC_KEY() {
+        return PUBLIC_KEY;
     }
 
 }

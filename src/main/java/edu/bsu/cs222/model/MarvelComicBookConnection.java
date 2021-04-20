@@ -25,15 +25,16 @@ import java.net.URLConnection;
 
 public class MarvelComicBookConnection {
     private SearchType searchType;
+    private final String FILE_NAME = "apiInformation.txt";
 
     public JSONArray MarvelComicBookConnector(String characterId, int comicPage) throws IOException {
         if (searchType == null) {
             throw new IOException("You must first set the search term");
         }
-        APIKey key = new APIKey();
+        APIKey key = new APIKey(FILE_NAME);
         String urlString = "https://gateway.marvel.com/v1/public/" + searchType.asLowerCase() + "/" + characterId +
                 "/comics?format=comic&formatType=comic&noVariants=true&orderBy=onsaleDate&limit=100&offset=" + (comicPage - 1) * 100 +
-                "&ts=2&apikey=" + key.getPublicKey() + "&hash=" + key.getHashKey();
+                "&ts=2&apikey=" + key.getPUBLIC_KEY() + "&hash=" + key.getHASH_KEY();
         URL url = new URL(urlString);
         URLConnection connection = url.openConnection();
         connection.setRequestProperty("User-Agent",

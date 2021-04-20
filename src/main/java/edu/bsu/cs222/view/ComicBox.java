@@ -41,14 +41,14 @@ public class ComicBox extends VBox {
     private Button lessButton;
     private String searchTerm;
 
-    public void comicBooks(MarvelObject selected, Stage primary, String searchTerm) {
+    public void comicBooks(MarvelObject selected, Stage primary, String searchCategory) {
         this.selected = selected;
         primaryStage = primary;
-        this.searchTerm = searchTerm;
+        this.searchTerm = searchCategory;
         MarvelComicBookDataParser comicBookDataParser = new MarvelComicBookDataParser();
         List<ComicBook> comicBooks = null;
         try {
-            comicBooks = comicBookDataParser.retrieveComicBookData(selected.getId(), comicPage, searchTerm);
+            comicBooks = comicBookDataParser.retrieveComicBookData(selected.getId(), comicPage, searchCategory);
         } catch (MalformedURLException e) {
             showURLError();
         }
@@ -63,23 +63,22 @@ public class ComicBox extends VBox {
     }
 
     public void showComics(List<ComicBook> comicBooks) {
-        VBox resultsBox = new VBox();
         if (selected instanceof Character) {
             CharacterDetailBox superDetails = new CharacterDetailBox();
             superDetails.showCharacterDetails((Character) selected);
-            resultsBox.getChildren().add(superDetails);
+            getChildren().add(superDetails);
         } else {
             CreatorDetailBox creatorDetails = new CreatorDetailBox();
             creatorDetails.showCreatorDetails((Creator) selected);
-            resultsBox.getChildren().add(creatorDetails);
+            getChildren().add(creatorDetails);
         }
         ComicGrid comicPane = new ComicGrid();
         Platform.runLater(() -> runLaterDisplayComics(comicBooks, comicPane));
         HBox pageChooser = createPageChooser();
         Label loadingLabel = new Label("Loading comics, Please wait!");
         comicPane.add(loadingLabel, 0, 0, 5, 1);
-        resultsBox.getChildren().addAll(pageChooser, comicPane);
-        ScrollPane scrollPane = new ScrollPane(resultsBox);
+        getChildren().addAll(pageChooser, comicPane);
+        ScrollPane scrollPane = new ScrollPane(ComicBox.this);
         PrimaryStage primaryStageEdit = new PrimaryStage();
         primaryStageEdit.primaryStageEdit(primaryStage, 600, 600, "comic books");
         primaryStage.setScene(new Scene(scrollPane));

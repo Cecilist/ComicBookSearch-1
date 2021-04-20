@@ -38,6 +38,16 @@ public class CreatorParserTest {
     }
 
     @Test
+    public void getSeriesTotal_518_ReturnStan_Lee() {
+        Assertions.assertEquals(518, stanLee.getSeriesTotal());
+    }
+
+    @Test
+    public void getStoriesTotal_3295_ReturnStan_Lee() {
+        Assertions.assertEquals(3295, stanLee.getStoriesTotal());
+    }
+
+    @Test
     void getId_30_ReturnID() {
         Assertions.assertEquals("30", stanLee.getId());
     }

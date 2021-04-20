@@ -45,16 +45,16 @@ public class SearchSelectionBox extends VBox {
     private List<MarvelObject> noComicList;
     private Stage primaryStage;
 
-    public void pickSearchOption(String searchTerm, String characterName, Stage primaryStage) {
+    public void pickSearchOption(String searchCategory, String searchTerm, Stage primaryStage) {
         this.primaryStage = primaryStage;
         noComicList = new ArrayList<>();
         marvelObjectList = new ArrayList<>();
         MarvelSearchParser searchParser = new MarvelSearchParser();
 
-        if (searchTerm.equals("CHARACTERS")) {
+        if (searchCategory.equals("CHARACTERS")) {
             List<Character> charactersList = null;
             try {
-                charactersList = searchParser.retrieveCharacterData(characterName);
+                charactersList = searchParser.retrieveCharacterData(searchTerm);
             } catch (IOException e) {
                 showIOAlert();
             }
@@ -64,7 +64,7 @@ public class SearchSelectionBox extends VBox {
         } else {
             List<Creator> creatorList = null;
             try {
-                creatorList = searchParser.retrieveCreatorData(characterName);
+                creatorList = searchParser.retrieveCreatorData(searchTerm);
             } catch (IOException e) {
                 showIOAlert();
             }
@@ -76,7 +76,7 @@ public class SearchSelectionBox extends VBox {
             getChildren().add(createInstructionLabel());
             setSpacing(5);
             setAlignment(Pos.CENTER);
-            createButtons(searchTerm);
+            createButtons(searchCategory);
             if (!noComicList.isEmpty()) {
                 alertNoComic(noComicList);
             }

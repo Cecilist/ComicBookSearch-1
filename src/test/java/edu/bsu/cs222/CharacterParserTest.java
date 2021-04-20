@@ -40,7 +40,19 @@ public class CharacterParserTest {
     }
 
     @Test
-    void getId_SpiderMan_ReturnID() {
+    void getId_1009610_ReturnID() {
         Assertions.assertEquals("1009610", spiderMan.getId());
     }
+
+    @Test
+    void hasComics_True_ReturnTrue() {
+        Assertions.assertTrue(spiderMan.hasComics());
+    }
+
+    @Test
+    void getComicsTotal_3979_ReturnTotal() {
+        Assertions.assertEquals(3979, spiderMan.getComicsTotal());
+    }
+
+
 }

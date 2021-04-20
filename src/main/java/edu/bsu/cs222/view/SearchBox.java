@@ -35,7 +35,7 @@ public class SearchBox extends VBox {
         VBox searchBox = createSearchBox();
         Label titleLabel = createTitleLabel();
         Label searchLabel = createSearchLabel();
-        HBox searchTypeSelector = creatorSearchTypeSelector();
+        HBox searchTypeSelector = creatorSearchCategorySelector();
         TextField searchBar = createSearchBar();
         Button searchButton = createSearchButton(searchBar, primaryStage);
         searchButton.setDefaultButton(true);
@@ -62,7 +62,7 @@ public class SearchBox extends VBox {
     }
 
     private Label createSearchLabel() {
-        Label searchLabel = new Label("Select a search term and then enter the name below");
+        Label searchLabel = new Label("Select a search category and then enter the name below");
         searchLabel.setTextFill(Color.web("#ffffffff"));
         searchLabel.setFont(new Font("Fantasy", 12));
         searchLabel.setPadding(new Insets(10, 10, -10, 10));
@@ -77,7 +77,7 @@ public class SearchBox extends VBox {
         return searchBar;
     }
 
-    private HBox creatorSearchTypeSelector() {
+    private HBox creatorSearchCategorySelector() {
         searchTypeGroup = new ToggleGroup();
         RadioButton characterButton = new RadioButton("Character");
         RadioButton creatorButton = new RadioButton("Creator");
@@ -86,23 +86,24 @@ public class SearchBox extends VBox {
         characterButton.setUserData("CHARACTERS");
         creatorButton.setUserData("CREATORS");
         createRadioButton(creatorButton);
-        HBox creatorSearchTypeBox = new HBox(characterButton, creatorButton);
-        creatorSearchTypeBox.setAlignment(Pos.CENTER);
-        creatorSearchTypeBox.setSpacing(20);
-        return creatorSearchTypeBox;
+        HBox creatorSearchCategoryBox = new HBox(characterButton, creatorButton);
+        creatorSearchCategoryBox.setAlignment(Pos.CENTER);
+        creatorSearchCategoryBox.setSpacing(20);
+        return creatorSearchCategoryBox;
     }
 
-    private Button createSearchButton(TextField articleName, Stage primaryStage) {
+    private Button createSearchButton(TextField searchTerm, Stage primaryStage) {
         Button searchButton = new Button("Search");
         searchButton.setOnAction(event -> {
             SearchSelectionBox heroView = new SearchSelectionBox();
-            String searchTerm = getSearchTerm();
-            heroView.pickSearchOption(searchTerm, articleName.getText(), primaryStage);
+            String searchCategory = getSearchTerm();
+            heroView.pickSearchOption(searchCategory, searchTerm.getText(), primaryStage);
         });
         return searchButton;
     }
 
     private void createRadioButton(RadioButton Button) {
+
         Button.setToggleGroup(searchTypeGroup);
         Button.setTextFill(Color.web("#ffffffff"));
         Button.setFont(new Font("Fantasy", 12));
