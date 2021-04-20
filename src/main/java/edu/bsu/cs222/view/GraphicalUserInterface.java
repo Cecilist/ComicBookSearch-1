@@ -23,6 +23,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -60,11 +61,12 @@ public class GraphicalUserInterface extends Application {
     }
 
     private VBox createResultsBox() {
+        TitledPane selectionPane = new TitledPane("Select Option", selectionBox);
         Label title = createTitleLabel();
         VBox resultsBox = new VBox();
         resultsBox.setAlignment(Pos.CENTER);
         resultsBox.setBackground(new Background(new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
-        resultsBox.getChildren().addAll(title, searchBox, selectionBox, comicBox);
+        resultsBox.getChildren().addAll(title, searchBox, selectionPane, comicBox);
         return resultsBox;
     }
 

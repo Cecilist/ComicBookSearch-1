@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchSelectionBox extends GridPane {
-    private final int BUTTON_COLUMN_WIDTH = 3;
     private final ComicBox comicBox;
     private List<MarvelObject> marvelObjectList;
     private List<MarvelObject> noComicList;
@@ -57,8 +56,9 @@ public class SearchSelectionBox extends GridPane {
         } catch (IOException e) {
             showIOAlert(e);
         }
-        add(createInstructionLabel(), 0, 0, 3, 1);
+
         if (!marvelObjectList.isEmpty()) {
+            add(createInstructionLabel(), 0, 0, 3, 1);
             if (marvelObjectList.size() == 1) {
                 comicBox.setSearchCategory(searchCategory);
                 comicBox.setMarvelObject(marvelObjectList.get(0));
@@ -105,6 +105,7 @@ public class SearchSelectionBox extends GridPane {
 
     private void createButtons(String searchCategory) {
         int comicCount = 0;
+        int BUTTON_COLUMN_WIDTH = 3;
         for (int i = 1; i <= marvelObjectList.size() / BUTTON_COLUMN_WIDTH; i++) {
             for (int x = 0; x < BUTTON_COLUMN_WIDTH; x++) {
                 if (comicCount < marvelObjectList.size()) {
