@@ -19,6 +19,7 @@ package edu.bsu.cs222.view;
 
 import edu.bsu.cs222.model.MarvelObject;
 import edu.bsu.cs222.model.MarvelSearchParser;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -50,29 +51,15 @@ public class SearchSelectionBox extends VBox {
         marvelObjectList = new ArrayList<>();
         MarvelSearchParser searchParser = new MarvelSearchParser();
 
-        if (searchCategory.equals("CHARACTERS")) {
-            List<MarvelObject> charactersList = null;
+
             try {
-                charactersList = searchParser.retrieveData(searchTerm, searchCategory);
+                marvelObjectList = searchParser.retrieveData(searchTerm, searchCategory);
             } catch (IOException e) {
                 showIOAlert(e);
             }
 
-            if (charactersList != null)
-                marvelObjectList.addAll(charactersList);
 
-        } else {
-            List<MarvelObject> creatorList = null;
-            try {
-                creatorList = searchParser.retrieveData(searchTerm, searchCategory);
-            } catch (IOException e) {
-                showIOAlert(e);
-            }
-            if (creatorList != null)
-                marvelObjectList.addAll(creatorList);
-        }
-
-        if (marvelObjectList.size() != 0) {
+        if (!marvelObjectList.isEmpty()) {
             getChildren().add(createInstructionLabel());
             setSpacing(5);
             setAlignment(Pos.CENTER);
@@ -132,6 +119,7 @@ public class SearchSelectionBox extends VBox {
         IOAlert.setTitle("IOEXCEPTION");
         IOAlert.setContentText(e.toString());
         IOAlert.showAndWait();
+        Platform.exit();
     }
 
     private void showDoesntExist() {
