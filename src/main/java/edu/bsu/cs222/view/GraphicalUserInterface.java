@@ -29,8 +29,8 @@ public class GraphicalUserInterface extends Application {
     @Override
     public void start(Stage primaryStage) {
         BasicConfigurator.configure();
-        SearchBox searchBox = new SearchBox();
-        searchBox.createStage(primaryStage);
+        DummieBox searchBox = new DummieBox();
+        searchBox.comicBooks(primaryStage);
     }
 
 

@@ -18,7 +18,6 @@ package edu.bsu.cs222.view;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -26,22 +25,19 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
-public class SearchBox extends VBox {
+public class SearchBox extends HBox {
     private ToggleGroup searchTypeGroup;
 
-    public void createStage(Stage primaryStage) {
-        PrimaryStage primarystage = new PrimaryStage();
-        primarystage.primaryStageEdit(primaryStage, 300, 400, " Search");
+    public VBox createStage(Stage primaryStage) {
         VBox searchBox = createSearchBox();
-        Label titleLabel = createTitleLabel();
         Label searchLabel = createSearchLabel();
         HBox searchTypeSelector = creatorSearchTypeSelector();
         TextField searchBar = createSearchBar();
         Button searchButton = createSearchButton(searchBar, primaryStage);
+        HBox creatorSearchHBox = new HBox(searchLabel,searchBar, searchButton);
         searchButton.setDefaultButton(true);
-        searchBox.getChildren().addAll(titleLabel, searchLabel, searchTypeSelector, searchBar, searchButton);
-        primaryStage.setScene(new Scene(searchBox));
-        primaryStage.show();
+        searchBox.getChildren().addAll( searchTypeSelector,creatorSearchHBox );
+        return searchBox;
     }
 
     private VBox createSearchBox() {
@@ -49,20 +45,20 @@ public class SearchBox extends VBox {
         searchBox.setAlignment(Pos.CENTER);
         searchBox.setBackground(new Background(
                 new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
-        searchBox.setSpacing(20);
+        searchBox.setSpacing(10);
         return searchBox;
     }
 
-    private Label createTitleLabel() {
-        Label titleLabel = new Label("Comic Book Search");
-        titleLabel.setTextFill(Color.web("#ffffffff"));
-        titleLabel.setFont(new Font("Fantasy", 30));
-        titleLabel.setPadding(new Insets(10, 10, 10, 10));
-        return titleLabel;
-    }
 
     private Label createSearchLabel() {
-        Label searchLabel = new Label("Select a search term and then enter the name below");
+        Label searchLabel = new Label("Enter the name:         ");
+        searchLabel.setTextFill(Color.web("#ffffffff"));
+        searchLabel.setFont(new Font("Fantasy", 12));
+        searchLabel.setPadding(new Insets(10, 10, 10, 10));
+        return searchLabel;
+    }
+    private Label createTermLabel() {
+        Label searchLabel = new Label("Select a search Item:");
         searchLabel.setTextFill(Color.web("#ffffffff"));
         searchLabel.setFont(new Font("Fantasy", 12));
         searchLabel.setPadding(new Insets(10, 10, -10, 10));
@@ -72,7 +68,7 @@ public class SearchBox extends VBox {
 
     private TextField createSearchBar() {
         TextField searchBar = new TextField("");
-        searchBar.setMaxWidth(300);
+        searchBar.setMinWidth(200);
         searchBar.setOnMouseClicked(event -> searchBar.clear());
         return searchBar;
     }
@@ -86,9 +82,9 @@ public class SearchBox extends VBox {
         characterButton.setUserData("characters");
         creatorButton.setUserData("creators");
         createRadioButton(creatorButton);
-        HBox creatorSearchTypeBox = new HBox(characterButton, creatorButton);
-        creatorSearchTypeBox.setAlignment(Pos.CENTER);
-        creatorSearchTypeBox.setSpacing(20);
+        Label termLabel = createTermLabel();
+        HBox creatorSearchTypeBox = new HBox(termLabel,characterButton, creatorButton);
+        creatorSearchTypeBox.setSpacing(5);
         return creatorSearchTypeBox;
     }
 
