@@ -36,11 +36,9 @@ public class ComicBox extends VBox {
     private int comicPage = 1;
     private MarvelObject selected;
     private Stage primaryStage;
-    private Button newSearchButton;
     private Button moreButton;
     private Button lessButton;
     private String searchTerm;
-    private final int COMIC_LIMIT = 100;
 
 
     public void comicBooks(MarvelObject selected, Stage primary, String searchCategory) {
@@ -65,6 +63,10 @@ public class ComicBox extends VBox {
     }
 
     public void showComics(List<ComicBook> comicBooks) {
+        VBox resultsBox = new VBox();
+        SearchBox SearchHBox = new SearchBox();
+        VBox HBoxSearchHBox = SearchHBox.createStage(primaryStage);
+        resultsBox.getChildren().add(HBoxSearchHBox);
         if (selected instanceof Character) {
             CharacterDetailBox superDetails = new CharacterDetailBox();
             superDetails.showCharacterDetails((Character) selected);
@@ -108,8 +110,6 @@ public class ComicBox extends VBox {
         HBox pageChooser = new HBox();
         pageChooser.setAlignment(Pos.CENTER);
         pageChooser.setSpacing(20);
-        newSearch();
-        pageChooser.getChildren().add(newSearchButton);
         if (hasMoreComics()) {
             Label pageNumber = new Label("Page: " + comicPage);
             moreResults();
@@ -144,21 +144,13 @@ public class ComicBox extends VBox {
     }
 
 
-    private void newSearch() {
-        newSearchButton = new Button("New search");
-        newSearchButton.setOnAction(event -> {
-            SearchBox searchBox = new SearchBox();
-            searchBox.createStage(primaryStage);
-        });
-        newSearchButton.setDisable(true);
-    }
 
     private Boolean hasMoreComics() {
+        int COMIC_LIMIT = 100;
         return selected.getComicsTotal() > comicPage * COMIC_LIMIT;
     }
 
     private void enableButtons() {
-        newSearchButton.setDisable(false);
         if (moreButton != null) {
             moreButton.setDisable(false);
         }
