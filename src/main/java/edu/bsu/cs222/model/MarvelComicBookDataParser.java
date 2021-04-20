@@ -62,7 +62,7 @@ public class MarvelComicBookDataParser {
             newComic.setThumbnailURL(getThumbnailURL());
             newComic.setHasDigital(getHasDigital());
             if (newComic.isDigital()) {
-                newComic.setPrice(getDigitalPrice());
+                newComic.setPrice((Double) getDigitalPrice());
             }
             for (int x = 0; x < numOfCreators(); x++) {
                 Creator newCreator = new Creator();
@@ -133,10 +133,10 @@ public class MarvelComicBookDataParser {
         return !digital.isEmpty();
     }
 
-    public double getDigitalPrice() {
+    public Object getDigitalPrice() {
 
         JSONArray price = read(marvelData, "$..results[" + index + "].prices[1].price");
-        return (double) price.get(0);
+        return price.get(0);
     }
 
     public void setIndex(int index) {

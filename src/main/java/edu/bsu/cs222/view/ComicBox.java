@@ -20,31 +20,25 @@ import edu.bsu.cs222.model.Character;
 import edu.bsu.cs222.model.*;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.net.MalformedURLException;
 import java.util.List;
 
+
 public class ComicBox extends VBox {
+    private final CreatorDetailBox creatorDetails = new CreatorDetailBox();
     private int comicPage = 1;
     private MarvelObject selected;
-    private Stage primaryStage;
     private Button moreButton;
     private Button lessButton;
-    private String searchTerm;
+    private String searchCategory;
 
-
-    public void comicBooks(MarvelObject selected, Stage primary, String searchCategory) {
-        this.selected = selected;
-        primaryStage = primary;
-        this.searchTerm = searchCategory;
+    public void createComicBooks() {
         MarvelComicBookDataParser comicBookDataParser = new MarvelComicBookDataParser();
         List<ComicBook> comicBooks = null;
         try {
@@ -55,6 +49,14 @@ public class ComicBox extends VBox {
         showComics(comicBooks);
     }
 
+    public void setMarvelObject(MarvelObject selected) {
+        this.selected = selected;
+    }
+
+    public void setSearchCategory(String searchCategory) {
+        this.searchCategory = searchCategory;
+    }
+
     private void showURLError() {
         Alert URLError = new Alert(Alert.AlertType.ERROR);
         URLError.setTitle("URL ERROR");
@@ -63,30 +65,35 @@ public class ComicBox extends VBox {
     }
 
     public void showComics(List<ComicBook> comicBooks) {
+        getChildren().clear();
+        createCharacterDetails();
+        if (comicBooks != null) {
+            ComicGrid comicPane = new ComicGrid();
+            Platform.runLater(() -> displayComics(comicBooks, comicPane));
+            HBox pageChooser = createPageChooser();
+            Label loadingLabel = new Label("Loading comics, Please wait!");
+            comicPane.add(loadingLabel, 0, 0, 5, 1);
+            getChildren().addAll(pageChooser, comicPane);
+        }
 
-        SearchBox SearchHBox = new SearchBox();
-        VBox HBoxSearchHBox = SearchHBox.createStage(primaryStage);
-        getChildren().add(HBoxSearchHBox);
+
+    }
+
+
+    private void createCharacterDetails() {
+        creatorDetails.getChildren().clear();
         if (selected instanceof Character) {
             CharacterDetailBox superDetails = new CharacterDetailBox();
             superDetails.showCharacterDetails((Character) selected);
             getChildren().add(superDetails);
         } else {
-            CreatorDetailBox creatorDetails = new CreatorDetailBox();
             creatorDetails.showCreatorDetails((Creator) selected);
             getChildren().add(creatorDetails);
         }
-        ComicGrid comicPane = new ComicGrid();
-        Platform.runLater(() -> displayComics(comicBooks, comicPane));
-        HBox pageChooser = createPageChooser();
-        Label loadingLabel = new Label("Loading comics, Please wait!");
-        comicPane.add(loadingLabel, 0, 0, 5, 1);
-        getChildren().addAll(pageChooser, comicPane);
-        ScrollPane scrollPane = new ScrollPane(ComicBox.this);
-        PrimaryStage primaryStageEdit = new PrimaryStage();
-        primaryStageEdit.primaryStageEdit(primaryStage, 600, 600, "comic books");
-        primaryStage.setScene(new Scene(scrollPane));
-        primaryStage.show();
+    }
+
+    public void replaceCreatorDescription(String description) {
+        creatorDetails.setCreatorDescription(description);
     }
 
     private void displayComics(List<ComicBook> comicBooks, ComicGrid comicPane) {
@@ -94,15 +101,19 @@ public class ComicBox extends VBox {
             comicPane.createGrid(comicBooks);
             enableButtons();
         } else {
-            Alert APIError = new Alert(Alert.AlertType.INFORMATION);
-            APIError.setTitle("API error");
-            APIError.setContentText("No more comic books exist in marvels Api \n Returning to previous page");
-            APIError.showAndWait();
+            showAPIError();
             comicPage -= 1;
             if (comicPage < 1) comicPage = 1;
-            comicBooks(selected, primaryStage, searchTerm);
+            createComicBooks();
 
         }
+    }
+
+    private void showAPIError() {
+        Alert APIError = new Alert(Alert.AlertType.INFORMATION);
+        APIError.setTitle("API error");
+        APIError.setContentText("No more comic books exist in marvels Api \n Returning to previous page");
+        APIError.showAndWait();
     }
 
 
@@ -128,7 +139,7 @@ public class ComicBox extends VBox {
 
         moreButton.setOnAction(event -> {
             comicPage += 1;
-            comicBooks(selected, primaryStage, searchTerm);
+            createComicBooks();
         });
         moreButton.setDisable(true);
     }
@@ -138,15 +149,14 @@ public class ComicBox extends VBox {
         lessButton.setOnAction(event -> {
             comicPage -= 1;
             if (comicPage < 1) comicPage = 1;
-            comicBooks(selected, primaryStage, searchTerm);
+            createComicBooks();
         });
         lessButton.setDisable(true);
     }
 
 
-
     private Boolean hasMoreComics() {
-        int COMIC_LIMIT = 100;
+        final int COMIC_LIMIT = 100;
         return selected.getComicsTotal() > comicPage * COMIC_LIMIT;
     }
 

@@ -56,12 +56,15 @@ public class CreatorParserTest {
 
     @Test
     public void getSeriesTotal_518_ReturnStan_Lee() {
-        Assertions.assertEquals(518, stanLee.getSeriesTotal());
+
+        Creator stanLeeCreator = (Creator) stanLee;
+        Assertions.assertEquals(518, stanLeeCreator.getSeriesTotal());
     }
 
     @Test
     public void getStoriesTotal_3295_ReturnStan_Lee() {
-        Assertions.assertEquals(3295, stanLee.getStoriesTotal());
+        Creator stanLeeCreator = (Creator) stanLee;
+        Assertions.assertEquals(3295, stanLeeCreator.getStoriesTotal());
     }
 
     @Test

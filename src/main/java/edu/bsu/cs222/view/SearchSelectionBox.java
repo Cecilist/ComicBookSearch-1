@@ -22,63 +22,65 @@ import edu.bsu.cs222.model.MarvelSearchParser;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchSelectionBox extends VBox {
+public class SearchSelectionBox extends GridPane {
+    private final int BUTTON_COLUMN_WIDTH = 3;
+    private final ComicBox comicBox;
     private List<MarvelObject> marvelObjectList;
     private List<MarvelObject> noComicList;
-    private Stage primaryStage;
 
-    public void pickSearchOption(String searchCategory, String searchTerm, Stage primaryStage) {
-        this.primaryStage = primaryStage;
+    public SearchSelectionBox(ComicBox comicBox) {
+        this.comicBox = comicBox;
+    }
+
+    public void pickSearchOption(String searchCategory, String searchTerm) {
+        getChildren().clear();
         noComicList = new ArrayList<>();
         marvelObjectList = new ArrayList<>();
         MarvelSearchParser searchParser = new MarvelSearchParser();
-            try {
-                marvelObjectList = searchParser.retrieveData(searchTerm, searchCategory);
-            } catch (IOException e) {
-                showIOAlert(e);
-            }
+        try {
+            marvelObjectList = searchParser.retrieveData(searchTerm, searchCategory);
+        } catch (IOException e) {
+            showIOAlert(e);
+        }
+        add(createInstructionLabel(), 0, 0, 3, 1);
         if (!marvelObjectList.isEmpty()) {
-            createButtons(searchCategory);
-            if (!noComicList.isEmpty()) {
-                alertNoComic(noComicList);
+            if (marvelObjectList.size() == 1) {
+                comicBox.setSearchCategory(searchCategory);
+                comicBox.setMarvelObject(marvelObjectList.get(0));
+                comicBox.createComicBooks();
+            } else {
+                createButtons(searchCategory);
+                if (!noComicList.isEmpty()) {
+                    alertNoComic(noComicList);
+                }
             }
-            styleBox();
 
         } else
             showDoesntExist();
 
     }
 
-    private void styleBox() {
-        getChildren().add(createInstructionLabel());
-        setSpacing(5);
+    public void styleBox() {
+        setHgap(5);
+        setVgap(5);
         setAlignment(Pos.CENTER);
         setBackground(new Background(
                 new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
-        ScrollPane buttonScroll = new ScrollPane(SearchSelectionBox.this);
-        buttonScroll.setFitToWidth(true);
-        buttonScroll.setFitToHeight(true);
-        primaryStage.setScene(new Scene(buttonScroll));
-        primaryStage.show();
-        refreshStage();
     }
 
     private Label createInstructionLabel() {
@@ -101,18 +103,29 @@ public class SearchSelectionBox extends VBox {
         charHasNoComics.showAndWait();
     }
 
-    private void createButtons(String SearchTerm) {
-        ComicBox comicBox = new ComicBox();
-        for (int i = 0; i < marvelObjectList.size(); i++) {
-            if (marvelObjectList.get(i).hasComics()) {
-                Button characterButton = new Button(marvelObjectList.get(i).getName());
-                int finalI = i;
-                characterButton.setOnMouseClicked(event -> comicBox.comicBooks(marvelObjectList.get(finalI), primaryStage, SearchTerm));
-                getChildren().add(characterButton);
-            } else {
-                noComicList.add(marvelObjectList.get(i));
+    private void createButtons(String searchCategory) {
+        int comicCount = 0;
+        for (int i = 1; i <= marvelObjectList.size() / BUTTON_COLUMN_WIDTH; i++) {
+            for (int x = 0; x < BUTTON_COLUMN_WIDTH; x++) {
+                if (comicCount < marvelObjectList.size()) {
+                    if (marvelObjectList.get(comicCount).hasComics()) {
+                        Button characterButton = new Button(marvelObjectList.get(comicCount).getName());
+                        int finalComicCount = comicCount;
+                        characterButton.setOnMouseClicked(event -> {
+                            comicBox.setSearchCategory(searchCategory);
+                            comicBox.setMarvelObject(marvelObjectList.get(finalComicCount));
+                            comicBox.createComicBooks();
+                        });
+                        add(characterButton, x, i);
+                    } else {
+                        x--;
+                        noComicList.add(marvelObjectList.get(comicCount));
+                    }
+                    comicCount++;
+                }
             }
         }
+
     }
 
     private void showIOAlert(IOException e) {
@@ -128,9 +141,5 @@ public class SearchSelectionBox extends VBox {
         doesntExist.setTitle("Not Found");
         doesntExist.setContentText("The term that you searched for doesn't exist!");
         doesntExist.showAndWait();
-    }
-
-    public void refreshStage() {
-        primaryStage.setWidth(primaryStage.getWidth() + 0.0001);
     }
 }
