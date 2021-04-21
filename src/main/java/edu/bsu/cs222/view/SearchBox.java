@@ -18,6 +18,7 @@
 package edu.bsu.cs222.view;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -93,6 +94,7 @@ public class SearchBox extends VBox {
         Button searchButton = new Button("Search");
         searchButton.setOnAction(event -> {
             String searchCategory = getSearchTerm();
+            selectionBox.setAlignment(Pos.CENTER_LEFT);
             selectionBox.pickSearchOption(searchCategory, searchTerm.getText());
         });
         return searchButton;
