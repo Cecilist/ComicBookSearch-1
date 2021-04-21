@@ -38,15 +38,18 @@ public class ComicBox extends VBox {
     private Button lessButton;
     private String searchCategory;
 
+    private final ComicGrid comicPane = new ComicGrid();
+    private List<ComicBook> comicBooks;
+
     public void createComicBooks() {
         MarvelComicBookDataParser comicBookDataParser = new MarvelComicBookDataParser();
-        List<ComicBook> comicBooks = null;
+        comicBooks = null;
         try {
             comicBooks = comicBookDataParser.retrieveComicBookData(selected.getId(), comicPage, searchCategory);
         } catch (MalformedURLException e) {
             showURLError();
         }
-        showComics(comicBooks);
+        showComics();
     }
 
     public void setMarvelObject(MarvelObject selected) {
@@ -64,12 +67,11 @@ public class ComicBox extends VBox {
         URLError.showAndWait();
     }
 
-    public void showComics(List<ComicBook> comicBooks) {
+    public void showComics() {
         getChildren().clear();
         createCharacterDetails();
         if (comicBooks != null) {
-            ComicGrid comicPane = new ComicGrid();
-            Platform.runLater(() -> displayComics(comicBooks, comicPane));
+            displayComics();
             HBox pageChooser = createPageChooser();
             Label loadingLabel = new Label("Loading comics, Please wait!");
             comicPane.add(loadingLabel, 0, 0, 5, 1);
@@ -78,7 +80,6 @@ public class ComicBox extends VBox {
 
 
     }
-
 
     private void createCharacterDetails() {
         creatorDetails.getChildren().clear();
@@ -96,9 +97,9 @@ public class ComicBox extends VBox {
         creatorDetails.setCreatorDescription(description);
     }
 
-    private void displayComics(List<ComicBook> comicBooks, ComicGrid comicPane) {
+    private void displayComics() {
         if (comicBooks.size() != 0) {
-            comicPane.createGrid(comicBooks);
+            Platform.runLater(() -> comicPane.createGrid(comicBooks));
             enableButtons();
         } else {
             showAPIError();

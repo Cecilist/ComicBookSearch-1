@@ -79,7 +79,7 @@ public class GraphicalUserInterface extends Application {
         }
         comicBox.setMarvelObject(dummyCreator);
         comicBox.setSearchCategory("CREATOR");
-        comicBox.showComics(null);
+        comicBox.showComics();
     }
 
     private void stageSetup() {

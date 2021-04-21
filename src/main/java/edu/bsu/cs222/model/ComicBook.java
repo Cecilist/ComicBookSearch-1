@@ -16,6 +16,8 @@
 
 package edu.bsu.cs222.model;
 
+import javafx.scene.image.Image;
+
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class ComicBook {
     private String description;
     private LocalDateTime onSaleDate;
     private URL thumbnailURL;
+    private Image thumbnail = null;
     private boolean hasDigital;
     private double price;
 
@@ -85,5 +88,13 @@ public class ComicBook {
 
     public void setHasDigital(boolean hasDigital) {
         this.hasDigital = hasDigital;
+    }
+
+    public Image getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(Image thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }
