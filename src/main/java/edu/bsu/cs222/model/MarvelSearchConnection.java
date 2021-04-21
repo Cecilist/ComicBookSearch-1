@@ -26,13 +26,13 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class MarvelSearchConnection {
-    private final String FILE_NAME = "apiInformation.txt";
     private SearchType searchType;
 
     public JSONArray MarvelSearchConnector(String characterName) throws IOException {
         if (searchType == null) {
             throw new IOException("You must first set the search term");
         }
+        String FILE_NAME = "apiInformation.txt";
         APIKey key = new APIKey(FILE_NAME);
         String urlString = "https://gateway.marvel.com/v1/public/" + searchType.asLowerCase() + "?nameStartsWith=" + characterName +
                 "&ts=2&apikey=" + key.getPUBLIC_KEY() + "&hash=" + key.getHASH_KEY();

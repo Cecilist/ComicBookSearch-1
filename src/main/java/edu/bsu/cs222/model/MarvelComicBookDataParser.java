@@ -69,15 +69,19 @@ public class MarvelComicBookDataParser {
             if (newComic.isDigital()) {
                 newComic.setPrice((Double) getDigitalPrice());
             }
-            for (int x = 0; x < numOfCreators(); x++) {
-                Creator newCreator = new Creator();
-                newCreator.setName((getComicCreatorName(x)));
-                newCreator.setRole(getComicCreatorRole(x));
-                newComic.addCreator(newCreator);
-            }
+            addCreators(newComic);
             comicBooks.add(newComic);
         }
         return comicBooks;
+    }
+
+    private void addCreators(ComicBook newComic) {
+        for (int x = 0; x < numOfCreators(); x++) {
+            Creator newCreator = new Creator();
+            newCreator.setName((getComicCreatorName(x)));
+            newCreator.setRole(getComicCreatorRole(x));
+            newComic.addCreator(newCreator);
+        }
     }
 
     public int numOfComics() {

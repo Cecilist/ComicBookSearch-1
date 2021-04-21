@@ -77,8 +77,6 @@ public class ComicBox extends VBox {
             comicPane.add(loadingLabel, 0, 0, 5, 1);
             getChildren().addAll(pageChooser, comicPane);
         }
-
-
     }
 
     private void createCharacterDetails() {

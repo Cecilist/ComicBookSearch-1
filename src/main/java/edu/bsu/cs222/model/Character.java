@@ -19,8 +19,6 @@ package edu.bsu.cs222.model;
 import java.net.URL;
 
 public class Character implements MarvelObject {
-
-
     private String name;
     private String id;
     private String description;

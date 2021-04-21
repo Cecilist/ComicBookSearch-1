@@ -25,13 +25,13 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class MarvelComicBookConnection {
-    private final String FILE_NAME = "apiInformation.txt";
     private SearchType searchType;
 
     public JSONArray MarvelComicBookConnector(String characterId, int comicPage) throws IOException {
         if (searchType == null) {
             throw new IOException("You must first set the search term");
         }
+        String FILE_NAME = "apiInformation.txt";
         APIKey key = new APIKey(FILE_NAME);
         String urlString = "https://gateway.marvel.com/v1/public/" + searchType.asLowerCase() + "/" + characterId +
                 "/comics?format=comic&formatType=comic&noVariants=true&orderBy=onsaleDate&limit=100&offset=" + (comicPage - 1) * 100 +
