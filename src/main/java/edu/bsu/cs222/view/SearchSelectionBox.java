@@ -63,12 +63,12 @@ public class SearchSelectionBox extends GridPane {
     }
 
     private void createChooseButtons(List<MarvelObject> marvelObjectList, String searchCategory) {
-        add(createInstructionLabel(), 0, 0, 3, 1);
         if (marvelObjectList.size() == 1) {
             comicBox.setSearchCategory(searchCategory);
             comicBox.setMarvelObject(marvelObjectList.get(0));
             comicBox.createComicBooks();
         } else {
+            add(createInstructionLabel(), 0, 0, 3, 1);
             createButtons(searchCategory);
         }
         if (!noComicList.isEmpty()) {

@@ -18,7 +18,6 @@ package edu.bsu.cs222.view;
 
 import edu.bsu.cs222.model.Character;
 import edu.bsu.cs222.model.*;
-import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -73,8 +72,6 @@ public class ComicBox extends VBox {
         if (comicBooks != null) {
             displayComics();
             HBox pageChooser = createPageChooser();
-            Label loadingLabel = new Label("Loading comics, Please wait!");
-            comicPane.add(loadingLabel, 0, 0, 5, 1);
             getChildren().addAll(pageChooser, comicPane);
         }
     }
@@ -97,8 +94,7 @@ public class ComicBox extends VBox {
 
     private void displayComics() {
         if (comicBooks.size() != 0) {
-            Platform.runLater(() -> comicPane.createGrid(comicBooks));
-            enableButtons();
+            comicPane.createGrid(comicBooks);
         } else {
             showAPIError();
 
@@ -137,7 +133,7 @@ public class ComicBox extends VBox {
             comicPage += 1;
             createComicBooks();
         });
-        moreButton.setDisable(true);
+
     }
 
     private void lessResults() {
@@ -147,21 +143,12 @@ public class ComicBox extends VBox {
             if (comicPage < 1) comicPage = 1;
             createComicBooks();
         });
-        lessButton.setDisable(true);
+
     }
 
 
     private Boolean hasMoreComics() {
         final int COMIC_LIMIT = 100;
         return selected.getComicsTotal() > comicPage * COMIC_LIMIT;
-    }
-
-    private void enableButtons() {
-        if (moreButton != null) {
-            moreButton.setDisable(false);
-        }
-        if (lessButton != null) {
-            lessButton.setDisable(false);
-        }
     }
 }
