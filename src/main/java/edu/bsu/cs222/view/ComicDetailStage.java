@@ -39,28 +39,24 @@ public class ComicDetailStage extends Stage {
 
     public void showComicDetail(ComicBook comicSelected) {
         this.comicSelected = comicSelected;
-        HBox comicDescriptionBox = new HBox();
-        VBox comicDetailBox = new VBox();
-        HBox comicButtonBox = new HBox();
-        ImageView comicThumbnail = new ImageView(new Image(comicSelected.getThumbnailURL().toString()));
         StringBuilder creators = createCreators();
         TextArea comicDescription = createComicDescription(creators);
-        Button ebayButton = createEbayButton();
-        comicDescriptionBox.getChildren().addAll(comicThumbnail, comicDescription);
-        comicButtonBox.getChildren().add(ebayButton);
-        comicButtonBox.setAlignment(Pos.CENTER);
+        HBox comicDescriptionBox = createComicDescriptionBox(comicDescription);
+        VBox comicDetailBox = new VBox();
+        HBox comicButtonBox = createButtonBox();
         comicDetailBox.getChildren().addAll(comicDescriptionBox, comicButtonBox);
+        createDigitalButtons(comicDescription, comicButtonBox);
+        setScene(new Scene(comicDetailBox));
+        show();
+    }
+
+    private void createDigitalButtons(TextArea comicDescription, HBox comicButtonBox) {
         if (comicSelected.isDigital()) {
             comicDescription.appendText("Marvel App Sale Price: $" + comicSelected.getPrice());
             Button playStore = createMarvelPlayStoreButton();
             Button appStore = createMarvelAppStoreButton();
             comicButtonBox.getChildren().addAll(playStore, appStore);
         }
-        comicDescription.setBackground(new Background(
-                new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
-        Stage comicDetailStage = new Stage();
-        comicDetailStage.setScene(new Scene(comicDetailBox));
-        comicDetailStage.show();
     }
 
     private TextArea createComicDescription(StringBuilder creators) {
@@ -69,7 +65,24 @@ public class ComicDetailStage extends Stage {
                 comicSelected.getDescription() + "\nCreators: \n" + creators);
         comicDescription.setWrapText(true);
         comicDescription.setEditable(false);
+        comicDescription.setBackground(new Background(
+                new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
         return comicDescription;
+    }
+
+    private HBox createButtonBox() {
+        HBox comicButtonBox = new HBox();
+        Button ebayButton = createEbayButton();
+        comicButtonBox.getChildren().add(ebayButton);
+        comicButtonBox.setAlignment(Pos.CENTER);
+        return comicButtonBox;
+    }
+
+    private HBox createComicDescriptionBox(TextArea comicDescription) {
+        HBox comicDescriptionBox = new HBox();
+        ImageView comicThumbnail = new ImageView(new Image(comicSelected.getThumbnailURL().toString()));
+        comicDescriptionBox.getChildren().addAll(comicThumbnail, comicDescription);
+        return comicDescriptionBox;
     }
 
     private StringBuilder createCreators() {
@@ -116,9 +129,6 @@ public class ComicDetailStage extends Stage {
         }
         String finalEncodedTitle = encodedTitle;
         URLClick.setOnMouseClicked(e -> gui.getHostServices().showDocument("https://www.ebay.com/sch/63/i.html?_from=R40&_nkw=" + finalEncodedTitle));
-
-
         return URLClick;
-
     }
 }

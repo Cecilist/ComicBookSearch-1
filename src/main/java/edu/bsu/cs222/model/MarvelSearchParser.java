@@ -37,11 +37,10 @@ public class MarvelSearchParser {
         MarvelSearchConnection dataStream = new MarvelSearchConnection();
         dataStream.setSearchType(searchType);
         characterData = dataStream.MarvelSearchConnector(encodedCreatorName);
-        if(searchType.equals("CREATORS"))
+        if (searchType.equals("CREATORS"))
             return buildCreators();
         else
             return buildCharacters();
-
     }
 
     public List<MarvelObject> buildCreators() throws MalformedURLException {
@@ -60,7 +59,6 @@ public class MarvelSearchParser {
         }
         return creators;
     }
-
 
 
     public List<MarvelObject> buildCharacters() throws IOException {

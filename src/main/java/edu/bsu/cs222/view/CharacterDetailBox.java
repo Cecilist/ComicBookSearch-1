@@ -24,18 +24,32 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class CharacterDetailBox extends HBox {
     public void showCharacterDetails(Character character) {
         VBox superDetails = new VBox();
         setMaxHeight(30);
         ImageView characterThumbnail = new ImageView(new Image(character.getThumbnailURL().toString()));
-        Label characterName = new Label(character.getName());
+        Label characterName = createCharacterName(character.getName());
+        TextArea characterDescription = createCharacterDescription(character);
+        superDetails.getChildren().addAll(characterName, characterDescription);
+        getChildren().addAll(characterThumbnail, superDetails);
+    }
+
+    private Label createCharacterName(String name) {
+        Label characterName = new Label(name);
+        characterName.setTextFill(Color.web("#ffffffff"));
+        characterName.setFont(new Font("Fantasy", 25));
+        return characterName;
+    }
+
+    private TextArea createCharacterDescription(Character character) {
         TextArea characterDescription = new TextArea(character.getDescription() +
                 "\nAppears in " + character.getComicsTotal() + " Marvel comics");
         characterDescription.setWrapText(true);
         characterDescription.setEditable(false);
-        superDetails.getChildren().addAll(characterName, characterDescription);
-        getChildren().addAll(characterThumbnail, superDetails);
+        return characterDescription;
     }
 }

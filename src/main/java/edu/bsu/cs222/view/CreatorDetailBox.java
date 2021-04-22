@@ -23,19 +23,41 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class CreatorDetailBox extends HBox {
+    private TextArea creatorDescription;
+
     public void showCreatorDetails(Creator creator) {
         VBox creatorDetails = new VBox();
         setMaxHeight(30);
         ImageView characterThumbnail = new ImageView(new Image(creator.getThumbnailURL().toString()));
-        Label creatorName = new Label(creator.getName());
-        TextArea creatorDescription = new TextArea("Helped make " + creator.getSeriesTotal() + " Marvel series" +
+        characterThumbnail.setFitWidth(100);
+        characterThumbnail.setFitHeight(150);
+        Label creatorName = createCreatorName(creator.getName());
+        TextArea creatorDescription = createCreatorDescription(creator);
+        creatorDetails.getChildren().addAll(creatorName, creatorDescription);
+        getChildren().addAll(characterThumbnail, creatorDetails);
+    }
+
+    private Label createCreatorName(String creator) {
+        Label creatorName = new Label(creator);
+        creatorName.setTextFill(Color.web("#ffffffff"));
+        creatorName.setFont(new Font("Fantasy", 25));
+        return creatorName;
+    }
+
+    private TextArea createCreatorDescription(Creator creator) {
+        creatorDescription = new TextArea("Helped make " + creator.getSeriesTotal() + " Marvel series" +
                 "\nHelped make " + creator.getStoriesTotal() + " Marvel stories" +
                 "\nHelped make " + creator.getComicsTotal() + " Marvel comics");
         creatorDescription.setWrapText(true);
         creatorDescription.setEditable(false);
-        creatorDetails.getChildren().addAll(creatorName, creatorDescription);
-        getChildren().addAll(characterThumbnail, creatorDetails);
+        return creatorDescription;
+    }
+
+    public void setCreatorDescription(String creatorDescription) {
+        this.creatorDescription.setText(creatorDescription);
     }
 }

@@ -17,32 +17,48 @@
 package edu.bsu.cs222.view;
 
 import edu.bsu.cs222.model.ComicBook;
+import javafx.application.Platform;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 import java.util.List;
 
+
 public class ComicGrid extends GridPane {
     public void createGrid(List<ComicBook> comicBooks) {
-        final int COMICBOOK_WIDTH = 5;
-        int numOfComics = comicBooks.size();
-        int comicCount = 0;
-        for (int i = 0; i < numOfComics; i++)
-            for (int x = 0; x < COMICBOOK_WIDTH; x++) {
-                if (comicCount < numOfComics) {
-                    Button comicButton = new Button();
-                    ComicBook comicCharacter = comicBooks.get(comicCount);
-                    ImageView comicThumbnail = new ImageView(new Image(comicCharacter.getThumbnailURL().toString()));
-                    comicButton.setGraphic(comicThumbnail);
-                    add(comicButton, x, i);
-                    comicButton.setOnMouseClicked(event -> {
-                        ComicDetailStage detailStage = new ComicDetailStage();
-                        detailStage.showComicDetail(comicCharacter);
-                    });
-                    comicCount++;
+        Label loadingLabel = new Label("Loading comics, Please wait!");
+        add(loadingLabel, 0, 0, 5, 1);
+        Platform.runLater(() -> {
+            final int COMICBOOK_WIDTH = 5;
+            int numOfComics = comicBooks.size();
+            int comicCount = 0;
+            for (int i = 0; i < numOfComics; i++)
+                for (int x = 0; x < COMICBOOK_WIDTH; x++) {
+                    if (comicCount < numOfComics) {
+                        Button comicButton = new Button();
+                        ComicBook comic = comicBooks.get(comicCount);
+                        while (comic.getThumbnail() == null) {
+                            waitForImage();
+                        }
+                        comicButton.setGraphic(new ImageView(comic.getThumbnail()));
+                        add(comicButton, x, i);
+                        comicButton.setOnMouseClicked(event -> {
+                            ComicDetailStage detailStage = new ComicDetailStage();
+                            detailStage.showComicDetail(comic);
+                        });
+                        comicCount++;
+                    }
                 }
-            }
+        });
+    }
+
+    private void waitForImage() {
+        try {
+            Thread.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

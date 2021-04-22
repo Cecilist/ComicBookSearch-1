@@ -20,8 +20,6 @@ import java.net.URL;
 
 public class Creator implements MarvelObject {
     private String name;
-
-
     private String id;
     private String role;
     private URL thumbnailURL;

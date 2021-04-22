@@ -18,6 +18,7 @@
 package edu.bsu.cs222.model;
 
 import com.jayway.jsonpath.JsonPath;
+import javafx.scene.image.Image;
 import net.minidev.json.JSONArray;
 
 import java.io.IOException;
@@ -28,6 +29,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import static com.jayway.jsonpath.JsonPath.read;
 
@@ -35,6 +38,7 @@ import static com.jayway.jsonpath.JsonPath.read;
 public class MarvelComicBookDataParser {
     private JSONArray marvelData;
     private int index;
+    private final Executor executor = Executors.newSingleThreadExecutor();
 
     public List<ComicBook> retrieveComicBookData(String characterId, int comicResultPage, String searchTerm) throws MalformedURLException {
         MarvelComicBookConnection comicBookStream = new MarvelComicBookConnection();
@@ -60,19 +64,24 @@ public class MarvelComicBookDataParser {
             newComic.setDescription(getComicDescription());
             newComic.setOnSaleDate(getOnSaleDate());
             newComic.setThumbnailURL(getThumbnailURL());
+            executor.execute(() -> newComic.setThumbnail(new Image(newComic.getThumbnailURL().toString())));
             newComic.setHasDigital(getHasDigital());
             if (newComic.isDigital()) {
-                newComic.setPrice(getDigitalPrice());
+                newComic.setPrice((Double) getDigitalPrice());
             }
-            for (int x = 0; x < numOfCreators(); x++) {
-                Creator newCreator = new Creator();
-                newCreator.setName((getComicCreatorName(x)));
-                newCreator.setRole(getComicCreatorRole(x));
-                newComic.addCreator(newCreator);
-            }
+            addCreators(newComic);
             comicBooks.add(newComic);
         }
         return comicBooks;
+    }
+
+    private void addCreators(ComicBook newComic) {
+        for (int x = 0; x < numOfCreators(); x++) {
+            Creator newCreator = new Creator();
+            newCreator.setName((getComicCreatorName(x)));
+            newCreator.setRole(getComicCreatorRole(x));
+            newComic.addCreator(newCreator);
+        }
     }
 
     public int numOfComics() {
@@ -133,10 +142,10 @@ public class MarvelComicBookDataParser {
         return !digital.isEmpty();
     }
 
-    public double getDigitalPrice() {
+    public Object getDigitalPrice() {
 
         JSONArray price = read(marvelData, "$..results[" + index + "].prices[1].price");
-        return (double) price.get(0);
+        return price.get(0);
     }
 
     public void setIndex(int index) {

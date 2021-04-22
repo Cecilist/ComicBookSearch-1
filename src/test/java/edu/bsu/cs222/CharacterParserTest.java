@@ -53,7 +53,7 @@ public class CharacterParserTest {
 
     @Test
     void getDescription_SpiderMan_ReturnDescription() {
-        Character charSpiderMan = (Character)spiderMan;
+        Character charSpiderMan = (Character) spiderMan;
         Assertions.assertEquals('B', charSpiderMan.getDescription().charAt(0));
     }
 

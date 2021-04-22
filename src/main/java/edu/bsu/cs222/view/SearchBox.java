@@ -23,31 +23,31 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 
-public class SearchBox extends HBox {
+public class SearchBox extends VBox {
+    private final SearchSelectionBox selectionBox;
     private ToggleGroup searchTypeGroup;
 
-    public VBox createStage(Stage primaryStage) {
-        VBox searchBox = createSearchBox();
+    public SearchBox(SearchSelectionBox selectionBox) {
+        this.selectionBox = selectionBox;
+    }
+
+    public void createStage() {
+        createSearchBox();
         Label searchLabel = createSearchLabel();
         HBox searchTypeSelector = creatorSearchCategorySelector();
         TextField searchBar = createSearchBar();
-        Button searchButton = createSearchButton(searchBar, primaryStage);
+        Button searchButton = createSearchButton(searchBar);
         HBox creatorSearchHBox = new HBox(searchLabel, searchBar, searchButton);
         searchButton.setDefaultButton(true);
-        searchBox.getChildren().addAll( searchTypeSelector,creatorSearchHBox );
-        return searchBox;
+        getChildren().addAll(searchTypeSelector, creatorSearchHBox);
     }
 
-    private VBox createSearchBox() {
-        VBox searchBox = new VBox();
-        searchBox.setAlignment(Pos.CENTER);
-        searchBox.setBackground(new Background(
+    private void createSearchBox() {
+        setBackground(new Background(
                 new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
-        searchBox.setSpacing(10);
-        return searchBox;
+        setSpacing(10);
     }
 
 
@@ -58,6 +58,7 @@ public class SearchBox extends HBox {
         searchLabel.setPadding(new Insets(10, 10, 10, 10));
         return searchLabel;
     }
+
     private Label createTermLabel() {
         Label searchLabel = new Label("Select a search Item:");
         searchLabel.setTextFill(Color.web("#ffffffff"));
@@ -84,17 +85,17 @@ public class SearchBox extends HBox {
         creatorButton.setUserData("CREATORS");
         createRadioButton(creatorButton);
         Label termLabel = createTermLabel();
-        HBox creatorSearchTypeBox = new HBox(termLabel,characterButton, creatorButton);
+        HBox creatorSearchTypeBox = new HBox(termLabel, characterButton, creatorButton);
         creatorSearchTypeBox.setSpacing(5);
         return creatorSearchTypeBox;
     }
 
-    private Button createSearchButton(TextField searchTerm, Stage primaryStage) {
+    private Button createSearchButton(TextField searchTerm) {
         Button searchButton = new Button("Search");
         searchButton.setOnAction(event -> {
-            SearchSelectionBox heroView = new SearchSelectionBox();
             String searchCategory = getSearchTerm();
-            heroView.pickSearchOption(searchCategory, searchTerm.getText(), primaryStage);
+            selectionBox.setAlignment(Pos.CENTER_LEFT);
+            selectionBox.pickSearchOption(searchCategory, searchTerm.getText());
         });
         return searchButton;
     }
