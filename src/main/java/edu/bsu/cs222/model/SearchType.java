@@ -1,3 +1,4 @@
+
 /*
  *  Program to search for comics and creators that Marvel has available information on.
  *  Copyright (C) 2021  Lloyd Rowe, Jacob Cecil, Christopher Willis, Christopher Parrish
@@ -14,19 +15,21 @@
  * along with this program, SEE THE Copyright.txt FILE IN RESOURCES.  If not, see https://www.gnu.org/licenses/.
  */
 
-package edu.bsu.cs222.view;
+package edu.bsu.cs222.model;
 
-import javafx.stage.Stage;
+public enum SearchType {
+    CHARACTERS {
+        @Override
+        public String asLowerCase() {
+            return CHARACTERS.toString().toLowerCase();
+        }
+    },
+    CREATORS {
+        @Override
+        public String asLowerCase() {
+            return CREATORS.toString().toLowerCase();
+        }
+    };
 
-public class PrimaryStage {
-    public void primaryStageEdit(Stage primaryStage, int height, int width, String title) {
-        primaryStage.setHeight(height);
-        primaryStage.setWidth(width);
-        primaryStage.setTitle(title);
-        primaryStage.centerOnScreen();
-    }
-
-    public void refreshStage(Stage primaryStage) {
-        primaryStage.setWidth(primaryStage.getWidth() + 0.0001);
-    }
+    public abstract String asLowerCase();
 }

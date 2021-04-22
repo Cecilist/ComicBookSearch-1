@@ -1,24 +1,25 @@
-//  <Program to search for comics and creators that Marvel has available information on.>
-//  Copyright (C) <2021>  <Lloyd Rowe, Jacob Cecil, Christopher Willis, Christopher Parrish>
-
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program, SEE THE Copyright.txt FILE IN RESOURCES.  If not, see <https://www.gnu.org/licenses/>.
+/*
+ *  Program to search for comics and creators that Marvel has available information on.
+ *  Copyright (C) 2021  Lloyd Rowe, Jacob Cecil, Christopher Willis, Christopher Parrish
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program, SEE THE Copyright.txt FILE IN RESOURCES.  If not, see https://www.gnu.org/licenses/.
+ */
 
 package edu.bsu.cs222.view;
 
-import edu.bsu.cs222.model.Character;
-import edu.bsu.cs222.model.Creator;
+
 import edu.bsu.cs222.model.MarvelObject;
+import edu.bsu.cs222.model.MarvelSearchParser;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -35,6 +36,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,43 +45,40 @@ public class SearchSelectionBox extends VBox {
     private List<MarvelObject> noComicList;
     private Stage primaryStage;
 
-    public void pickSearchOption(String searchTerm, String characterName, Stage primaryStage) {
+    public void pickSearchOption(String searchCategory, String searchTerm, Stage primaryStage) {
         this.primaryStage = primaryStage;
         noComicList = new ArrayList<>();
         marvelObjectList = new ArrayList<>();
-
-        if (searchTerm.equals("characters")) {
-            Character newCharacter = new Character();
-            List<Character> charactersList;
-            charactersList=newCharacter.createCharacter(searchTerm, characterName);
-            if(!charactersList.isEmpty())
-                marvelObjectList.addAll(charactersList);
-
-        } else {
-            Creator newCreator = new Creator();
-            List<Creator> creatorList;
-            creatorList=newCreator.createCreator(searchTerm, characterName);
-            if(!creatorList.isEmpty())
-                marvelObjectList.addAll(creatorList);
-        }
-
-        if (marvelObjectList != null) {
-            getChildren().add(createInstructionLabel());
-            setSpacing(5);
-            setAlignment(Pos.CENTER);
-            createButtons(searchTerm);
+        MarvelSearchParser searchParser = new MarvelSearchParser();
+            try {
+                marvelObjectList = searchParser.retrieveData(searchTerm, searchCategory);
+            } catch (IOException e) {
+                showIOAlert(e);
+            }
+        if (!marvelObjectList.isEmpty()) {
+            createButtons(searchCategory);
             if (!noComicList.isEmpty()) {
                 alertNoComic(noComicList);
             }
-            setBackground(new Background(
-                    new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
-            ScrollPane buttonScroll = new ScrollPane(SearchSelectionBox.this);
-            buttonScroll.setFitToWidth(true);
-            buttonScroll.setFitToHeight(true);
-            primaryStage.setScene(new Scene(buttonScroll));
-            primaryStage.show();
-            refreshStage();
-        }
+            styleBox();
+
+        } else
+            showDoesntExist();
+
+    }
+
+    private void styleBox() {
+        getChildren().add(createInstructionLabel());
+        setSpacing(5);
+        setAlignment(Pos.CENTER);
+        setBackground(new Background(
+                new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
+        ScrollPane buttonScroll = new ScrollPane(SearchSelectionBox.this);
+        buttonScroll.setFitToWidth(true);
+        buttonScroll.setFitToHeight(true);
+        primaryStage.setScene(new Scene(buttonScroll));
+        primaryStage.show();
+        refreshStage();
     }
 
     private Label createInstructionLabel() {
@@ -114,6 +113,21 @@ public class SearchSelectionBox extends VBox {
                 noComicList.add(marvelObjectList.get(i));
             }
         }
+    }
+
+    private void showIOAlert(IOException e) {
+        Alert IOAlert = new Alert(Alert.AlertType.ERROR);
+        IOAlert.setTitle("IOEXCEPTION");
+        IOAlert.setContentText(e.toString());
+        IOAlert.showAndWait();
+        Platform.exit();
+    }
+
+    private void showDoesntExist() {
+        Alert doesntExist = new Alert(Alert.AlertType.ERROR);
+        doesntExist.setTitle("Not Found");
+        doesntExist.setContentText("The term that you searched for doesn't exist!");
+        doesntExist.showAndWait();
     }
 
     public void refreshStage() {

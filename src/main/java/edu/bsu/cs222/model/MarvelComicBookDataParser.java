@@ -1,24 +1,28 @@
-//  <Program to search for comics and creators that Marvel has available information on.>
-//  Copyright (C) <2021>  <Lloyd Rowe, Jacob Cecil, Christopher Willis, Christopher Parrish>
 
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program, SEE THE Copyright.txt FILE IN RESOURCES.  If not, see <https://www.gnu.org/licenses/>.
+/*
+ *  Program to search for comics and creators that Marvel has available information on.
+ *  Copyright (C) 2021  Lloyd Rowe, Jacob Cecil, Christopher Willis, Christopher Parrish
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program, SEE THE Copyright.txt FILE IN RESOURCES.  If not, see https://www.gnu.org/licenses/.
+ */
 
 package edu.bsu.cs222.model;
 
 import com.jayway.jsonpath.JsonPath;
 import net.minidev.json.JSONArray;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,63 +33,114 @@ import static com.jayway.jsonpath.JsonPath.read;
 
 
 public class MarvelComicBookDataParser {
-    public List<String> getComicTitles(JSONArray marvelData) {
-        JSONArray titles = read(marvelData, "$..['results'][*]['title']");
-        List<String> titleList = new ArrayList<>();
-        for (Object o : titles) {
-            titleList.add(String.valueOf(o));
+    private JSONArray marvelData;
+    private int index;
+
+    public List<ComicBook> retrieveComicBookData(String characterId, int comicResultPage, String searchTerm) throws MalformedURLException {
+        MarvelComicBookConnection comicBookStream = new MarvelComicBookConnection();
+        try {
+            comicBookStream.setSearchType(searchTerm);
+            marvelData = comicBookStream.MarvelComicBookConnector(characterId, comicResultPage);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return titleList;
+        return createComicBooks();
     }
 
-    public List<String> getComicDescription(JSONArray marvelData) {
-        JSONArray descriptions = read(marvelData, "$..['results'][*]['description']");
-        List<String> descriptionList = new ArrayList<>();
-        for (Object o : descriptions) {
-            descriptionList.add(String.valueOf(o));
-        }
-        return descriptionList;
+    public void setMarvelData(JSONArray marvelData) {
+        this.marvelData = marvelData;
     }
 
-    public List<LocalDateTime> getComicDates(JSONArray marvelData) {
-        JSONArray timestamps = read
-                (marvelData, "$..['results'][*]['dates'][0]['date']");
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'-'SSSS");
-        List<LocalDateTime> dateList = new ArrayList<>();
-        for (Object o : timestamps) {
-            try {
-                dateList.add(LocalDateTime.parse(String.valueOf(o), dateFormat));
-            } catch (DateTimeException e) {
-                dateList.add(null);
+    public List<ComicBook> createComicBooks() throws MalformedURLException {
+        List<ComicBook> comicBooks = new ArrayList<>();
+        for (int i = 0; i < numOfComics(); i++) {
+            setIndex(i);
+            ComicBook newComic = new ComicBook();
+            newComic.setTitle(getComicTitle());
+            newComic.setDescription(getComicDescription());
+            newComic.setOnSaleDate(getOnSaleDate());
+            newComic.setThumbnailURL(getThumbnailURL());
+            newComic.setHasDigital(getHasDigital());
+            if (newComic.isDigital()) {
+                newComic.setPrice(getDigitalPrice());
             }
+            for (int x = 0; x < numOfCreators(); x++) {
+                Creator newCreator = new Creator();
+                newCreator.setName((getComicCreatorName(x)));
+                newCreator.setRole(getComicCreatorRole(x));
+                newComic.addCreator(newCreator);
+            }
+            comicBooks.add(newComic);
         }
-        return dateList;
+        return comicBooks;
     }
 
-    public List<String> getComicCreatorName(JSONArray marvelData, int index) {
-        JSONArray creatorNames = read(marvelData, "$..['results'][" + index + "]['creators']['items'][*]['name']");
-        List<String> creatorNamesList = new ArrayList<>();
-        for (Object o : creatorNames) {
-            creatorNamesList.add(String.valueOf(o));
-        }
-        return creatorNamesList;
+    public int numOfComics() {
+        JSONArray total = read(marvelData, "$..['count']");
+        return (int) total.get(0);
     }
 
-    public List<String> getComicCreatorRole(JSONArray marvelData, int index) {
-        JSONArray creatorRoles = JsonPath.read(marvelData, "$..['results'][" + index + "]['creators']['items'][*]['role']");
-        List<String> creatorRolesList = new ArrayList<>();
-        for (Object o : creatorRoles) {
-            creatorRolesList.add(String.valueOf(o));
-        }
-        return creatorRolesList;
+    public int numOfCreators() {
+        JSONArray creators = read(marvelData, "$..['results'][" + index + "]['creators']['available']");
+        return (int) creators.get(0);
+
     }
 
-    public List<String> getThumbnail(JSONArray marvelData) {
-        JSONArray thumbnails = read(marvelData, "$..results[*].thumbnail.path");
-        List<String> thumbnailList = new ArrayList<>();
-        for (Object o : thumbnails) {
-            thumbnailList.add(String.valueOf(o));
+    public String getComicTitle() {
+        JSONArray titles = read(marvelData, "$..['results'][" + index + "]['title']");
+        return String.valueOf(titles.get(0));
+    }
+
+    public String getComicDescription() {
+        JSONArray description = read(marvelData, "$..['results'][" + index + "]['description']");
+
+        return String.valueOf(description.get(0));
+    }
+
+    public LocalDateTime getOnSaleDate() {
+        JSONArray timestamp = read
+                (marvelData, "$..['results'][" + index + "]['dates'][0]['date']");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'-'SSSS");
+        LocalDateTime onSaleDate;
+        try {
+            onSaleDate = LocalDateTime.parse(String.valueOf(timestamp.get(0)), dateFormat);
+        } catch (DateTimeException e) {
+            return null;
         }
-        return thumbnailList;
+        return onSaleDate;
+
+    }
+
+    public String getComicCreatorName(int creatorIndex) {
+        JSONArray creatorName = read(marvelData, "$..['results'][" + index + "]['creators']['items'][" + creatorIndex + "]['name']");
+
+        return String.valueOf(creatorName.get(0));
+    }
+
+    public String getComicCreatorRole(int creatorIndex) {
+        JSONArray creatorRole = JsonPath.read(marvelData, "$..['results'][" + index + "]['creators']['items'][" + creatorIndex + "]['role']");
+        return String.valueOf(creatorRole.get(0));
+    }
+
+    public URL getThumbnailURL() throws MalformedURLException {
+        JSONArray thumbnail = read(marvelData, "$..['results'][" + index + "].thumbnail.path");
+
+        return new URL(thumbnail.get(0) + "/portrait_medium.jpg");
+    }
+
+    public boolean getHasDigital() {
+        JSONArray digital = read(marvelData, "$..results[" + index + "].prices[1]");
+        return !digital.isEmpty();
+    }
+
+    public double getDigitalPrice() {
+
+        JSONArray price = read(marvelData, "$..results[" + index + "].prices[1].price");
+        return (double) price.get(0);
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }
+
