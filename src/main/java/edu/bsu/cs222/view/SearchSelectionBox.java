@@ -86,7 +86,7 @@ public class SearchSelectionBox extends GridPane {
     }
 
     private Label createInstructionLabel() {
-        Label instruction = new Label("Please select a Character: ");
+        Label instruction = new Label("Multiple results found, choose one: ");
         instruction.setTextFill(Color.web("#ffffffff"));
         instruction.setFont(Font.font("Fantasy", FontWeight.BOLD, 15));
         return instruction;
