@@ -90,7 +90,7 @@ public class MarvelComicBookDataParser {
     }
 
     public int numOfCreators() {
-        JSONArray creators = read(marvelData, "$..['results'][" + index + "]['creators']['available']");
+        JSONArray creators = read(marvelData, "$..['results'][" + index + "]['creators']['returned']");
         return (int) creators.get(0);
 
     }

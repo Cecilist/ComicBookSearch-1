@@ -24,14 +24,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,13 +39,19 @@ public class SearchSelectionBox extends GridPane {
     private final ComicBox comicBox;
     private List<MarvelObject> marvelObjectList;
     private List<MarvelObject> noComicList;
+    private TitledPane selectionPane;
 
     public SearchSelectionBox(ComicBox comicBox) {
         this.comicBox = comicBox;
     }
 
+    public void setTiledPane(TitledPane selectionPane) {
+        this.selectionPane = selectionPane;
+    }
+
     public void pickSearchOption(String searchCategory, String searchTerm) {
         getChildren().clear();
+        selectionPane.setVisible(false);
         noComicList = new ArrayList<>();
         marvelObjectList = new ArrayList<>();
         MarvelSearchParser searchParser = new MarvelSearchParser();
@@ -68,7 +72,8 @@ public class SearchSelectionBox extends GridPane {
             comicBox.setMarvelObject(marvelObjectList.get(0));
             comicBox.createComicBooks();
         } else {
-            add(createInstructionLabel(), 0, 0, 3, 1);
+            //add(createInstructionLabel(), 0, 0, 3, 1);
+            selectionPane.setVisible(true);
             createButtons(searchCategory);
         }
         if (!noComicList.isEmpty()) {
@@ -83,13 +88,6 @@ public class SearchSelectionBox extends GridPane {
         setAlignment(Pos.CENTER);
         setBackground(new Background(
                 new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
-    }
-
-    private Label createInstructionLabel() {
-        Label instruction = new Label("Please select a Character: ");
-        instruction.setTextFill(Color.web("#ffffffff"));
-        instruction.setFont(Font.font("Fantasy", FontWeight.BOLD, 15));
-        return instruction;
     }
 
     private void alertNoComic(List<MarvelObject> characterNoComics) {

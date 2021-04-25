@@ -62,10 +62,12 @@ public class GraphicalUserInterface extends Application {
 
     private VBox createResultsBox() {
         TitledPane selectionPane = new TitledPane("Select Option", selectionBox);
+        selectionBox.setTiledPane(selectionPane);
         Label title = createTitleLabel();
         VBox resultsBox = new VBox();
         resultsBox.setAlignment(Pos.CENTER);
         resultsBox.setBackground(new Background(new BackgroundFill(Color.web("#F0131E"), CornerRadii.EMPTY, Insets.EMPTY)));
+        selectionPane.setVisible(false);
         resultsBox.getChildren().addAll(title, searchBox, selectionPane, comicBox);
         return resultsBox;
     }
