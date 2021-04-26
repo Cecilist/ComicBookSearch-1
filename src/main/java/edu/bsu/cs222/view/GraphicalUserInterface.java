@@ -61,7 +61,7 @@ public class GraphicalUserInterface extends Application {
     }
 
     private VBox createResultsBox() {
-        TitledPane selectionPane = new TitledPane("Select Option", selectionBox);
+        TitledPane selectionPane = new TitledPane("Multiple results found, choose one:", selectionBox);
         selectionBox.setTiledPane(selectionPane);
         Label title = createTitleLabel();
         VBox resultsBox = new VBox();
