@@ -36,9 +36,9 @@ import static com.jayway.jsonpath.JsonPath.read;
 
 
 public class MarvelComicBookDataParser {
+    private final Executor executor = Executors.newSingleThreadExecutor();
     private JSONArray marvelData;
     private int index;
-    private final Executor executor = Executors.newSingleThreadExecutor();
 
     public List<ComicBook> retrieveComicBookData(String characterId, int comicResultPage, String searchTerm) throws MalformedURLException {
         MarvelComicBookConnection comicBookStream = new MarvelComicBookConnection();

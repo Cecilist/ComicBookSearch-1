@@ -31,13 +31,12 @@ import java.util.List;
 
 public class ComicBox extends VBox {
     private final CreatorDetailBox creatorDetails = new CreatorDetailBox();
+    private final ComicGrid comicPane = new ComicGrid();
     private int comicPage = 1;
     private MarvelObject selected;
     private Button moreButton;
     private Button lessButton;
     private String searchCategory;
-
-    private final ComicGrid comicPane = new ComicGrid();
     private List<ComicBook> comicBooks;
 
     public void createComicBooks() {
