@@ -72,7 +72,6 @@ public class SearchSelectionBox extends GridPane {
             comicBox.setMarvelObject(marvelObjectList.get(0));
             comicBox.createComicBooks();
         } else {
-            //add(createInstructionLabel(), 0, 0, 3, 1);
             selectionPane.setVisible(true);
             createButtons(searchCategory);
         }

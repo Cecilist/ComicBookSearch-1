@@ -94,6 +94,7 @@ public class ComicBox extends VBox {
 
     private void displayComics() {
         if (comicBooks.size() != 0) {
+            comicPane.getChildren().clear();
             comicPane.createGrid(comicBooks);
         } else {
             showAPIError();
